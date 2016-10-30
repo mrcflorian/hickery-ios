@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -95,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-logo" translatesAutoresizingMaskIntoConstraints="NO" id="iYk-Tb-HUw"/>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music playlist from your Facebook likes and shares" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TX-rN-LFH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music playlist from your Facebook likes and shares" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TX-rN-LFH">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="155" id="sse-cd-43C"/>
                                 </constraints>
@@ -103,16 +104,28 @@
                                 <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zw-Ce-YcB">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="A9a-0c-IF8"/>
+                                    <constraint firstAttribute="height" constant="27" id="RN4-GW-Kwg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.137958155" green="0.4877211514" blue="0.81883769129999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="0TX-rN-LFH" firstAttribute="width" secondItem="nVZ-cJ-ZeQ" secondAttribute="width" id="SdB-sN-w9D"/>
-                            <constraint firstItem="0TX-rN-LFH" firstAttribute="top" secondItem="iYk-Tb-HUw" secondAttribute="bottom" constant="27" id="YsW-2y-9OG"/>
+                            <constraint firstItem="6Zw-Ce-YcB" firstAttribute="top" secondItem="0TX-rN-LFH" secondAttribute="bottom" multiplier="1.1" id="OuF-jd-eu1"/>
+                            <constraint firstItem="0TX-rN-LFH" firstAttribute="width" secondItem="nVZ-cJ-ZeQ" secondAttribute="width" multiplier="0.9" id="SdB-sN-w9D"/>
+                            <constraint firstItem="6Zw-Ce-YcB" firstAttribute="centerX" secondItem="nVZ-cJ-ZeQ" secondAttribute="centerX" id="TkO-Wi-zS1"/>
+                            <constraint firstItem="0TX-rN-LFH" firstAttribute="top" secondItem="iYk-Tb-HUw" secondAttribute="bottom" multiplier="1.1" id="YsW-2y-9OG"/>
+                            <constraint firstItem="iYk-Tb-HUw" firstAttribute="top" secondItem="Rgc-Mx-KLY" secondAttribute="bottom" multiplier="5" constant="25" id="bCX-96-Uc6"/>
                             <constraint firstItem="0TX-rN-LFH" firstAttribute="centerX" secondItem="iYk-Tb-HUw" secondAttribute="centerX" id="etB-dQ-bVS"/>
                             <constraint firstItem="iYk-Tb-HUw" firstAttribute="centerX" secondItem="nVZ-cJ-ZeQ" secondAttribute="centerX" id="hAG-6C-BJK"/>
-                            <constraint firstItem="iYk-Tb-HUw" firstAttribute="top" secondItem="Rgc-Mx-KLY" secondAttribute="bottom" constant="100" id="qKi-2f-8Hl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fbLoginContainerView" destination="6Zw-Ce-YcB" id="HKS-om-jmX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIv-Mi-2lX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
