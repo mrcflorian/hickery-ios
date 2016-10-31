@@ -104,37 +104,43 @@
                                 <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zw-Ce-YcB">
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhF-1t-QaB" customClass="HKLoginButton" customModule="Hickery" customModuleProvider="target">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="165" id="A9a-0c-IF8"/>
-                                    <constraint firstAttribute="height" constant="27" id="RN4-GW-Kwg"/>
+                                    <constraint firstAttribute="height" constant="39" id="1fc-oN-oXR"/>
+                                    <constraint firstAttribute="width" constant="235" id="XC6-E9-2rr"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Login With Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapLoginButton:" destination="W8V-k4-epI" eventType="touchUpInside" id="gxb-jk-dsu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.137958155" green="0.4877211514" blue="0.81883769129999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Zw-Ce-YcB" firstAttribute="top" secondItem="0TX-rN-LFH" secondAttribute="bottom" multiplier="1.1" id="OuF-jd-eu1"/>
+                            <constraint firstItem="mhF-1t-QaB" firstAttribute="top" secondItem="0TX-rN-LFH" secondAttribute="bottom" multiplier="1.1" id="A7b-D1-RXc"/>
                             <constraint firstItem="0TX-rN-LFH" firstAttribute="width" secondItem="nVZ-cJ-ZeQ" secondAttribute="width" multiplier="0.9" id="SdB-sN-w9D"/>
-                            <constraint firstItem="6Zw-Ce-YcB" firstAttribute="centerX" secondItem="nVZ-cJ-ZeQ" secondAttribute="centerX" id="TkO-Wi-zS1"/>
                             <constraint firstItem="0TX-rN-LFH" firstAttribute="top" secondItem="iYk-Tb-HUw" secondAttribute="bottom" multiplier="1.1" id="YsW-2y-9OG"/>
                             <constraint firstItem="iYk-Tb-HUw" firstAttribute="top" secondItem="Rgc-Mx-KLY" secondAttribute="bottom" multiplier="5" constant="25" id="bCX-96-Uc6"/>
+                            <constraint firstItem="mhF-1t-QaB" firstAttribute="centerX" secondItem="0TX-rN-LFH" secondAttribute="centerX" id="cpQ-os-bRf"/>
                             <constraint firstItem="0TX-rN-LFH" firstAttribute="centerX" secondItem="iYk-Tb-HUw" secondAttribute="centerX" id="etB-dQ-bVS"/>
                             <constraint firstItem="iYk-Tb-HUw" firstAttribute="centerX" secondItem="nVZ-cJ-ZeQ" secondAttribute="centerX" id="hAG-6C-BJK"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fbLoginContainerView" destination="6Zw-Ce-YcB" id="HKS-om-jmX"/>
+                        <outlet property="loginButton" destination="mhF-1t-QaB" id="LS1-kx-Un7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIv-Mi-2lX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-951.20000000000005" y="-87.706146926536732"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Hickery Tab Bar View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HickeryTabBarViewController" id="49e-Tb-3d3" customClass="HickeryTabBarViewController" customModule="Hickery" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
