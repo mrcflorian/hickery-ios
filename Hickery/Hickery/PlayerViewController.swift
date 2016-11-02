@@ -9,7 +9,7 @@
 import UIKit
 import youtube_ios_player_helper
 
-class PlayerViewController: UIViewController, YTPlayerViewDelegate {
+class PlayerViewController: UIViewController {
 
     @IBOutlet var youtubePlayerView: YTPlayerView!
     var videoId: String? {
@@ -31,7 +31,17 @@ class PlayerViewController: UIViewController, YTPlayerViewDelegate {
         guard let videoId = videoId else {
             return
         }
-        youtubePlayerView.load(withVideoId: videoId)
+        youtubePlayerView.load(withVideoId: videoId, playerVars: ["origin":"http://www.youtube.com", "playsinline":1])
+    }
+}
+
+// MARK: YTPlayerViewDelegate
+extension PlayerViewController: YTPlayerViewDelegate {
+    public func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        print (state)
+    }
+
+    public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         youtubePlayerView.playVideo()
     }
 }

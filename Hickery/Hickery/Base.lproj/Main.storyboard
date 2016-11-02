@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,6 +40,7 @@
                             <constraint firstItem="Bsc-LH-mvj" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" constant="8" id="fNY-Xp-i8T"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" multiplier="3" id="gyB-vg-5be"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="iMJ-uO-zZi"/>
+                            <constraint firstItem="B5W-px-e8z" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="height" multiplier="375:667" id="u74-Zj-DWo"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Bsc-LH-mvj" secondAttribute="bottom" constant="8" id="uq3-TP-5Ok"/>
                         </constraints>
                     </view>
