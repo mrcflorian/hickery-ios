@@ -10,24 +10,20 @@ import UIKit
 
 class HickeryTabBarViewController: UITabBarController {
 
-    let apiManager = APIManager()
+    var likesPlayListVC: PlaylistViewController?
 
-    var userId = "" {
+    var userId: String? {
         didSet {
-            requestUserLikes()
+            likesPlayListVC?.userId = userId
         }
     }
 
-    private func requestUserLikes() {
-        apiManager.requestLikes(userId: userId) { (songs) in
-            print(songs)
-        }
+    override func viewDidLoad() {
+        configureViewControllers()
     }
 
-    private func didFetchUserSongs() {
-    }
-
-    private func didFetchUserProfile() {
-
+    private func configureViewControllers() {
+        likesPlayListVC = viewControllers?.first as? PlaylistViewController
+        likesPlayListVC?.userId = userId
     }
 }

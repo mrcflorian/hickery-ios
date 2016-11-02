@@ -10,7 +10,7 @@
         <!--First-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaylistViewController" id="9pv-A4-QxB" customClass="PlaylistViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -19,31 +19,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="First View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by FirstViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5M-7J-77L">
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5W-px-e8z" userLabel="Player Container View">
+                                <connections>
+                                    <segue destination="mwi-cl-oxw" kind="embed" id="hqx-F5-G6G"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsc-LH-mvj" userLabel="Song List Container View">
+                                <connections>
+                                    <segue destination="IWh-aO-amX" kind="embed" id="GYA-uI-V54"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
-                            <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
-                            <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
-                            <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
+                            <constraint firstItem="Bsc-LH-mvj" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="23m-Dz-0fz"/>
+                            <constraint firstItem="Bsc-LH-mvj" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="354-YY-joy"/>
+                            <constraint firstItem="B5W-px-e8z" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="50U-UC-CIf"/>
+                            <constraint firstItem="B5W-px-e8z" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="I5F-dm-MqB"/>
+                            <constraint firstItem="Bsc-LH-mvj" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" constant="8" id="fNY-Xp-i8T"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" multiplier="3" id="gyB-vg-5be"/>
+                            <constraint firstItem="B5W-px-e8z" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="iMJ-uO-zZi"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Bsc-LH-mvj" secondAttribute="bottom" constant="8" id="uq3-TP-5Ok"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -155,6 +158,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Player View Controller-->
+        <scene sceneID="S9Y-PX-cZV">
+            <objects>
+                <viewController id="mwi-cl-oxw" customClass="PlayerViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bii-mC-vsL"/>
+                        <viewControllerLayoutGuide type="bottom" id="egX-Hd-oX0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KAT-2o-Heg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-eW-j9C" customClass="YTPlayerView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="M7l-eW-j9C" secondAttribute="width" id="5bR-D8-7ee"/>
+                            <constraint firstItem="M7l-eW-j9C" firstAttribute="centerY" secondItem="KAT-2o-Heg" secondAttribute="centerY" id="6P7-Uv-1ae"/>
+                            <constraint firstAttribute="height" secondItem="M7l-eW-j9C" secondAttribute="height" id="8RD-Wc-Stf"/>
+                            <constraint firstItem="M7l-eW-j9C" firstAttribute="centerX" secondItem="KAT-2o-Heg" secondAttribute="centerX" id="XXW-Gn-45W"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="youtubePlayerView" destination="M7l-eW-j9C" id="ibb-Uo-hPM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OQ9-wn-fQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1577" y="-510"/>
+        </scene>
+        <!--Song Table View Controller-->
+        <scene sceneID="A4X-1h-EJR">
+            <objects>
+                <tableViewController id="IWh-aO-amX" customClass="SongTableViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRB-e5-PUS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="396"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RoA-kk-zoa">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RoA-kk-zoa" id="cgv-yT-zxY">
+                                    <frame key="frameInset" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IWh-aO-amX" id="eRU-Np-6i4"/>
+                            <outlet property="delegate" destination="IWh-aO-amX" id="5wX-IM-sAg"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DgK-cK-1Kw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1565" y="-65"/>
         </scene>
     </scenes>
     <resources>

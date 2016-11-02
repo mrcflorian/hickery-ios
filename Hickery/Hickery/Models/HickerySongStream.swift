@@ -23,5 +23,4 @@ class HickerySongStream {
         }
         return result
     }
-
 }

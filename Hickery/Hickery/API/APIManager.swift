@@ -15,14 +15,13 @@ class APIManager {
 
     let networkingManager = NetworkingManager()
 
-    func requestLikes(userId: String, completion: (_ songs: [HickerySong]) -> Void) {
+    func requestLikes(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
         let params = [kHickeryAPIParamUserIdKey:userId]
         networkingManager.get(path: kHickeryAPIUserLikesPath, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
             case .success:
-                print(jsonResponse)
                 let array = HickerySongStream.parse(jsonResponse: jsonResponse)
-                print(array)
+                completion(array)
             case .error(let error):
                 print(error)
             }
