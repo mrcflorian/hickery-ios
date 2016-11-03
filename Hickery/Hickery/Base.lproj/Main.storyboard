@@ -222,7 +222,7 @@
                                                 <constraint firstAttribute="height" constant="33" id="Qdy-fD-Nxo"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" red="0.137958155" green="0.4877211514" blue="0.81883769129999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
