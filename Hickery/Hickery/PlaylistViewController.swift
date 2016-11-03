@@ -21,6 +21,16 @@ class PlaylistViewController: UIViewController {
         }
     }
 
+    func play(hickerySong: HickerySong) {
+        playerVC?.videoId = hickerySong.youtubeVideoID()
+    }
+
+    func playNextSong() {
+        if let hickerySong = songTableVC?.getNextSongForPlaying() {
+            self.play(hickerySong: hickerySong)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewControllers()
@@ -45,9 +55,10 @@ class PlaylistViewController: UIViewController {
 
     private func didFetchUserSongs(songs: [HickerySong]) {
         configureViewControllers()
-        playerVC?.videoId = songs.first?.youtubeVideoID()
+        playerVC?.delegate = self
         songTableVC?.songTableViewControllerDelegate = self
         songTableVC?.songs = songs
+        playNextSong()
     }
 
     private func didFetchUserProfile() {
@@ -57,6 +68,12 @@ class PlaylistViewController: UIViewController {
 
 extension PlaylistViewController: SongTableViewControllerDelegate {
     func songTableViewController(_ songTableViewController: SongTableViewController, didSelectHickerySong hickerySong: HickerySong) {
-        playerVC?.videoId = hickerySong.youtubeVideoID()
+        self.play(hickerySong: hickerySong)
+    }
+}
+
+extension PlaylistViewController: PlayerViewControllerDelegate {
+    func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController) {
+        self.playNextSong()
     }
 }

@@ -9,9 +9,15 @@
 import UIKit
 import youtube_ios_player_helper
 
+protocol PlayerViewControllerDelegate {
+    func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController)
+}
+
 class PlayerViewController: UIViewController {
 
     @IBOutlet var youtubePlayerView: YTPlayerView!
+    var delegate: PlayerViewControllerDelegate?
+
     var videoId: String? {
         didSet {
             videoDidChange()
@@ -38,7 +44,9 @@ class PlayerViewController: UIViewController {
 // MARK: YTPlayerViewDelegate
 extension PlayerViewController: YTPlayerViewDelegate {
     public func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
-        print (state)
+        if state == .ended {
+            self.delegate?.playerViewControllerDidFinishCurrentSong(self)
+        }
     }
 
     public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {

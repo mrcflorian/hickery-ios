@@ -23,14 +23,16 @@ class SongTableViewController: UITableViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var indexPathOfCurrentPlayingSong = IndexPath(row: -1, section: 0)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    func getNextSongForPlaying() -> HickerySong? {
+        let newIndexPath = IndexPath(row: indexPathOfCurrentPlayingSong.row + 1, section: indexPathOfCurrentPlayingSong.section)
+        if let hickerySong = self.hickerySong(forIndexPath: newIndexPath) {
+            indexPathOfCurrentPlayingSong = newIndexPath
+            self.tableView.selectRow(at: indexPathOfCurrentPlayingSong, animated: false, scrollPosition: .none)
+            return hickerySong
+        }
+        return nil
     }
 
     // MARK: - Table view data source
@@ -61,6 +63,7 @@ class SongTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let hickerySong = self.hickerySong(forIndexPath: indexPath) {
             songTableViewControllerDelegate?.songTableViewController(self, didSelectHickerySong: hickerySong)
+            indexPathOfCurrentPlayingSong = indexPath
         }
     }
 
