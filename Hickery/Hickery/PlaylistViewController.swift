@@ -46,9 +46,17 @@ class PlaylistViewController: UIViewController {
     private func didFetchUserSongs(songs: [HickerySong]) {
         configureViewControllers()
         playerVC?.videoId = songs.first?.youtubeVideoID()
+        songTableVC?.songTableViewControllerDelegate = self
+        songTableVC?.songs = songs
     }
 
     private func didFetchUserProfile() {
 
+    }
+}
+
+extension PlaylistViewController: SongTableViewControllerDelegate {
+    func songTableViewController(_ songTableViewController: SongTableViewController, didSelectHickerySong hickerySong: HickerySong) {
+        playerVC?.videoId = hickerySong.youtubeVideoID()
     }
 }

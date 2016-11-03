@@ -9,6 +9,7 @@ target 'Hickery' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
   pod 'youtube-ios-player-helper', :git=>'https://github.com/youtube/youtube-ios-player-helper', :commit=>'head'
+  pod 'Kingfisher'
 
   # Pods for Hickery
 

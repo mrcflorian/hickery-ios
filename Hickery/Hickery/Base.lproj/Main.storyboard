@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -197,18 +198,45 @@
         <scene sceneID="A4X-1h-EJR">
             <objects>
                 <tableViewController id="IWh-aO-amX" customClass="SongTableViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRB-e5-PUS">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRB-e5-PUS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="396"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RoA-kk-zoa">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongTableViewCell" rowHeight="69" id="RoA-kk-zoa" customClass="SongTableViewCell" customModule="Hickery" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RoA-kk-zoa" id="cgv-yT-zxY">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIV-2k-882">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="65" id="Gpz-Qo-YUK"/>
+                                                <constraint firstAttribute="height" constant="51" id="luO-FB-Rnc"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vT-57-hE1">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="51" id="Qdy-fD-Nxo"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="leadingMargin" secondItem="vIV-2k-882" secondAttribute="leading" id="Ia8-7g-iF5"/>
+                                        <constraint firstItem="4vT-57-hE1" firstAttribute="leading" secondItem="vIV-2k-882" secondAttribute="trailing" constant="8" id="RmF-yR-FrI"/>
+                                        <constraint firstItem="4vT-57-hE1" firstAttribute="centerY" secondItem="cgv-yT-zxY" secondAttribute="centerY" id="kLR-bR-3qW"/>
+                                        <constraint firstItem="vIV-2k-882" firstAttribute="centerY" secondItem="cgv-yT-zxY" secondAttribute="centerY" id="sas-7U-UFQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="4vT-57-hE1" secondAttribute="trailing" id="seq-cg-MH7"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="vIV-2k-882" id="3x3-bR-Vnn"/>
+                                    <outlet property="titleLabel" destination="4vT-57-hE1" id="r4G-pB-psG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -219,7 +247,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DgK-cK-1Kw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1565" y="-65"/>
+            <point key="canvasLocation" x="1564" y="-65.667166416791616"/>
         </scene>
     </scenes>
     <resources>

@@ -7,8 +7,21 @@
 //
 
 import UIKit
+import Kingfisher
+
+protocol SongTableViewControllerDelegate {
+    func songTableViewController(_ songTableViewController: SongTableViewController, didSelectHickerySong hickerySong: HickerySong)
+}
 
 class SongTableViewController: UITableViewController {
+
+    var songTableViewControllerDelegate: SongTableViewControllerDelegate?
+
+    var songs: [HickerySong]? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,32 +33,36 @@ class SongTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if songs != nil {
+            return songs!.count
+        }
         return 0
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableViewCell", for: indexPath) as! SongTableViewCell
+        if let hickeryObject = self.hickerySong(forIndexPath: indexPath) {
+            if let imageURLString = hickeryObject.photoURL {
+                let imageURL = URL(string: imageURLString)
+                cell.avatarImageView.kf.setImage(with: imageURL)
+            }
+            cell.titleLabel.text = hickeryObject.title
+        }
         return cell
     }
-    */
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let hickerySong = self.hickerySong(forIndexPath: indexPath) {
+            songTableViewControllerDelegate?.songTableViewController(self, didSelectHickerySong: hickerySong)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -91,5 +108,15 @@ class SongTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    private func hickerySong(forIndexPath indexPath: IndexPath) -> HickerySong? {
+        if (songs == nil) {
+            return nil
+        }
+        if (songs!.count < indexPath.row) {
+            return nil
+        }
+        return songs![indexPath.row]
+    }
 
 }

@@ -26,6 +26,7 @@
 		17A945011DC9972D0080EFA8 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A945001DC9972D0080EFA8 /* PlaylistViewController.swift */; };
 		17A945031DC9973D0080EFA8 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A945021DC9973D0080EFA8 /* PlayerViewController.swift */; };
 		17A945051DC997550080EFA8 /* SongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A945041DC997550080EFA8 /* SongTableViewController.swift */; };
+		17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BAEDB61DCBC6B40053B182 /* SongTableViewCell.swift */; };
 		290D533656C5D81876F6C317 /* Pods_HickeryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5928909C0522813C5BB8153 /* Pods_HickeryUITests.framework */; };
 		3FA08C0FA26D2B785C2A8A19 /* Pods_HickeryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA5F0FF1754AF4E4652B1E6 /* Pods_HickeryTests.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		17A945001DC9972D0080EFA8 /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		17A945021DC9973D0080EFA8 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		17A945041DC997550080EFA8 /* SongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewController.swift; sourceTree = "<group>"; };
+		17BAEDB61DCBC6B40053B182 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		364ADBC731FB1A82DF1349CC /* Pods-HickeryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryTests/Pods-HickeryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		443B0E0D30F77F6C71B66DE4 /* Pods-HickeryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryTests/Pods-HickeryTests.release.xcconfig"; sourceTree = "<group>"; };
 		470F1371361AC858F69EEC64 /* Pods-HickeryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryUITests/Pods-HickeryUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				178D34C31DC6E25D0044175D /* Models */,
 				1700E3621DC68A8D0085A5D0 /* Onboarding */,
 				17A944F71DC98ECB0080EFA8 /* Playlists */,
+				17BAEDB51DCBC6970053B182 /* Views */,
 				1700E3321DC689A60085A5D0 /* AppDelegate.swift */,
 				1700E3361DC689A60085A5D0 /* SecondViewController.swift */,
 				1700E3381DC689A60085A5D0 /* Main.storyboard */,
@@ -227,6 +230,14 @@
 				17A945041DC997550080EFA8 /* SongTableViewController.swift */,
 			);
 			name = Playlists;
+			sourceTree = "<group>";
+		};
+		17BAEDB51DCBC6970053B182 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17BAEDB61DCBC6B40053B182 /* SongTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		6E1A7421A83163AC2933823A /* Pods */ = {
@@ -541,6 +552,7 @@
 				1700E3371DC689A60085A5D0 /* SecondViewController.swift in Sources */,
 				1700E3331DC689A60085A5D0 /* AppDelegate.swift in Sources */,
 				17A945011DC9972D0080EFA8 /* PlaylistViewController.swift in Sources */,
+				17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */,
 				1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */,
 				1700E3641DC68AE70085A5D0 /* LandingViewController.swift in Sources */,
 				178D34C71DC6E2E60044175D /* HickerySong.swift in Sources */,
