@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0001C96D1724B7C5A0A2FA7B /* Pods_Hickery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CF4180F1803A0DA6BA5319 /* Pods_Hickery.framework */; };
 		1700E3331DC689A60085A5D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3321DC689A60085A5D0 /* AppDelegate.swift */; };
-		1700E3371DC689A60085A5D0 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3361DC689A60085A5D0 /* SecondViewController.swift */; };
+		1700E3371DC689A60085A5D0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3361DC689A60085A5D0 /* ProfileViewController.swift */; };
 		1700E33A1DC689A60085A5D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1700E3381DC689A60085A5D0 /* Main.storyboard */; };
 		1700E33C1DC689A60085A5D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1700E33B1DC689A60085A5D0 /* Assets.xcassets */; };
 		1700E33F1DC689A60085A5D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1700E33D1DC689A60085A5D0 /* LaunchScreen.storyboard */; };
@@ -27,6 +27,8 @@
 		17A945031DC9973D0080EFA8 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A945021DC9973D0080EFA8 /* PlayerViewController.swift */; };
 		17A945051DC997550080EFA8 /* SongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A945041DC997550080EFA8 /* SongTableViewController.swift */; };
 		17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BAEDB61DCBC6B40053B182 /* SongTableViewCell.swift */; };
+		17BAEDB91DCBFA050053B182 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */; };
+		17BAEDBB1DCBFACE0053B182 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */; };
 		290D533656C5D81876F6C317 /* Pods_HickeryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5928909C0522813C5BB8153 /* Pods_HickeryUITests.framework */; };
 		3FA08C0FA26D2B785C2A8A19 /* Pods_HickeryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA5F0FF1754AF4E4652B1E6 /* Pods_HickeryTests.framework */; };
 /* End PBXBuildFile section */
@@ -54,7 +56,7 @@
 		16257AB68E3B77AC6AF6EFDA /* Pods-Hickery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hickery.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hickery/Pods-Hickery.release.xcconfig"; sourceTree = "<group>"; };
 		1700E32F1DC689A60085A5D0 /* Hickery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hickery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1700E3321DC689A60085A5D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1700E3361DC689A60085A5D0 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		1700E3361DC689A60085A5D0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1700E3391DC689A60085A5D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1700E33B1DC689A60085A5D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1700E33E1DC689A60085A5D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,6 +81,8 @@
 		17A945021DC9973D0080EFA8 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		17A945041DC997550080EFA8 /* SongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewController.swift; sourceTree = "<group>"; };
 		17BAEDB61DCBC6B40053B182 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
+		17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Hickery/SearchViewController.swift; sourceTree = "<group>"; };
 		364ADBC731FB1A82DF1349CC /* Pods-HickeryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryTests/Pods-HickeryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		443B0E0D30F77F6C71B66DE4 /* Pods-HickeryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryTests/Pods-HickeryTests.release.xcconfig"; sourceTree = "<group>"; };
 		470F1371361AC858F69EEC64 /* Pods-HickeryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryUITests/Pods-HickeryUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 		1700E3261DC689A60085A5D0 = {
 			isa = PBXGroup;
 			children = (
+				17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */,
 				1700E3311DC689A60085A5D0 /* Hickery */,
 				1700E3481DC689A70085A5D0 /* HickeryTests */,
 				1700E3531DC689A70085A5D0 /* HickeryUITests */,
@@ -157,7 +162,7 @@
 				17A944F71DC98ECB0080EFA8 /* Playlists */,
 				17BAEDB51DCBC6970053B182 /* Views */,
 				1700E3321DC689A60085A5D0 /* AppDelegate.swift */,
-				1700E3361DC689A60085A5D0 /* SecondViewController.swift */,
+				1700E3361DC689A60085A5D0 /* ProfileViewController.swift */,
 				1700E3381DC689A60085A5D0 /* Main.storyboard */,
 				1700E33B1DC689A60085A5D0 /* Assets.xcassets */,
 				1700E33D1DC689A60085A5D0 /* LaunchScreen.storyboard */,
@@ -165,6 +170,7 @@
 				178D34C21DC6DF110044175D /* Hickery.entitlements */,
 				178D34C81DC6E6550044175D /* HickeryTabBarViewController.swift */,
 				17A944F61DC98BAB0080EFA8 /* Bridging-Header.h */,
+				17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */,
 			);
 			path = Hickery;
 			sourceTree = "<group>";
@@ -549,8 +555,10 @@
 				17A945051DC997550080EFA8 /* SongTableViewController.swift in Sources */,
 				178D34CC1DC6EB230044175D /* APIManager.swift in Sources */,
 				17A945031DC9973D0080EFA8 /* PlayerViewController.swift in Sources */,
-				1700E3371DC689A60085A5D0 /* SecondViewController.swift in Sources */,
+				1700E3371DC689A60085A5D0 /* ProfileViewController.swift in Sources */,
 				1700E3331DC689A60085A5D0 /* AppDelegate.swift in Sources */,
+				17BAEDB91DCBFA050053B182 /* DiscoverViewController.swift in Sources */,
+				17BAEDBB1DCBFACE0053B182 /* SearchViewController.swift in Sources */,
 				17A945011DC9972D0080EFA8 /* PlaylistViewController.swift in Sources */,
 				17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */,
 				1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */,

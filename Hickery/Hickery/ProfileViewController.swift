@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  ProfileViewController.swift
 //  Hickery
 //
 //  Created by Florian Marcu on 10/30/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,4 @@ class SecondViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-

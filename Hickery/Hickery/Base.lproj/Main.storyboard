@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
+        <!--Home-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController storyboardIdentifier="PlaylistViewController" id="9pv-A4-QxB" customClass="PlaylistViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
@@ -45,16 +45,54 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Bsc-LH-mvj" secondAttribute="bottom" constant="8" id="uq3-TP-5Ok"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="first" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--Second-->
+        <!--Search-->
+        <scene sceneID="rq2-pY-lqQ">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="RdU-dy-IIT" customClass="SearchViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mSV-tB-kSN"/>
+                        <viewControllerLayoutGuide type="bottom" id="EQX-Tl-BPo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qQn-uC-SKq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" image="first" id="gkM-Oz-zLf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f86-xM-Vjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-900" y="619"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="nIV-LL-khn">
+            <objects>
+                <viewController storyboardIdentifier="DiscoverViewController" id="YvE-z4-dXW" customClass="DiscoverViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eL4-Kc-ssj"/>
+                        <viewControllerLayoutGuide type="bottom" id="cwa-Mm-eYl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yxB-fT-fI7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Discover" image="first" id="WoL-dp-gEB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZh-uN-eWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1" y="790"/>
+        </scene>
+        <!--Me-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -83,7 +121,7 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="second" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,7 +193,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="YvE-z4-dXW" kind="relationship" relationship="viewControllers" id="9wO-VV-Nzk"/>
+                        <segue destination="RdU-dy-IIT" kind="relationship" relationship="viewControllers" id="DMj-So-fdN"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="0oY-sr-If4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
