@@ -8,10 +8,17 @@
 
 import UIKit
 
+let kSongTableViewCellImageViewCornerRadius: CGFloat = 8.0
+
 class SongTableViewCell: UITableViewCell {
 
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
+
+    func configureCell() {
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = kSongTableViewCellImageViewCornerRadius
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

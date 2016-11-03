@@ -50,6 +50,7 @@ class SongTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableViewCell", for: indexPath) as! SongTableViewCell
+        cell.configureCell()
         if let hickeryObject = self.hickerySong(forIndexPath: indexPath) {
             if let imageURLString = hickeryObject.photoURL {
                 let imageURL = URL(string: imageURLString)
