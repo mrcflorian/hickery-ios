@@ -29,7 +29,7 @@ class SongTableViewController: UITableViewController {
         let newIndexPath = IndexPath(row: indexPathOfCurrentPlayingSong.row + 1, section: indexPathOfCurrentPlayingSong.section)
         if let hickerySong = self.hickerySong(forIndexPath: newIndexPath) {
             indexPathOfCurrentPlayingSong = newIndexPath
-            self.tableView.selectRow(at: indexPathOfCurrentPlayingSong, animated: false, scrollPosition: .none)
+            self.tableView.selectRow(at: indexPathOfCurrentPlayingSong, animated: true, scrollPosition: .top)
             return hickerySong
         }
         return nil
@@ -64,6 +64,7 @@ class SongTableViewController: UITableViewController {
         if let hickerySong = self.hickerySong(forIndexPath: indexPath) {
             songTableViewControllerDelegate?.songTableViewController(self, didSelectHickerySong: hickerySong)
             indexPathOfCurrentPlayingSong = indexPath
+            self.tableView.scrollToRow(at: indexPathOfCurrentPlayingSong, at: .top, animated: true)
         }
     }
 
