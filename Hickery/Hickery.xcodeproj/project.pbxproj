@@ -82,7 +82,7 @@
 		17A945041DC997550080EFA8 /* SongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewController.swift; sourceTree = "<group>"; };
 		17BAEDB61DCBC6B40053B182 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
-		17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Hickery/SearchViewController.swift; sourceTree = "<group>"; };
+		17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		364ADBC731FB1A82DF1349CC /* Pods-HickeryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryTests/Pods-HickeryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		443B0E0D30F77F6C71B66DE4 /* Pods-HickeryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryTests/Pods-HickeryTests.release.xcconfig"; sourceTree = "<group>"; };
 		470F1371361AC858F69EEC64 /* Pods-HickeryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HickeryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HickeryUITests/Pods-HickeryUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,7 +132,6 @@
 		1700E3261DC689A60085A5D0 = {
 			isa = PBXGroup;
 			children = (
-				17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */,
 				1700E3311DC689A60085A5D0 /* Hickery */,
 				1700E3481DC689A70085A5D0 /* HickeryTests */,
 				1700E3531DC689A70085A5D0 /* HickeryUITests */,
@@ -171,6 +170,7 @@
 				178D34C81DC6E6550044175D /* HickeryTabBarViewController.swift */,
 				17A944F61DC98BAB0080EFA8 /* Bridging-Header.h */,
 				17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */,
+				17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */,
 			);
 			path = Hickery;
 			sourceTree = "<group>";
@@ -272,6 +272,7 @@
 				1700E32D1DC689A60085A5D0 /* Resources */,
 				2DFBC18740F75A736AAADC70 /* [CP] Embed Pods Frameworks */,
 				6A02BD89646547BC874302AB /* [CP] Copy Pods Resources */,
+				17BAEDBC1DCC4C7A0053B182 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -420,6 +421,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		17BAEDBC1DCC4C7A0053B182 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 7189842e0edc1f648a6e6e3c52978493bb12c759 3ce1a95baf59d87848375aad6dd8f274a073626fa720daacd2a771583b1b1f76";
 		};
 		21A0536AFFA701C4947C93F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

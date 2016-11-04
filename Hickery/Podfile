@@ -10,6 +10,8 @@ target 'Hickery' do
   pod 'FacebookShare'
   pod 'youtube-ios-player-helper', :git=>'https://github.com/youtube/youtube-ios-player-helper', :commit=>'head'
   pod 'Kingfisher'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
   # Pods for Hickery
 
