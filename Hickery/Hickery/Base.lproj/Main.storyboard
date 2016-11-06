@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Playlist-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController storyboardIdentifier="PlaylistViewController" id="9pv-A4-QxB" customClass="PlaylistViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaylistViewController" id="9pv-A4-QxB" userLabel="Playlist" customClass="PlaylistViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -42,7 +42,7 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" multiplier="3" id="gyB-vg-5be"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="iMJ-uO-zZi"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="height" multiplier="375:667" id="u74-Zj-DWo"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Bsc-LH-mvj" secondAttribute="bottom" constant="8" id="uq3-TP-5Ok"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Bsc-LH-mvj" secondAttribute="bottom" id="uq3-TP-5Ok"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="first" id="acW-dT-cKf"/>
@@ -50,6 +50,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="BBL-8f-2eO">
+            <objects>
+                <viewController id="6u5-QE-zFO" customClass="HomeViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qUt-uw-okO"/>
+                        <viewControllerLayoutGuide type="bottom" id="cpx-qo-4Im"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Iuo-7e-RST">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="first" id="qji-P0-5GV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hae-kY-aaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1018" y="779"/>
         </scene>
         <!--Search-->
         <scene sceneID="rq2-pY-lqQ">
@@ -68,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f86-xM-Vjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-900" y="619"/>
+            <point key="canvasLocation" x="-278" y="779"/>
         </scene>
         <!--Discover-->
         <scene sceneID="nIV-LL-khn">
@@ -87,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WZh-uN-eWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1" y="790"/>
+            <point key="canvasLocation" x="431" y="779"/>
         </scene>
         <!--Me-->
         <scene sceneID="wg7-f3-ORb">
@@ -125,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="1103" y="779"/>
         </scene>
         <!--Landing View Controller-->
         <scene sceneID="URX-xB-E3f">
@@ -192,7 +211,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="6u5-QE-zFO" kind="relationship" relationship="viewControllers" id="n1G-Zq-Tqg"/>
                         <segue destination="YvE-z4-dXW" kind="relationship" relationship="viewControllers" id="9wO-VV-Nzk"/>
                         <segue destination="RdU-dy-IIT" kind="relationship" relationship="viewControllers" id="DMj-So-fdN"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="0oY-sr-If4"/>
@@ -211,7 +230,7 @@
                         <viewControllerLayoutGuide type="bottom" id="egX-Hd-oX0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KAT-2o-Heg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="202.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-eW-j9C" customClass="YTPlayerView">
@@ -239,7 +258,7 @@
             <objects>
                 <tableViewController id="IWh-aO-amX" customClass="SongTableViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="35" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRB-e5-PUS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="396"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="436.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

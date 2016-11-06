@@ -10,11 +10,11 @@ import UIKit
 
 class HickeryTabBarViewController: UITabBarController {
 
-    var likesPlayListVC: PlaylistViewController?
+    var homeVC: HomeViewController?
 
     var userId: String? {
         didSet {
-            likesPlayListVC?.userId = userId
+            homeVC?.userId = userId
         }
     }
 
@@ -23,7 +23,7 @@ class HickeryTabBarViewController: UITabBarController {
     }
 
     private func configureViewControllers() {
-        likesPlayListVC = viewControllers?.first as? PlaylistViewController
-        likesPlayListVC?.userId = userId
+        homeVC = viewControllers?.first as? HomeViewController
+        homeVC?.userId = userId
     }
 }

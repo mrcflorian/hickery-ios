@@ -17,6 +17,8 @@
 		1700E3551DC689A70085A5D0 /* HickeryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3541DC689A70085A5D0 /* HickeryUITests.swift */; };
 		1700E3641DC68AE70085A5D0 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3631DC68AE70085A5D0 /* LandingViewController.swift */; };
 		1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1702436A1DC7008A00369C72 /* HickerySongStream.swift */; };
+		1756C4291DCFC26000505E03 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C4281DCFC26000505E03 /* HomeViewController.swift */; };
+		1756C42B1DCFC62B00505E03 /* StoryboardEntityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */; };
 		178D34C11DC6DBC80044175D /* HKLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D34C01DC6DBC80044175D /* HKLoginButton.swift */; };
 		178D34C51DC6E2C60044175D /* HickeryUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D34C41DC6E2C60044175D /* HickeryUser.swift */; };
 		178D34C71DC6E2E60044175D /* HickerySong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D34C61DC6E2E60044175D /* HickerySong.swift */; };
@@ -69,6 +71,8 @@
 		1700E3561DC689A70085A5D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1700E3631DC68AE70085A5D0 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		1702436A1DC7008A00369C72 /* HickerySongStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickerySongStream.swift; sourceTree = "<group>"; };
+		1756C4281DCFC26000505E03 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardEntityProvider.swift; sourceTree = "<group>"; };
 		178D34C01DC6DBC80044175D /* HKLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKLoginButton.swift; sourceTree = "<group>"; };
 		178D34C21DC6DF110044175D /* Hickery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hickery.entitlements; sourceTree = "<group>"; };
 		178D34C41DC6E2C60044175D /* HickeryUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickeryUser.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				1700E3621DC68A8D0085A5D0 /* Onboarding */,
 				17A944F71DC98ECB0080EFA8 /* Playlists */,
 				17BAEDB51DCBC6970053B182 /* Views */,
+				1756C42C1DCFC63600505E03 /* Helpers */,
 				1700E3321DC689A60085A5D0 /* AppDelegate.swift */,
 				1700E3361DC689A60085A5D0 /* ProfileViewController.swift */,
 				1700E3381DC689A60085A5D0 /* Main.storyboard */,
@@ -171,6 +176,7 @@
 				17A944F61DC98BAB0080EFA8 /* Bridging-Header.h */,
 				17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */,
 				17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */,
+				1756C4281DCFC26000505E03 /* HomeViewController.swift */,
 			);
 			path = Hickery;
 			sourceTree = "<group>";
@@ -208,6 +214,14 @@
 				178D34CD1DC6EE640044175D /* NetworkingManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		1756C42C1DCFC63600505E03 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		178D34C31DC6E25D0044175D /* Models */ = {
@@ -565,6 +579,7 @@
 				178D34C51DC6E2C60044175D /* HickeryUser.swift in Sources */,
 				178D34C11DC6DBC80044175D /* HKLoginButton.swift in Sources */,
 				178D34C91DC6E6550044175D /* HickeryTabBarViewController.swift in Sources */,
+				1756C4291DCFC26000505E03 /* HomeViewController.swift in Sources */,
 				178D34CE1DC6EE640044175D /* NetworkingManager.swift in Sources */,
 				17A945051DC997550080EFA8 /* SongTableViewController.swift in Sources */,
 				178D34CC1DC6EB230044175D /* APIManager.swift in Sources */,
@@ -573,6 +588,7 @@
 				1700E3331DC689A60085A5D0 /* AppDelegate.swift in Sources */,
 				17BAEDB91DCBFA050053B182 /* DiscoverViewController.swift in Sources */,
 				17BAEDBB1DCBFACE0053B182 /* SearchViewController.swift in Sources */,
+				1756C42B1DCFC62B00505E03 /* StoryboardEntityProvider.swift in Sources */,
 				17A945011DC9972D0080EFA8 /* PlaylistViewController.swift in Sources */,
 				17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */,
 				1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */,
