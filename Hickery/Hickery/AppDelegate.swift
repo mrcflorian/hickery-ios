@@ -6,12 +6,12 @@
 //  Copyright © 2016 Florian Marcu. All rights reserved.
 //
 
-import UIKit
+import Crashlytics
+import Fabric
 import FacebookCore
 import FacebookLogin
 import FacebookShare
-import Fabric
-import Crashlytics
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
