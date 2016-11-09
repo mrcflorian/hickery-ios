@@ -64,7 +64,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="first" id="qji-P0-5GV"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home-tab-icon-white" id="qji-P0-5GV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hae-kY-aaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="first" id="gkM-Oz-zLf"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search-tab-icon-white" id="gkM-Oz-zLf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f86-xM-Vjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,7 +102,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="first" id="WoL-dp-gEB"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="discover-tab-icon-white" id="WoL-dp-gEB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WZh-uN-eWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,7 +140,7 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Me" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="me-tab-icon-white" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -208,7 +208,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="6u5-QE-zFO" kind="relationship" relationship="viewControllers" id="n1G-Zq-Tqg"/>
@@ -312,8 +312,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="discover-tab-icon-white" width="25" height="25"/>
         <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="home-tab-icon-white" width="25" height="25"/>
+        <image name="me-tab-icon-white" width="25" height="25"/>
+        <image name="search-tab-icon-white" width="25" height="25"/>
         <image name="white-logo" width="174" height="41"/>
     </resources>
 </document>

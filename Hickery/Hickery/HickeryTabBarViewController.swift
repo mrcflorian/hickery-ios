@@ -20,6 +20,12 @@ class HickeryTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         configureViewControllers()
+        configureTabBar()
+    }
+
+    private func configureTabBar() {
+        self.tabBar.barTintColor = UIColor.black
+        self.tabBar.tintColor = UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)
     }
 
     private func configureViewControllers() {
