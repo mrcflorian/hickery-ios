@@ -24,6 +24,10 @@ class HickeryTabBarViewController: UITabBarController {
         configureTabBar()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.tabBar.isHidden = UIDevice.current.orientation.isLandscape
+    }
+
     private func configureTabBar() {
         self.tabBar.barTintColor = UIColor.black
         self.tabBar.tintColor = UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)
