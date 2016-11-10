@@ -8,8 +8,10 @@
 
 import Foundation
 
-let kHickeryAPIParamUserIdKey = "user_id"
 let kHickeryAPIUserLikesPath = "api/likes.php"
+let kHickeryAPIUserRecommendationsPath = "api/recommendations.php"
+
+let kHickeryAPIParamUserIdKey = "user_id"
 
 class APIManager {
 
@@ -17,7 +19,16 @@ class APIManager {
 
     func requestLikes(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
         let params = [kHickeryAPIParamUserIdKey:userId]
-        networkingManager.get(path: kHickeryAPIUserLikesPath, params: params) { (jsonResponse, responseStatus) in
+        requestSongs(endpoint: kHickeryAPIUserLikesPath, params: params, completion: completion)
+    }
+
+    func requestRecommendations(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
+        let params = [kHickeryAPIParamUserIdKey:userId]
+        requestSongs(endpoint: kHickeryAPIUserRecommendationsPath, params: params, completion: completion)
+    }
+
+    private func requestSongs(endpoint: String, params: [String:String], completion: @escaping (_ songs: [HickerySong]) -> Void) {
+        networkingManager.get(path: endpoint, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
             case .success:
                 let array = HickerySongStream.parse(jsonResponse: jsonResponse)

@@ -11,6 +11,7 @@ import UIKit
 class HickeryTabBarViewController: UITabBarController {
 
     var homeVC: HomeViewController?
+    var discoverVC: DiscoverViewController?
 
     var userId: String? {
         didSet {
@@ -31,5 +32,8 @@ class HickeryTabBarViewController: UITabBarController {
     private func configureViewControllers() {
         homeVC = viewControllers?.first as? HomeViewController
         homeVC?.userId = userId
+
+        discoverVC = viewControllers?[1] as? DiscoverViewController
+        discoverVC?.userId = userId
     }
 }

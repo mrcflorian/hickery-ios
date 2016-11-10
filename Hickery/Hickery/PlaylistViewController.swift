@@ -13,6 +13,18 @@ class PlaylistViewController: UIViewController {
     var playerVC: PlayerViewController?
     var songTableVC: SongTableViewController?
 
+    var autoplayEnabled: Bool = true
+    var songs: [HickerySong] = [] {
+        didSet {
+            updateIfNeeded()
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateIfNeeded()
+    }
+
     func play(hickerySong: HickerySong) {
         playerVC?.videoId = hickerySong.youtubeVideoID()
     }
@@ -23,17 +35,16 @@ class PlaylistViewController: UIViewController {
         }
     }
 
-    func update(songs: [HickerySong]) {
+    func updateIfNeeded() {
         configureViewControllers()
-        playerVC?.delegate = self
-        songTableVC?.songTableViewControllerDelegate = self
-        songTableVC?.songs = songs
-        playNextSong()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureViewControllers()
+        if (songs.count > 0) {
+            playerVC?.delegate = self
+            songTableVC?.songTableViewControllerDelegate = self
+            songTableVC?.songs = songs
+            if (autoplayEnabled) {
+                playNextSong()
+            }
+        }
     }
 
     private func configureViewControllers() {

@@ -34,6 +34,6 @@ class HomeViewController: UIViewController {
     }
 
     private func didFetchUserSongs(songs: [HickerySong]) {
-        playlistVC.update(songs: songs)
+        playlistVC.songs = songs
     }
 }
