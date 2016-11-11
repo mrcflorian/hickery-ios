@@ -19,6 +19,10 @@
 		1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1702436A1DC7008A00369C72 /* HickerySongStream.swift */; };
 		1756C4291DCFC26000505E03 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C4281DCFC26000505E03 /* HomeViewController.swift */; };
 		1756C42B1DCFC62B00505E03 /* StoryboardEntityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */; };
+		178697591DD56A8200225681 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178697581DD56A8200225681 /* SignUpViewController.swift */; };
+		1786975B1DD56D5A00225681 /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1786975A1DD56D5A00225681 /* FacebookUser.swift */; };
+		1786975D1DD56DDB00225681 /* FacebookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1786975C1DD56DDB00225681 /* FacebookAPIManager.swift */; };
+		1786975F1DD579D900225681 /* FacebookPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1786975E1DD579D900225681 /* FacebookPost.swift */; };
 		178D34C11DC6DBC80044175D /* HKLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D34C01DC6DBC80044175D /* HKLoginButton.swift */; };
 		178D34C51DC6E2C60044175D /* HickeryUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D34C41DC6E2C60044175D /* HickeryUser.swift */; };
 		178D34C71DC6E2E60044175D /* HickerySong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D34C61DC6E2E60044175D /* HickerySong.swift */; };
@@ -73,6 +77,10 @@
 		1702436A1DC7008A00369C72 /* HickerySongStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickerySongStream.swift; sourceTree = "<group>"; };
 		1756C4281DCFC26000505E03 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardEntityProvider.swift; sourceTree = "<group>"; };
+		178697581DD56A8200225681 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1786975A1DD56D5A00225681 /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
+		1786975C1DD56DDB00225681 /* FacebookAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAPIManager.swift; sourceTree = "<group>"; };
+		1786975E1DD579D900225681 /* FacebookPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPost.swift; sourceTree = "<group>"; };
 		178D34C01DC6DBC80044175D /* HKLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKLoginButton.swift; sourceTree = "<group>"; };
 		178D34C21DC6DF110044175D /* Hickery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hickery.entitlements; sourceTree = "<group>"; };
 		178D34C41DC6E2C60044175D /* HickeryUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickeryUser.swift; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 			children = (
 				1700E3631DC68AE70085A5D0 /* LandingViewController.swift */,
 				178D34C01DC6DBC80044175D /* HKLoginButton.swift */,
+				178697581DD56A8200225681 /* SignUpViewController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -230,6 +239,8 @@
 				178D34C41DC6E2C60044175D /* HickeryUser.swift */,
 				178D34C61DC6E2E60044175D /* HickerySong.swift */,
 				1702436A1DC7008A00369C72 /* HickerySongStream.swift */,
+				1786975A1DD56D5A00225681 /* FacebookUser.swift */,
+				1786975E1DD579D900225681 /* FacebookPost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				178D34CB1DC6EB230044175D /* APIManager.swift */,
+				1786975C1DD56DDB00225681 /* FacebookAPIManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -577,18 +589,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				178D34C51DC6E2C60044175D /* HickeryUser.swift in Sources */,
+				1786975F1DD579D900225681 /* FacebookPost.swift in Sources */,
 				178D34C11DC6DBC80044175D /* HKLoginButton.swift in Sources */,
 				178D34C91DC6E6550044175D /* HickeryTabBarViewController.swift in Sources */,
 				1756C4291DCFC26000505E03 /* HomeViewController.swift in Sources */,
 				178D34CE1DC6EE640044175D /* NetworkingManager.swift in Sources */,
 				17A945051DC997550080EFA8 /* SongTableViewController.swift in Sources */,
 				178D34CC1DC6EB230044175D /* APIManager.swift in Sources */,
+				178697591DD56A8200225681 /* SignUpViewController.swift in Sources */,
+				1786975D1DD56DDB00225681 /* FacebookAPIManager.swift in Sources */,
 				17A945031DC9973D0080EFA8 /* PlayerViewController.swift in Sources */,
 				1700E3371DC689A60085A5D0 /* ProfileViewController.swift in Sources */,
 				1700E3331DC689A60085A5D0 /* AppDelegate.swift in Sources */,
 				17BAEDB91DCBFA050053B182 /* DiscoverViewController.swift in Sources */,
 				17BAEDBB1DCBFACE0053B182 /* SearchViewController.swift in Sources */,
 				1756C42B1DCFC62B00505E03 /* StoryboardEntityProvider.swift in Sources */,
+				1786975B1DD56D5A00225681 /* FacebookUser.swift in Sources */,
 				17A945011DC9972D0080EFA8 /* PlaylistViewController.swift in Sources */,
 				17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */,
 				1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */,
