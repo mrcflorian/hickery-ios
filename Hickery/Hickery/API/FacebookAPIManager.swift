@@ -15,6 +15,7 @@ let kGraphPathMePageLikes = "me/likes"
 class FacebookAPIManager {
 
     let accessToken: AccessToken
+    let networkingManager = NetworkingManager()
 
     init(accessToken: AccessToken) {
         self.accessToken = accessToken
@@ -25,24 +26,14 @@ class FacebookAPIManager {
         graphRequest.start { (response: HTTPURLResponse?, result: GraphRequestResult<GraphRequest>) in
             switch result {
             case .success(let graphResponse):
-                if let dictionary = graphResponse.dictionaryValue {
-                    let firstName = dictionary["first_name"] as? String
-                    let lastName = dictionary["last_name"] as? String
-                    let email = dictionary["email"] as? String
-                    let id = dictionary["id"] as? String
-                    let fbUser = FacebookUser(firstName: firstName, lastName: lastName, email: email, id: id)
-                    completion(fbUser)
+                if let dictionary = graphResponse.dictionaryValue as? [String : String]{
+                    completion(FacebookUser(dictionary: dictionary))
                 }
                 break
             default:
                 print("Facebook request user error")
             }
         }
-    }
-
-    func requestWallPosts(completion: @escaping (_ posts: [FacebookPost]) -> Void) {
-        let parameters = ["fields":"link,created_time,description,picture","limit":"25"]
-        requestWallPosts(parameters: parameters, posts: [], completion: completion)
     }
 
     func requestFacebookUserPageLikes() {
@@ -52,47 +43,45 @@ class FacebookAPIManager {
         }
     }
 
-    private func requestWallPosts(parameters: [String:String], posts: [FacebookPost], completion: @escaping (_ posts: [FacebookPost]) -> Void) {
-        print ("Start new request")
-        let graphRequest = GraphRequest(graphPath: "me/posts", parameters: parameters, accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
+    func requestWallPosts(completion: @escaping (_ posts: [FacebookPost]) -> Void) {
+        let graphRequest = GraphRequest(graphPath: "me/posts", parameters: ["fields":"link,created_time,description,picture","limit":"25"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
 
         graphRequest.start { (response: HTTPURLResponse?, result: GraphRequestResult<GraphRequest>) in
             switch result {
             case .success(let graphResponse):
-                var newPosts = [FacebookPost]()
                 if let dictionary = graphResponse.dictionaryValue {
-                    if let array = dictionary["data"] as? [[String: String]] {
-                        for dict in array {
-                            let fbPost = FacebookPost(dictionary: dict)
-                            newPosts.append(fbPost)
-                        }
-                    }
-                    print ("Loaded " + String(newPosts.count) + " more posts")
-                    if let paging = dictionary["paging"] as? [String: String] {
-                        if let next = paging["next"] as String? {
-                            if next.characters.count > 0 {
-                                var newParams = parameters
-                                newParams["__paging_token"] = self.extractPagingToken(string: next)
-                                self.requestWallPosts(parameters: parameters, posts: posts + newPosts, completion: completion)
-                                return
-                            }
-                        }
-                    }
+                    self.processWallPostResponse(dictionary: dictionary, posts: [], completion: completion)
+                    return
                 }
-                completion(posts + newPosts)
-                return
-            default:
-                print("Facebook me/posts error")
+            default: break
             }
-            completion(posts)
+            completion([])
         }
     }
 
-    private func extractPagingToken(string: String) -> String? {
-        if let urlComponents = URLComponents(string: string), let queryItems = (urlComponents.queryItems as [URLQueryItem]?) {
-            return queryItems.filter({ (item) in item.name == "__paging_token" }).first?.value!
+    private func processWallPostResponse(dictionary: [String: Any?], posts: [FacebookPost], completion: @escaping (_ posts: [FacebookPost]) -> Void) {
+        var newPosts = [FacebookPost]()
+        if let array = dictionary["data"] as? [[String: String]] {
+            for dict in array {
+                let fbPost = FacebookPost(dictionary: dict)
+                newPosts.append(fbPost)
+            }
         }
-        return nil
+        guard let paging = dictionary["paging"] as? [String: String], let next = paging["next"] as String?, next.characters.count > 0 else {
+            completion(posts + newPosts)
+            return
+        }
+        networkingManager.get(path: next, params: [:], completion: { (jsonResponse, responseStatus) in
+            switch responseStatus {
+            case .success:
+                guard let jsonResponse = jsonResponse, let dictionary = jsonResponse as? [String: Any] else {
+                    completion(posts + newPosts)
+                    return
+                }
+                self.processWallPostResponse(dictionary: dictionary, posts: posts + newPosts, completion: completion)
+            case .error(_):
+                completion(posts + newPosts)
+            }
+        })
     }
-
 }

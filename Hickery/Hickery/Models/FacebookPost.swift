@@ -7,10 +7,10 @@
 //
 
 class FacebookPost {
-    var link: String?
-    var createdTime: String?
-    var description: String?
-    var picture: String?
+    let link: String?
+    let createdTime: String?
+    let description: String?
+    let picture: String?
 
     init (dictionary: [String: String]) {
         self.link = dictionary["link"] as String?
