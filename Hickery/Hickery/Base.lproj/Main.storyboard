@@ -81,13 +81,34 @@
                     <view key="view" contentMode="scaleToFill" id="qQn-uC-SKq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-5m-zOG">
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCz-3A-7BR">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pCz-3A-7BR" firstAttribute="top" secondItem="qA4-5m-zOG" secondAttribute="bottom" id="62G-mQ-P92"/>
+                            <constraint firstItem="pCz-3A-7BR" firstAttribute="centerX" secondItem="qQn-uC-SKq" secondAttribute="centerX" id="PUJ-yF-Z2G"/>
+                            <constraint firstItem="qA4-5m-zOG" firstAttribute="width" secondItem="qQn-uC-SKq" secondAttribute="width" id="S3b-p9-lMi"/>
+                            <constraint firstItem="pCz-3A-7BR" firstAttribute="width" secondItem="qQn-uC-SKq" secondAttribute="width" id="buU-4P-g73"/>
+                            <constraint firstItem="qA4-5m-zOG" firstAttribute="centerX" secondItem="qQn-uC-SKq" secondAttribute="centerX" id="hDL-mQ-RCS"/>
+                            <constraint firstItem="EQX-Tl-BPo" firstAttribute="top" secondItem="pCz-3A-7BR" secondAttribute="bottom" id="inP-Ck-rX4"/>
+                            <constraint firstItem="qA4-5m-zOG" firstAttribute="top" secondItem="mSV-tB-kSN" secondAttribute="bottom" id="wwk-Jp-Ajm"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="search-tab-icon-white" id="gkM-Oz-zLf"/>
+                    <connections>
+                        <outlet property="containerView" destination="pCz-3A-7BR" id="cpB-Zq-bbQ"/>
+                        <outlet property="searchBar" destination="qA4-5m-zOG" id="Llv-oH-KOc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f86-xM-Vjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-278" y="779"/>
+            <point key="canvasLocation" x="-279.19999999999999" y="778.56071964017997"/>
         </scene>
         <!--Discover-->
         <scene sceneID="nIV-LL-khn">
@@ -267,7 +288,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="33"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RoA-kk-zoa" id="cgv-yT-zxY">
-                                    <frame key="frameInset" width="375" height="32"/>
+                                    <frame key="frameInset" width="375" height="33"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIV-2k-882">

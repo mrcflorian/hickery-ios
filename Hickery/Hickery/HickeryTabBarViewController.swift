@@ -12,6 +12,7 @@ class HickeryTabBarViewController: UITabBarController {
 
     var homeVC: HomeViewController?
     var discoverVC: DiscoverViewController?
+    var searchVC: SearchViewController?
 
     var userId: String? {
         didSet {
@@ -39,5 +40,8 @@ class HickeryTabBarViewController: UITabBarController {
 
         discoverVC = viewControllers?[1] as? DiscoverViewController
         discoverVC?.userId = userId
+
+        searchVC = viewControllers?[2] as? SearchViewController
+        searchVC?.userId = userId
     }
 }

@@ -10,8 +10,10 @@ import Foundation
 
 let kHickeryAPIUserLikesPath = "api/likes.php"
 let kHickeryAPIUserRecommendationsPath = "api/recommendations.php"
+let kHickeryAPIUserSearchPath = "api/search.php"
 
 let kHickeryAPIParamUserIdKey = "user_id"
+let kHickeryAPIParamQueryKey = "query"
 
 class APIManager {
 
@@ -25,6 +27,11 @@ class APIManager {
     func requestRecommendations(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
         let params = [kHickeryAPIParamUserIdKey:userId]
         requestSongs(endpoint: kHickeryAPIUserRecommendationsPath, params: params, completion: completion)
+    }
+
+    func requestSearchResults(userId: String, query: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
+        let params = [kHickeryAPIParamUserIdKey:userId, kHickeryAPIParamQueryKey:query]
+        requestSongs(endpoint: kHickeryAPIUserSearchPath, params: params, completion: completion)
     }
 
     private func requestSongs(endpoint: String, params: [String:String], completion: @escaping (_ songs: [HickerySong]) -> Void) {

@@ -25,7 +25,11 @@ class HickerySong {
     }
 
     func youtubeVideoID() -> String {
-        if let query = self.content?.components(separatedBy: "?")[1] {
+        if let components = self.content?.components(separatedBy: "?") {
+            if (components.count <= 1) {
+                return ""
+            }
+            let query = components[1]
             let pairs = query.components(separatedBy: "&")
             for pair in pairs {
                 var kv = pair.components(separatedBy: "=")

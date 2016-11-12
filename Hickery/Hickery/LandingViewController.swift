@@ -37,9 +37,9 @@ class LandingViewController: UIViewController {
     private func didLoginWithFacebook() {
         assert(AccessToken.current != nil)
 
-        let signUpVC = SignUpViewController()
-        self.present(signUpVC, animated: false, completion: nil)
-        return
+//        let signUpVC = SignUpViewController()
+//        self.present(signUpVC, animated: false, completion: nil)
+//        return
 
         let accessToken = AccessToken.current
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
