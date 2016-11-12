@@ -22,6 +22,10 @@ class SearchViewController: UIViewController {
     let playlistVC = StoryboardEntityProvider().playlistViewController()
     var userId: String?
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.resignFirstResponder()
+    }
+
     func didFetchSearchSongs(songs: [HickerySong]) {
         playlistVC.songs = songs
         containerView.addSubview(playlistVC.view)
@@ -30,6 +34,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         guard let query = searchBar.text, let userId = userId else {
             return
         }
