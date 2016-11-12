@@ -22,11 +22,11 @@ class FacebookAPIManager {
     }
 
     func requestFacebookUser(completion: @escaping (_ facebookUser: FacebookUser) -> Void) {
-        let graphRequest = GraphRequest(graphPath: kGraphPathMe, parameters: ["fields":"id,email,last_name,first_name"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
+        let graphRequest = GraphRequest(graphPath: kGraphPathMe, parameters: ["fields":"id,email,last_name,first_name,picture"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
         graphRequest.start { (response: HTTPURLResponse?, result: GraphRequestResult<GraphRequest>) in
             switch result {
             case .success(let graphResponse):
-                if let dictionary = graphResponse.dictionaryValue as? [String : String]{
+                if let dictionary = graphResponse.dictionaryValue as [String : Any]!{
                     completion(FacebookUser(dictionary: dictionary))
                 }
                 break

@@ -174,7 +174,6 @@
 				17BAEDB51DCBC6970053B182 /* Views */,
 				1756C42C1DCFC63600505E03 /* Helpers */,
 				1700E3321DC689A60085A5D0 /* AppDelegate.swift */,
-				1700E3361DC689A60085A5D0 /* ProfileViewController.swift */,
 				1700E3381DC689A60085A5D0 /* Main.storyboard */,
 				1700E33B1DC689A60085A5D0 /* Assets.xcassets */,
 				1700E33D1DC689A60085A5D0 /* LaunchScreen.storyboard */,
@@ -185,6 +184,7 @@
 				17BAEDB81DCBFA050053B182 /* DiscoverViewController.swift */,
 				17BAEDBA1DCBFACE0053B182 /* SearchViewController.swift */,
 				1756C4281DCFC26000505E03 /* HomeViewController.swift */,
+				1700E3361DC689A60085A5D0 /* ProfileViewController.swift */,
 			);
 			path = Hickery;
 			sourceTree = "<group>";

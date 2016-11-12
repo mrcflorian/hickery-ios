@@ -13,12 +13,9 @@ class HickeryTabBarViewController: UITabBarController {
     var homeVC: HomeViewController?
     var discoverVC: DiscoverViewController?
     var searchVC: SearchViewController?
+    var profileVC: ProfileViewController?
 
-    var userId: String? {
-        didSet {
-            homeVC?.userId = userId
-        }
-    }
+    var user: HickeryUser?
 
     override func viewDidLoad() {
         configureViewControllers()
@@ -35,13 +32,19 @@ class HickeryTabBarViewController: UITabBarController {
     }
 
     private func configureViewControllers() {
+        guard let user = user else {
+            return
+        }
         homeVC = viewControllers?.first as? HomeViewController
-        homeVC?.userId = userId
+        homeVC?.userId = user.userID
 
         discoverVC = viewControllers?[1] as? DiscoverViewController
-        discoverVC?.userId = userId
+        discoverVC?.userId = user.userID
 
         searchVC = viewControllers?[2] as? SearchViewController
-        searchVC?.userId = userId
+        searchVC?.userId = user.userID
+
+        profileVC = viewControllers?[3] as? ProfileViewController
+        profileVC?.partialUser = user
     }
 }

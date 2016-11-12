@@ -7,16 +7,59 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet var avatarImageView: UIImageView!
+    @IBOutlet var nameLabel: UILabel!
+
+    var partialUser: HickeryUser? { // The user from facebook
+        didSet {
+            self.fetchUser()
+        }
+    }
+    var wholeUser: HickeryUser? // The user from hickery
+    var apiManager = APIManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        configureViews()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateIfNeeded()
+    }
+
+    private func updateIfNeeded() {
+        guard let avatarImageView = avatarImageView, let nameLabel = nameLabel else {
+            return
+        }
+        guard let user = ((wholeUser) != nil) ? wholeUser : partialUser else {
+            return
+        }
+        if let imageURL = URL(string: user.profileImageURL) {
+            avatarImageView.kf.setImage(with: imageURL)
+        }
+        nameLabel.text = user.firstName + " " + user.lastName
+    }
+
+    private func fetchUser() {
+        guard let partialUser = partialUser else {
+            return
+        }
+        apiManager.requestUser(email: partialUser.email) { (hickeryUser) in
+            self.wholeUser = hickeryUser
+            self.updateIfNeeded()
+        }
+    }
+
+    private func configureViews() {
+        guard let avatarImageView = avatarImageView else {
+            return
+        }
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = 15
     }
 }
