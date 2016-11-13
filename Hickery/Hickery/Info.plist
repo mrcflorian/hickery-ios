@@ -71,6 +71,10 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your photo will be used for your music profile only.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

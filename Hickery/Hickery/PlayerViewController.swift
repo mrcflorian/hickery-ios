@@ -31,6 +31,7 @@ class PlayerViewController: UIViewController {
 
     private func configurePlayer() {
         youtubePlayerView.delegate = self
+        youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
     }
 
     private func videoDidChange() {

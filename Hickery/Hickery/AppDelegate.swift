@@ -6,6 +6,7 @@
 //  Copyright © 2016 Florian Marcu. All rights reserved.
 //
 
+import AVFoundation
 import Crashlytics
 import Fabric
 import FacebookCore
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.activateAudioSession()
         Fabric.with([Crashlytics.self])
         return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -49,6 +51,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    // Necessary for playing in background and airplay
+    private func activateAudioSession() {
+        do {
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            do {
+                try audioSession.setActive(true)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
 }
 
