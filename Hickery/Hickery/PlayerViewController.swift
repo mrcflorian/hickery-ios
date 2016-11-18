@@ -9,6 +9,8 @@
 import UIKit
 import youtube_ios_player_helper
 
+let kMaxSongCountPerPlaylist = 100
+
 protocol PlayerViewControllerDelegate {
     func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController)
 }
@@ -28,10 +30,11 @@ class PlayerViewController: UIViewController {
     }
 
     func update(videoIds: [String]?) {
-        self.videoIds = videoIds
         guard let videoIds = videoIds else {
             return
         }
+        self.videoIds = slice(array: videoIds, count: kMaxSongCountPerPlaylist)
+
         var playerVars = self.playerVars
         playerVars["playlist"] = self.playlistString()
         youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
@@ -48,6 +51,17 @@ class PlayerViewController: UIViewController {
 
     private func playlistString() -> String? {
         return videoIds?.joined(separator: ",")
+    }
+
+    private func slice(array: [String], count: Int) -> [String] {
+        if array.count < count {
+            return array
+        }
+        var res = [String]()
+        for i in 0 ..< count {
+            res.append(array[i])
+        }
+        return res
     }
 }
 
