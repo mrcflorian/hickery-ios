@@ -18,15 +18,27 @@ class PlayerViewController: UIViewController {
     @IBOutlet var youtubePlayerView: YTPlayerView!
     var delegate: PlayerViewControllerDelegate?
 
-    var videoId: String? {
-        didSet {
-            videoDidChange()
-        }
-    }
+    var videoIds: [String]?
+
+    let playerVars = ["origin":"http://www.youtube.com", "playsinline":1, "modestbranding":1, "showinfo":1, "autohide":1, "controls":1] as [String : Any]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePlayer()
+    }
+
+    func update(videoIds: [String]?) {
+        self.videoIds = videoIds
+        guard let videoIds = videoIds else {
+            return
+        }
+        var playerVars = self.playerVars
+        playerVars["playlist"] = self.playlistString()
+        youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
+    }
+
+    func playSong(atIndex index: Int32) {
+        youtubePlayerView.playVideo(at: index + 1)
     }
 
     private func configurePlayer() {
@@ -34,11 +46,8 @@ class PlayerViewController: UIViewController {
         youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
     }
 
-    private func videoDidChange() {
-        guard let videoId = videoId else {
-            return
-        }
-        youtubePlayerView.load(withVideoId: videoId, playerVars: ["origin":"http://www.youtube.com", "playsinline":1])
+    private func playlistString() -> String? {
+        return videoIds?.joined(separator: ",")
     }
 }
 

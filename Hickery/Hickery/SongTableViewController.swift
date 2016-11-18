@@ -23,16 +23,9 @@ class SongTableViewController: UITableViewController {
         }
     }
 
-    var indexPathOfCurrentPlayingSong = IndexPath(row: -1, section: 0)
-
-    func getNextSongForPlaying() -> HickerySong? {
-        let newIndexPath = IndexPath(row: indexPathOfCurrentPlayingSong.row + 1, section: indexPathOfCurrentPlayingSong.section)
-        if let hickerySong = self.hickerySong(forIndexPath: newIndexPath) {
-            indexPathOfCurrentPlayingSong = newIndexPath
-            self.tableView.selectRow(at: indexPathOfCurrentPlayingSong, animated: true, scrollPosition: .top)
-            return hickerySong
-        }
-        return nil
+    func scrollToSongIndex(index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
 
     // MARK: - Table view data source
@@ -64,8 +57,7 @@ class SongTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let hickerySong = self.hickerySong(forIndexPath: indexPath) {
             songTableViewControllerDelegate?.songTableViewController(self, didSelectHickerySong: hickerySong)
-            indexPathOfCurrentPlayingSong = indexPath
-            self.tableView.scrollToRow(at: indexPathOfCurrentPlayingSong, at: .top, animated: true)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
     }
     // MARK: - Private

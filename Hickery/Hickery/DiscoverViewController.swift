@@ -15,6 +15,7 @@ class DiscoverViewController: UIViewController {
 
     var userId: String? {
         didSet {
+            configurePlaylistVC()
             requestUserRecommendations()
         }
     }

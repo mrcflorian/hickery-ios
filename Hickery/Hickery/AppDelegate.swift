@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    // Necessary for playing in background and airplay
+    // Necessary for playing in background, media player and airplay
     private func activateAudioSession() {
         do {
             let audioSession = AVAudioSession.sharedInstance()
