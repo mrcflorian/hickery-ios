@@ -22,7 +22,7 @@ class PlaylistViewController: UIViewController {
             updateIfNeeded()
         }
     }
-    var currentPlayingIndex: Int32 = -1
+    var currentPlayingIndex: Int32 = 0
 
     let commandCenter = MPRemoteCommandCenter.shared()
 

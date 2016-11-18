@@ -21,7 +21,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet var youtubePlayerView: YTPlayerView!
     var delegate: PlayerViewControllerDelegate?
     var autoplayEnabled: Bool = false
-
+    var didForcePlayingAfterBackgrounding = false
     var videoIds: [String]?
 
     let playerVars = ["origin":"http://www.youtube.com", "playsinline":1, "modestbranding":1, "showinfo":1, "autohide":1, "controls":1] as [String : Any]
@@ -69,11 +69,21 @@ class PlayerViewController: UIViewController {
 
 // MARK: YTPlayerViewDelegate
 extension PlayerViewController: YTPlayerViewDelegate {
+
     public func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         if state == .ended {
             self.delegate?.playerViewControllerDidFinishCurrentSong(self)
         } else if state == .playing {
             self.delegate?.playerViewControllerDidStartPlaying(self)
+        } else if state == .paused {
+            if (UIApplication.shared.applicationState == .background) {
+                if (!didForcePlayingAfterBackgrounding) {
+                    playerView.playVideo()
+                    didForcePlayingAfterBackgrounding = true
+                }
+            } else {
+                didForcePlayingAfterBackgrounding = false
+            }
         }
     }
 
