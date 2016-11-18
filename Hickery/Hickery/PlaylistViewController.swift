@@ -33,7 +33,6 @@ class PlaylistViewController: UIViewController {
     }
 
     func play(hickerySong: HickerySong, inBackground: Bool) {
-        PlaylistViewController.playingPlaylistVC = self
         currentPlayingIndex = index(of: hickerySong)
         playerVC?.playSong(atIndex: currentPlayingIndex)
         if (inBackground == false) {
@@ -51,13 +50,13 @@ class PlaylistViewController: UIViewController {
     func updateIfNeeded() {
         configureViewControllers()
         if (songs.count > 0) {
+
             playerVC?.delegate = self
+            playerVC?.autoplayEnabled = autoplayEnabled
             playerVC?.update(videoIds: self.videoIds())
+
             songTableVC?.songTableViewControllerDelegate = self
             songTableVC?.songs = songs
-            if (autoplayEnabled) {
-                playNextSong(inBackground: false)
-            }
         }
     }
 
@@ -124,5 +123,11 @@ extension PlaylistViewController: SongTableViewControllerDelegate {
 extension PlaylistViewController: PlayerViewControllerDelegate {
     func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController) {
         self.playNextSong(inBackground: false)
+    }
+    func playerViewControllerDidStartPlaying(_ playerViewController: PlayerViewController) {
+        if (self != PlaylistViewController.playingPlaylistVC) {
+            PlaylistViewController.playingPlaylistVC?.playerVC?.youtubePlayerView.stopVideo()
+        }
+        PlaylistViewController.playingPlaylistVC = self
     }
 }
