@@ -61,6 +61,14 @@ class PlaylistViewController: UIViewController {
         }
     }
 
+    private func playPreviousSong() {
+        // always in background
+        if currentPlayingIndex - 1 >= 0 {
+            currentPlayingIndex -= 1
+            self.play(hickerySong: songs[Int(currentPlayingIndex)], inBackground: true)
+        }
+    }
+
     private func configureViewControllers() {
         if (playerVC != nil && songTableVC != nil) {
             return
@@ -102,7 +110,7 @@ class PlaylistViewController: UIViewController {
 
     func previousTrackCommandSelector() {
         if (self == PlaylistViewController.playingPlaylistVC) {
-
+            self.playPreviousSong()
         }
     }
 }
