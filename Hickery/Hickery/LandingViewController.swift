@@ -23,6 +23,11 @@ class LandingViewController: UIViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loginButton.layer.cornerRadius = 10
+    }
+
     private func didReceiveFacebookLoginResult(loginResult: LoginResult) {
         switch loginResult {
         case .success:

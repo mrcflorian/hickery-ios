@@ -363,7 +363,7 @@
 				TargetAttributes = {
 					1700E32E1DC689A60085A5D0 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = L693HRC9HY;
+						DevelopmentTeam = JSQ6T9Y6J4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -766,10 +766,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Hickery/Hickery.entitlements;
-				DEVELOPMENT_TEAM = L693HRC9HY;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = JSQ6T9Y6J4;
 				INFOPLIST_FILE = Hickery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FMTech.Hickery;
+				PRODUCT_BUNDLE_IDENTIFIER = net.hickery.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -782,10 +783,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Hickery/Hickery.entitlements;
-				DEVELOPMENT_TEAM = L693HRC9HY;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = JSQ6T9Y6J4;
 				INFOPLIST_FILE = Hickery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FMTech.Hickery;
+				PRODUCT_BUNDLE_IDENTIFIER = net.hickery.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
