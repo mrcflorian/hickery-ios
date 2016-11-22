@@ -21,6 +21,6 @@ class HickerySongStream {
                 }
             }
         }
-        return result
+        return result.filter({$0.youtubeVideoID() != ""})
     }
 }

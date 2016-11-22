@@ -50,7 +50,6 @@ class PlaylistViewController: UIViewController {
     func updateIfNeeded() {
         configureViewControllers()
         if (songs.count > 0) {
-
             playerVC?.delegate = self
             playerVC?.autoplayEnabled = autoplayEnabled
             playerVC?.update(videoIds: self.videoIds())
