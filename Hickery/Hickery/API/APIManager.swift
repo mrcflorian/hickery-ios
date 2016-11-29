@@ -41,8 +41,8 @@ class APIManager {
         networkingManager.get(path: kHickeryAPIUserPath, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
             case .success:
-                if let jsonResponse = jsonResponse {
-                    let user = HickeryUser(jsonDictionary: jsonResponse as! [String : Any])
+                if let jsonResponse = jsonResponse as? [String : Any] {
+                    let user = HickeryUser(jsonDictionary: jsonResponse)
                     completion(user)
                 }
             case .error(let error):

@@ -40,8 +40,6 @@ class LandingViewController: UIViewController {
     }
 
     private func didLoginWithFacebook() {
-        assert(AccessToken.current != nil)
-
 //        let signUpVC = SignUpViewController()
 //        self.present(signUpVC, animated: false, completion: nil)
 //        return
@@ -50,9 +48,10 @@ class LandingViewController: UIViewController {
             let facebookAPIManager = FacebookAPIManager(accessToken: accessToken)
             facebookAPIManager.requestFacebookUser(completion: { (facebookUser) in
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as! HickeryTabBarViewController
-                vc.user = HickeryUser(facebookUser: facebookUser)
-                self.present(vc, animated: true, completion: nil)
+                if let vc = storyboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as? HickeryTabBarViewController {
+                    vc.user = HickeryUser(facebookUser: facebookUser)
+                    self.present(vc, animated: true, completion: nil)
+                }
             })
         }
     }

@@ -26,7 +26,7 @@ class FacebookAPIManager {
         graphRequest.start { (response: HTTPURLResponse?, result: GraphRequestResult<GraphRequest>) in
             switch result {
             case .success(let graphResponse):
-                if let dictionary = graphResponse.dictionaryValue as [String : Any]!{
+                if let dictionary = graphResponse.dictionaryValue {
                     completion(FacebookUser(dictionary: dictionary))
                 }
                 break

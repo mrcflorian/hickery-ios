@@ -12,11 +12,10 @@ class HickerySongStream {
 
     static func parse(jsonResponse: Any?) -> [HickerySong] {
         var result = [HickerySong]()
-        if jsonResponse != nil && jsonResponse! is NSArray {
-            let jsonArray = jsonResponse! as! NSArray
+        if let jsonArray = jsonResponse as? NSArray {
             for jsonSongDict in jsonArray {
-                if jsonSongDict is [String : String] {
-                    let song = HickerySong(jsonDictionary: jsonSongDict as! [String : String])
+                if let jsonDictionary = jsonSongDict as? [String : String] {
+                    let song = HickerySong(jsonDictionary: jsonDictionary)
                     result.append(song)
                 }
             }

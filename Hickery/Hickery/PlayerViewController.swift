@@ -39,7 +39,9 @@ class PlayerViewController: UIViewController {
 
         var playerVars = self.playerVars
         playerVars["playlist"] = self.playlistString()
-        youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
+        if (videoIds.count >= 1) {
+            youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
+        }
     }
 
     func playSong(atIndex index: Int32) {

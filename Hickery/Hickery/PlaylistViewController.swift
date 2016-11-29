@@ -49,14 +49,12 @@ class PlaylistViewController: UIViewController {
 
     func updateIfNeeded() {
         configureViewControllers()
-        if (songs.count > 0) {
-            playerVC?.delegate = self
-            playerVC?.autoplayEnabled = autoplayEnabled
-            playerVC?.update(videoIds: self.videoIds())
+        playerVC?.delegate = self
+        playerVC?.autoplayEnabled = autoplayEnabled
+        playerVC?.update(videoIds: self.videoIds())
 
-            songTableVC?.songTableViewControllerDelegate = self
-            songTableVC?.songs = songs
-        }
+        songTableVC?.songTableViewControllerDelegate = self
+        songTableVC?.songs = songs
     }
 
     private func playPreviousSong() {

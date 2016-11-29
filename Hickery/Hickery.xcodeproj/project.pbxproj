@@ -17,6 +17,7 @@
 		1700E3551DC689A70085A5D0 /* HickeryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3541DC689A70085A5D0 /* HickeryUITests.swift */; };
 		1700E3641DC68AE70085A5D0 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3631DC68AE70085A5D0 /* LandingViewController.swift */; };
 		1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1702436A1DC7008A00369C72 /* HickerySongStream.swift */; };
+		1737E8001DED3612000B23D2 /* HickeryUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1737E7FF1DED3612000B23D2 /* HickeryUserTest.swift */; };
 		1756C4291DCFC26000505E03 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C4281DCFC26000505E03 /* HomeViewController.swift */; };
 		1756C42B1DCFC62B00505E03 /* StoryboardEntityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */; };
 		178697591DD56A8200225681 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178697581DD56A8200225681 /* SignUpViewController.swift */; };
@@ -75,6 +76,7 @@
 		1700E3561DC689A70085A5D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1700E3631DC68AE70085A5D0 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		1702436A1DC7008A00369C72 /* HickerySongStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickerySongStream.swift; sourceTree = "<group>"; };
+		1737E7FF1DED3612000B23D2 /* HickeryUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickeryUserTest.swift; sourceTree = "<group>"; };
 		1756C4281DCFC26000505E03 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1756C42A1DCFC62B00505E03 /* StoryboardEntityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardEntityProvider.swift; sourceTree = "<group>"; };
 		178697581DD56A8200225681 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				1700E3491DC689A70085A5D0 /* HickeryTests.swift */,
 				1700E34B1DC689A70085A5D0 /* Info.plist */,
+				1737E7FF1DED3612000B23D2 /* HickeryUserTest.swift */,
 			);
 			path = HickeryTests;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1737E8001DED3612000B23D2 /* HickeryUserTest.swift in Sources */,
 				1700E34A1DC689A70085A5D0 /* HickeryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -803,7 +807,7 @@
 				DEVELOPMENT_TEAM = L693HRC9HY;
 				INFOPLIST_FILE = HickeryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FMTech.HickeryTests;
+				PRODUCT_BUNDLE_IDENTIFIER = net.hickery.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hickery.app/Hickery";
@@ -819,7 +823,7 @@
 				DEVELOPMENT_TEAM = L693HRC9HY;
 				INFOPLIST_FILE = HickeryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FMTech.HickeryTests;
+				PRODUCT_BUNDLE_IDENTIFIER = net.hickery.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hickery.app/Hickery";
