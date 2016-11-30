@@ -17,6 +17,14 @@ class HickeryTabBarViewController: UITabBarController {
 
     var user: HickeryUser?
 
+    static func startLoggedInExperience(facebookUser: FacebookUser, controller: UIViewController) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as? HickeryTabBarViewController {
+            vc.user = HickeryUser(facebookUser: facebookUser)
+            controller.present(vc, animated: true, completion: nil)
+        }
+    }
+
     override func viewDidLoad() {
         configureViewControllers()
         configureTabBar()

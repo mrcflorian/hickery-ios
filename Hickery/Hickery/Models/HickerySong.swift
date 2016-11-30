@@ -24,6 +24,13 @@ class HickerySong {
         subcategoryID = jsonDictionary["subcategory_id"]
     }
 
+    init(facebookPost: FacebookPost) {
+        photoURL = facebookPost.picture
+        content = facebookPost.link
+        title = facebookPost.name
+        songID = self.youtubeVideoID()
+    }
+
     func youtubeVideoID() -> String {
         if let components = self.content?.components(separatedBy: "?") {
             if (components.count <= 1) {

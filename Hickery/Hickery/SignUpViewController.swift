@@ -18,13 +18,17 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    func signUpFacebookUser() {
-        facebookAPIManager.requestFacebookUser { (fbUser: FacebookUser) in
-            print (fbUser)
-        }
-        facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
-            print (posts)
+    func startSignUpExperience(facebookUser: FacebookUser) {
+        self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
+            self.didSignUp(fbUser: facebookUser, fbPosts: posts)
         })
-        facebookAPIManager.requestFacebookUserPageLikes()
+    }
+
+    private func didSignUp(fbUser: FacebookUser, fbPosts: [FacebookPost]) {
+        let hickerySongs = fbPosts
+            .map{HickerySong(facebookPost: $0)}
+            .filter{$0.youtubeVideoID() != ""}
+        LocalStore().save(likes: hickerySongs, forUser: HickeryUser(facebookUser: fbUser))
+        HickeryTabBarViewController.startLoggedInExperience(facebookUser: fbUser, controller: self)
     }
 }

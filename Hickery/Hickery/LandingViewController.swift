@@ -16,6 +16,8 @@ class LandingViewController: UIViewController {
 
     private let readPermissions: [ReadPermission] = [ .publicProfile, .email, .userFriends, .custom("user_posts") ]
 
+    let apiManager = APIManager()
+
     override func viewDidAppear(_ animated: Bool) {
         if let _ = AccessToken.current {
             didLoginWithFacebook()
@@ -40,17 +42,21 @@ class LandingViewController: UIViewController {
     }
 
     private func didLoginWithFacebook() {
-//        let signUpVC = SignUpViewController()
-//        self.present(signUpVC, animated: false, completion: nil)
-//        return
-
         if let accessToken = AccessToken.current {
             let facebookAPIManager = FacebookAPIManager(accessToken: accessToken)
             facebookAPIManager.requestFacebookUser(completion: { (facebookUser) in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let vc = storyboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as? HickeryTabBarViewController {
-                    vc.user = HickeryUser(facebookUser: facebookUser)
-                    self.present(vc, animated: true, completion: nil)
+                if let email = facebookUser.email {
+                    self.apiManager.requestUser(email: email, completion: { (hickeryUser) in
+                        if (hickeryUser != nil) {
+                            // already signed up
+                            HickeryTabBarViewController.startLoggedInExperience(facebookUser: facebookUser, controller: self)
+                        } else {
+                            // new user, start sign up experience
+                            let signUpVC = SignUpViewController()
+                            signUpVC.startSignUpExperience(facebookUser: facebookUser)
+                            self.present(signUpVC, animated: false, completion: nil)
+                        }
+                    })
                 }
             })
         }

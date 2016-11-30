@@ -19,9 +19,14 @@ let kHickeryAPIParamEmailKey = "email"
 
 class APIManager {
 
+    let localStore = LocalStore()
     let networkingManager = NetworkingManager()
 
     func requestLikes(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
+        if let songs = localStore.likes(forUserId: userId) {
+            completion(songs)
+            return
+        }
         let params = [kHickeryAPIParamUserIdKey:userId]
         requestSongs(endpoint: kHickeryAPIUserLikesPath, params: params, completion: completion)
     }
@@ -44,9 +49,11 @@ class APIManager {
                 if let jsonResponse = jsonResponse as? [String : Any] {
                     let user = HickeryUser(jsonDictionary: jsonResponse)
                     completion(user)
+                } else {
+                    completion(nil)
                 }
             case .error(let error):
-                print(error)
+                completion(nil)
             }
         }
     }
