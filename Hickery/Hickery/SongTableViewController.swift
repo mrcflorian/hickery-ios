@@ -28,6 +28,11 @@ class SongTableViewController: UITableViewController {
         self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.tableFooterView = UIView()
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,28 +64,6 @@ class SongTableViewController: UITableViewController {
             songTableViewControllerDelegate?.songTableViewController(self, didSelectHickerySong: hickerySong)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
-    }
-
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let songs = songs, songs.count == 0 {
-            return 200
-        }
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let songs = songs, songs.count == 0 {
-                let msg = "You need to create an account on www.hickery.net first. \n\n\nYou can still use the Discover section"
-                let label = UILabel()
-                label.numberOfLines = 0
-                label.textAlignment = .center
-                label.sizeToFit()
-                label.text = msg
-                label.frame = CGRect(origin: tableView.bounds.origin, size: CGSize(width: tableView.bounds.size.width, height: 150))
-                return label
-        }
-
-       return nil
     }
 
     // MARK: - Private

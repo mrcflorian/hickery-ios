@@ -28,7 +28,9 @@ class SignUpViewController: UIViewController {
         let hickerySongs = fbPosts
             .map{HickerySong(facebookPost: $0)}
             .filter{$0.youtubeVideoID() != ""}
-        LocalStore().save(likes: hickerySongs, forUser: HickeryUser(facebookUser: fbUser))
+        if (hickerySongs.count > 0) {
+            LocalStore().save(likes: hickerySongs, forUser: HickeryUser(facebookUser: fbUser))
+        }
         HickeryTabBarViewController.startLoggedInExperience(facebookUser: fbUser, controller: self)
     }
 }

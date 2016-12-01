@@ -27,6 +27,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsc-LH-mvj" userLabel="Song List Container View">
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="IWh-aO-amX" kind="embed" id="GYA-uI-V54"/>
                                 </connections>
@@ -62,7 +63,7 @@
                     <view key="view" contentMode="scaleToFill" id="Iuo-7e-RST">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="home-tab-icon-white" id="qji-P0-5GV"/>
                 </viewController>
@@ -283,7 +284,7 @@
         <!--Song Table View Controller-->
         <scene sceneID="A4X-1h-EJR">
             <objects>
-                <tableViewController id="IWh-aO-amX" customClass="SongTableViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="IWh-aO-amX" customClass="SongTableViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="35" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRB-e5-PUS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="436.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
