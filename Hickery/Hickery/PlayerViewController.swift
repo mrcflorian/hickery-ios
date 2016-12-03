@@ -9,11 +9,12 @@
 import UIKit
 import youtube_ios_player_helper
 
-let kMaxSongCountPerPlaylist = 100
+let kNumberOfSongsToEnqueueForBackground = 20
 
 protocol PlayerViewControllerDelegate {
     func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController)
     func playerViewControllerDidStartPlaying(_ playerViewController: PlayerViewController)
+    func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController)
 }
 
 class PlayerViewController: UIViewController {
@@ -24,7 +25,9 @@ class PlayerViewController: UIViewController {
     var didForcePlayingAfterBackgrounding = false
     var videoIds: [String]?
 
-    let playerVars = ["origin":"http://www.youtube.com", "playsinline":1, "modestbranding":1, "showinfo":1, "autohide":1, "controls":1] as [String : Any]
+    internal var lastPlayedIndex = 0
+
+    let playerVars = ["origin":"http://www.youtube.com", "playsinline":1, "modestbranding":1, "autohide":1, "controls":1] as [String : Any]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,37 +38,28 @@ class PlayerViewController: UIViewController {
         guard let videoIds = videoIds else {
             return
         }
-        self.videoIds = slice(array: videoIds, count: kMaxSongCountPerPlaylist)
+        self.videoIds = videoIds
 
-        var playerVars = self.playerVars
-        playerVars["playlist"] = self.playlistString()
         if (videoIds.count >= 1) {
             youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
         }
     }
 
-    func playSong(atIndex index: Int32) {
-        youtubePlayerView.playVideo(at: index + 1)
+    func playSong(atIndex index: Int, inBackground: Bool) {
+        if let videoIds = videoIds, index < videoIds.count {
+            if (inBackground) {
+                youtubePlayerView.nextVideo()
+            } else {
+                youtubePlayerView.load(withVideoId: videoIds[index], playerVars: playerVars)
+            }
+            lastPlayedIndex = index
+        }
     }
 
     private func configurePlayer() {
         youtubePlayerView.delegate = self
         youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
-    }
-
-    private func playlistString() -> String? {
-        return videoIds?.joined(separator: ",")
-    }
-
-    private func slice(array: [String], count: Int) -> [String] {
-        if array.count < count {
-            return array
-        }
-        var res = [String]()
-        for i in 0 ..< count {
-            res.append(array[i])
-        }
-        return res
+        youtubePlayerView.load(withPlayerParams: playerVars)
     }
 }
 
@@ -80,18 +74,30 @@ extension PlayerViewController: YTPlayerViewDelegate {
         } else if state == .paused {
             if (UIApplication.shared.applicationState == .background) {
                 if (!didForcePlayingAfterBackgrounding) {
-                    playerView.playVideo()
+                    self.delegate?.playerViewControllerDidSwitchToBackground(self)
                     didForcePlayingAfterBackgrounding = true
                 }
             } else {
                 didForcePlayingAfterBackgrounding = false
             }
+        } else if state == .queued {
+            //playerView.playVideo()
         }
     }
 
     public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         if (autoplayEnabled) {
             playerView.playVideo()
+            /*
+             * We enqueue the songs that will be played in background, in case the user
+             * locks the screen. This is a workaround for Youtube SDK.
+             */
+//            if let videoIds = videoIds, lastPlayedIndex < videoIds.count {
+//                let startIndex = max(0, lastPlayedIndex);
+//                let stopIndex = min(startIndex + kNumberOfSongsEnqueueForBackground, videoIds.count - 1)
+//                let videoIdsSubarray = Array(videoIds[startIndex...stopIndex])
+//                youtubePlayerView.cuePlaylist(byVideos: videoIdsSubarray, index: 0, startSeconds: 0, suggestedQuality: .small)
+//            }
         }
     }
 }

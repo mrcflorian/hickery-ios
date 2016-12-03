@@ -16,13 +16,17 @@ class PlaylistViewController: UIViewController {
     var playerVC: PlayerViewController?
     var songTableVC: SongTableViewController?
 
-    var autoplayEnabled: Bool = true
+    var autoplayEnabled: Bool = true {
+        didSet {
+            playerVC?.autoplayEnabled = autoplayEnabled
+        }
+    }
     var songs: [HickerySong] = [] {
         didSet {
             updateIfNeeded()
         }
     }
-    var currentPlayingIndex: Int32 = 0
+    var currentPlayingIndex: Int = 0
 
     let commandCenter = MPRemoteCommandCenter.shared()
 
@@ -34,16 +38,16 @@ class PlaylistViewController: UIViewController {
 
     func play(hickerySong: HickerySong, inBackground: Bool) {
         currentPlayingIndex = index(of: hickerySong)
-        playerVC?.playSong(atIndex: currentPlayingIndex)
+        playerVC?.playSong(atIndex: currentPlayingIndex, inBackground: inBackground)
         if (inBackground == false) {
             songTableVC?.scrollToSongIndex(index: Int(currentPlayingIndex))
         }
     }
 
     func playNextSong(inBackground: Bool) {
-        if currentPlayingIndex + 1 < Int32(songs.count) {
+        if currentPlayingIndex + 1 < songs.count {
             currentPlayingIndex += 1
-            self.play(hickerySong: songs[Int(currentPlayingIndex)], inBackground: inBackground)
+            self.play(hickerySong: songs[currentPlayingIndex], inBackground: inBackground)
         }
     }
 
@@ -73,7 +77,7 @@ class PlaylistViewController: UIViewController {
         songTableVC = childViewControllers.last as? SongTableViewController
     }
 
-    private func videoIds() -> [String]? {
+    internal func videoIds() -> [String]? {
         var ids = [String]()
         for song in songs {
             ids.append(song.youtubeVideoID())
@@ -81,10 +85,10 @@ class PlaylistViewController: UIViewController {
         return ids
     }
 
-    private func index(of hickerySong: HickerySong) -> Int32 {
+    private func index(of hickerySong: HickerySong) -> Int {
         for (index, song) in songs.enumerated() {
             if (song.songID == hickerySong.songID) {
-                return Int32(index)
+                return index
             }
         }
         return 0
@@ -121,10 +125,16 @@ extension PlaylistViewController: PlayerViewControllerDelegate {
     func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController) {
         self.playNextSong(inBackground: false)
     }
+
     func playerViewControllerDidStartPlaying(_ playerViewController: PlayerViewController) {
         if (self != PlaylistViewController.playingPlaylistVC) {
             PlaylistViewController.playingPlaylistVC?.playerVC?.youtubePlayerView.stopVideo()
         }
         PlaylistViewController.playingPlaylistVC = self
     }
+
+    func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController) {
+        playerViewController.youtubePlayerView.playVideo()
+    }
+
 }

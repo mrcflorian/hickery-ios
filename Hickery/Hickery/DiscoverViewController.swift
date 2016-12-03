@@ -26,6 +26,11 @@ class DiscoverViewController: UIViewController {
         self.view.addSubview(playlistVC.view)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        playlistVC.autoplayEnabled = true
+    }
+
     private func configurePlaylistVC() {
         playlistVC.autoplayEnabled = false
     }
