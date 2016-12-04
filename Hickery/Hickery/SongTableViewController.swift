@@ -30,7 +30,11 @@ class SongTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.tableFooterView = UIView()
+        self.tableView.backgroundColor = UIColor.black
+        self.edgesForExtendedLayout = .all
+
+        // Workaround to not extend the table view under the tab bar
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: HickeryTabBarViewController.tabBarHeight, right: 0)
     }
 
     // MARK: - Table view data source

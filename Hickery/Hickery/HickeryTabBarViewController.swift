@@ -17,6 +17,8 @@ class HickeryTabBarViewController: UITabBarController {
 
     var user: HickeryUser?
 
+    static var tabBarHeight: CGFloat = 49
+
     static func startLoggedInExperience(facebookUser: FacebookUser, controller: UIViewController) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as? HickeryTabBarViewController {
@@ -37,6 +39,7 @@ class HickeryTabBarViewController: UITabBarController {
     private func configureTabBar() {
         self.tabBar.barTintColor = UIColor.black
         self.tabBar.tintColor = UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)
+        HickeryTabBarViewController.tabBarHeight = self.tabBar.frame.height
     }
 
     private func configureViewControllers() {
