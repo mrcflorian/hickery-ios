@@ -15,12 +15,6 @@ class PlaylistViewController: UIViewController {
 
     var playerVC: PlayerViewController?
     var songTableVC: SongTableViewController?
-
-    var autoplayEnabled: Bool = true {
-        didSet {
-            playerVC?.autoplayEnabled = autoplayEnabled
-        }
-    }
     var songs: [HickerySong] = [] {
         didSet {
             updateIfNeeded()
@@ -54,7 +48,6 @@ class PlaylistViewController: UIViewController {
     func updateIfNeeded() {
         configureViewControllers()
         playerVC?.delegate = self
-        playerVC?.autoplayEnabled = autoplayEnabled
         playerVC?.update(videoIds: self.videoIds())
 
         songTableVC?.songTableViewControllerDelegate = self
@@ -136,5 +129,4 @@ extension PlaylistViewController: PlayerViewControllerDelegate {
     func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController) {
         playerViewController.youtubePlayerView.playVideo()
     }
-
 }

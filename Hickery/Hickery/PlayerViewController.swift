@@ -21,11 +21,11 @@ class PlayerViewController: UIViewController {
 
     @IBOutlet var youtubePlayerView: YTPlayerView!
     var delegate: PlayerViewControllerDelegate?
-    var autoplayEnabled: Bool = false
     var didForcePlayingAfterBackgrounding = false
     var videoIds: [String]?
 
     internal var lastPlayedIndex = 0
+    internal var didStartPlaybackAfterQueing = false
 
     let playerVars = ["origin":"http://www.youtube.com", "playsinline":1, "modestbranding":1, "autohide":1, "controls":1] as [String : Any]
 
@@ -50,7 +50,8 @@ class PlayerViewController: UIViewController {
             if (inBackground) {
                 youtubePlayerView.nextVideo()
             } else {
-                youtubePlayerView.load(withVideoId: videoIds[index], playerVars: playerVars)
+                didStartPlaybackAfterQueing = false
+                youtubePlayerView.cueVideo(byId: videoIds[index], startSeconds: 0, suggestedQuality: .small)
             }
             lastPlayedIndex = index
         }
@@ -59,7 +60,6 @@ class PlayerViewController: UIViewController {
     private func configurePlayer() {
         youtubePlayerView.delegate = self
         youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
-        youtubePlayerView.load(withPlayerParams: playerVars)
     }
 }
 
@@ -81,13 +81,14 @@ extension PlayerViewController: YTPlayerViewDelegate {
                 didForcePlayingAfterBackgrounding = false
             }
         } else if state == .queued {
-            //playerView.playVideo()
+            if (!didStartPlaybackAfterQueing) {
+                didStartPlaybackAfterQueing = true
+                playerView.playVideo()
+            }
         }
     }
 
     public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        if (autoplayEnabled) {
-            playerView.playVideo()
             /*
              * We enqueue the songs that will be played in background, in case the user
              * locks the screen. This is a workaround for Youtube SDK.
@@ -98,6 +99,5 @@ extension PlayerViewController: YTPlayerViewDelegate {
 //                let videoIdsSubarray = Array(videoIds[startIndex...stopIndex])
 //                youtubePlayerView.cuePlaylist(byVideos: videoIdsSubarray, index: 0, startSeconds: 0, suggestedQuality: .small)
 //            }
-        }
     }
 }

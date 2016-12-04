@@ -35,5 +35,6 @@ class HomeViewController: UIViewController {
 
     private func didFetchUserSongs(songs: [HickerySong]) {
         playlistVC.songs = songs
+        playlistVC.playNextSong(inBackground: false)
     }
 }
