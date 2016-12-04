@@ -9,8 +9,6 @@
 import UIKit
 import youtube_ios_player_helper
 
-let kNumberOfSongsToEnqueueForBackground = 20
-
 protocol PlayerViewControllerDelegate {
     func playerViewControllerDidFinishCurrentSong(_ playerViewController: PlayerViewController)
     func playerViewControllerDidStartPlaying(_ playerViewController: PlayerViewController)
@@ -24,7 +22,6 @@ class PlayerViewController: UIViewController {
     var didForcePlayingAfterBackgrounding = false
     var videoIds: [String]?
 
-    internal var lastPlayedIndex = 0
     internal var didStartPlaybackAfterQueing = false
 
     let playerVars = ["origin":"http://www.youtube.com", "playsinline":1, "modestbranding":1, "autohide":1, "controls":1] as [String : Any]
@@ -45,16 +42,27 @@ class PlayerViewController: UIViewController {
         }
     }
 
-    func playSong(atIndex index: Int, inBackground: Bool) {
+    func playSongInForeground(atIndex index: Int) {
         if let videoIds = videoIds, index < videoIds.count {
-            if (inBackground) {
-                youtubePlayerView.nextVideo()
-            } else {
-                didStartPlaybackAfterQueing = false
-                youtubePlayerView.cueVideo(byId: videoIds[index], startSeconds: 0, suggestedQuality: .small)
-            }
-            lastPlayedIndex = index
+            didStartPlaybackAfterQueing = false
+            youtubePlayerView.cuePlaylist(byVideos: videosToBeEnqueued(index: index), index: 0, startSeconds: 0, suggestedQuality: .small)
         }
+    }
+
+    func playNextSongInBackground() {
+        youtubePlayerView.nextVideo()
+    }
+
+    func playPreviousSongInBackground() {
+        youtubePlayerView.previousVideo()
+    }
+
+    private func videosToBeEnqueued(index: Int) -> [String] {
+        if let videoIds = videoIds, index < videoIds.count {
+            let stopIndex = min(index + kNumberOfSongsToEnqueueForBackground, videoIds.count - 1)
+            return Array(videoIds[index...stopIndex])
+        }
+        return []
     }
 
     private func configurePlayer() {
@@ -70,6 +78,7 @@ extension PlayerViewController: YTPlayerViewDelegate {
         if state == .ended {
             self.delegate?.playerViewControllerDidFinishCurrentSong(self)
         } else if state == .playing {
+            didStartPlaybackAfterQueing = true
             self.delegate?.playerViewControllerDidStartPlaying(self)
         } else if state == .paused {
             if (UIApplication.shared.applicationState == .background) {
@@ -82,7 +91,6 @@ extension PlayerViewController: YTPlayerViewDelegate {
             }
         } else if state == .queued {
             if (!didStartPlaybackAfterQueing) {
-                didStartPlaybackAfterQueing = true
                 playerView.playVideo()
             }
         }

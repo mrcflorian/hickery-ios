@@ -9,6 +9,8 @@
 import MediaPlayer
 import UIKit
 
+let kNumberOfSongsToEnqueueForBackground = 10
+
 class PlaylistViewController: UIViewController {
 
     static var playingPlaylistVC: PlaylistViewController?
@@ -30,18 +32,20 @@ class PlaylistViewController: UIViewController {
         configureMediaPlayerCommandCenter()
     }
 
-    func play(hickerySong: HickerySong, inBackground: Bool) {
+    func playSongInForeground(hickerySong: HickerySong) {
         currentPlayingIndex = index(of: hickerySong)
-        playerVC?.playSong(atIndex: currentPlayingIndex, inBackground: inBackground)
-        if (inBackground == false) {
-            songTableVC?.scrollToSongIndex(index: Int(currentPlayingIndex))
-        }
+        playerVC?.playSongInForeground(atIndex: currentPlayingIndex)
+        songTableVC?.scrollToSongIndex(index: Int(currentPlayingIndex))
     }
 
     func playNextSong(inBackground: Bool) {
         if currentPlayingIndex + 1 < songs.count {
             currentPlayingIndex += 1
-            self.play(hickerySong: songs[currentPlayingIndex], inBackground: inBackground)
+            if (inBackground) {
+                playerVC?.playNextSongInBackground()
+            } else {
+                self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
+            }
         }
     }
 
@@ -58,7 +62,7 @@ class PlaylistViewController: UIViewController {
         // always in background
         if currentPlayingIndex - 1 >= 0 {
             currentPlayingIndex -= 1
-            self.play(hickerySong: songs[Int(currentPlayingIndex)], inBackground: true)
+            playerVC?.playPreviousSongInBackground()
         }
     }
 
@@ -110,7 +114,7 @@ class PlaylistViewController: UIViewController {
 
 extension PlaylistViewController: SongTableViewControllerDelegate {
     func songTableViewController(_ songTableViewController: SongTableViewController, didSelectHickerySong hickerySong: HickerySong) {
-        self.play(hickerySong: hickerySong, inBackground: false)
+        self.playSongInForeground(hickerySong: hickerySong)
     }
 }
 
