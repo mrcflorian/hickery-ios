@@ -6,14 +6,12 @@
 //  Copyright © 2016 Florian Marcu. All rights reserved.
 //
 
-let kMaxSongCount: Int = 30
-
 class LocalStore: NSObject {
 
     static var likes: [HickerySong]?
 
     func save(likes: [HickerySong], forUser: HickeryUser) {
-        LocalStore.likes = Array(likes.prefix(kMaxSongCount))
+        LocalStore.likes = likes
     }
 
     func likes(forUserId: String) -> [HickerySong]? {

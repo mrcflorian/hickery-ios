@@ -15,4 +15,8 @@ class StoryboardEntityProvider {
     func playlistViewController() -> PlaylistViewController {
         return mainStoryboard.instantiateViewController(withIdentifier: "PlaylistViewController") as! PlaylistViewController
     }
+
+    func signUpViewController() -> SignUpViewController {
+        return mainStoryboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+    }
 }

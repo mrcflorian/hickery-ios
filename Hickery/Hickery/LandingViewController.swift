@@ -52,9 +52,9 @@ class LandingViewController: UIViewController {
                             HickeryTabBarViewController.startLoggedInExperience(facebookUser: facebookUser, controller: self)
                         } else {
                             // new user, start sign up experience
-                            let signUpVC = SignUpViewController()
-                            signUpVC.startSignUpExperience(facebookUser: facebookUser)
+                            let signUpVC = StoryboardEntityProvider().signUpViewController()
                             self.present(signUpVC, animated: false, completion: nil)
+                            signUpVC.startSignUpExperience(facebookUser: facebookUser)
                         }
                     })
                 }

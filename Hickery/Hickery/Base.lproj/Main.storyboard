@@ -52,6 +52,50 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="lC1-i7-a0k">
+            <objects>
+                <viewController storyboardIdentifier="SignUpViewController" id="M9i-UX-gEb" customClass="SignUpViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bIC-dn-a1O"/>
+                        <viewControllerLayoutGuide type="bottom" id="s3o-2A-nDt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oyj-Ya-z98">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-logo" translatesAutoresizingMaskIntoConstraints="NO" id="uML-JD-a4a"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We're creating your music profile. This might take a few minutes, but we promise it will be worth it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrk-NY-88T">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="HPN-Bh-ck6">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="gHJ-CL-ojD"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1647058824" green="0.48627450979999998" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="nrk-NY-88T" firstAttribute="leading" secondItem="Oyj-Ya-z98" secondAttribute="leadingMargin" constant="28" id="HRU-J7-1AR"/>
+                            <constraint firstItem="uML-JD-a4a" firstAttribute="centerX" secondItem="Oyj-Ya-z98" secondAttribute="centerX" id="Kei-J7-1uw"/>
+                            <constraint firstItem="uML-JD-a4a" firstAttribute="top" secondItem="bIC-dn-a1O" secondAttribute="bottom" multiplier="4" constant="50" id="VlG-hJ-KdV"/>
+                            <constraint firstItem="HPN-Bh-ck6" firstAttribute="top" secondItem="nrk-NY-88T" secondAttribute="bottom" multiplier="1.1" id="Xsr-y7-T4h"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nrk-NY-88T" secondAttribute="trailing" constant="24" id="cdm-WV-EUp"/>
+                            <constraint firstItem="nrk-NY-88T" firstAttribute="top" secondItem="uML-JD-a4a" secondAttribute="bottom" multiplier="1.3" id="g5h-d9-my0"/>
+                            <constraint firstItem="HPN-Bh-ck6" firstAttribute="centerX" secondItem="Oyj-Ya-z98" secondAttribute="centerX" id="tiH-bP-DDR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="HPN-Bh-ck6" id="egS-wd-yfV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cB2-DX-fTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2010.4000000000001" y="324.28785607196403"/>
+        </scene>
         <!--Home-->
         <scene sceneID="BBL-8f-2eO">
             <objects>
@@ -209,7 +253,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.137958155" green="0.4877211514" blue="0.81883769129999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.16470588235294117" green="0.48627450980392156" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mhF-1t-QaB" firstAttribute="top" secondItem="0TX-rN-LFH" secondAttribute="bottom" multiplier="1.1" id="A7b-D1-RXc"/>
                             <constraint firstItem="0TX-rN-LFH" firstAttribute="width" secondItem="nVZ-cJ-ZeQ" secondAttribute="width" multiplier="0.9" id="SdB-sN-w9D"/>
