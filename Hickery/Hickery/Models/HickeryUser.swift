@@ -35,6 +35,9 @@ class HickeryUser {
         if (jsonDictionary["last_name"] != nil) {
             lastName = jsonDictionary["last_name"] as! String
         }
+        if (jsonDictionary["email"] != nil) {
+            email = jsonDictionary["email"] as! String
+        }
     }
 
     init(facebookUser: FacebookUser) {

@@ -12,6 +12,7 @@ let kHickeryAPIUserLikesPath = "api/likes.php"
 let kHickeryAPIUserRecommendationsPath = "api/recommendations.php"
 let kHickeryAPIUserSearchPath = "api/search.php"
 let kHickeryAPIUserPath = "api/user.php"
+let kHickeryAPIUserSignUpPath = "api/signup.php"
 
 let kHickeryAPIParamUserIdKey = "user_id"
 let kHickeryAPIParamQueryKey = "query"
@@ -22,6 +23,7 @@ class APIManager {
     let localStore = LocalStore()
     let networkingManager = NetworkingManager()
 
+    // MARK - Reads
     func requestLikes(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
         if let songs = localStore.likes(forUserId: userId) {
             completion(songs)
@@ -57,6 +59,30 @@ class APIManager {
             }
         }
     }
+
+    // MARK - Writes
+
+    func signUpUser(facebookUser: FacebookUser, completion: @escaping (_ hickeryUser: HickeryUser) -> Void) {
+        let params = ["fbid": facebookUser.id,
+                      "first_name": facebookUser.firstName,
+                      "last_name": facebookUser.lastName,
+                      "email": facebookUser.email,
+                      "profile_picture": facebookUser.profilePicture]
+        if let params = params as? [String: String] {
+            networkingManager.post(path: kHickeryAPIUserSignUpPath, params: params) { (jsonResponse, responseStatus) in
+                switch responseStatus {
+                case .success:
+                    if let jsonResponse = jsonResponse as? [String: Any] {
+                        completion(HickeryUser(jsonDictionary: jsonResponse))
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+
+    // MARK - Private
 
     private func requestSongs(endpoint: String, params: [String:String], completion: @escaping (_ songs: [HickerySong]) -> Void) {
         networkingManager.get(path: endpoint, params: params) { (jsonResponse, responseStatus) in

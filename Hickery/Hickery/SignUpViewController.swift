@@ -17,6 +17,7 @@ class SignUpViewController: UIViewController {
 
     let facebookAPIManager = FacebookAPIManager(accessToken: AccessToken.current!)
     let localStore = LocalStore()
+    let apiManager = APIManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +25,16 @@ class SignUpViewController: UIViewController {
 
     func startSignUpExperience(facebookUser: FacebookUser) {
         activityIndicator.startAnimating()
-        if (localStore.likes(forUserId: "TODO:") != nil) {
-            // We already fetched the wall posts, but the sign up was interrupted
-            self.didFinishSignUpProcess(facebookUser: facebookUser)
-        } else {
-            self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
-                self.savePostsToLocalStore(fbUser: facebookUser, fbPosts: posts)
+        apiManager.signUpUser(facebookUser: facebookUser) { (hickeryUser) in
+            if (self.localStore.likes(forUserId: "TODO:") != nil) {
+                // We already fetched the wall posts, but the sign up was interrupted
                 self.didFinishSignUpProcess(facebookUser: facebookUser)
-            })
+            } else {
+                self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
+                    self.savePostsToLocalStore(fbUser: facebookUser, fbPosts: posts)
+                    self.didFinishSignUpProcess(facebookUser: facebookUser)
+                })
+            }
         }
     }
 
