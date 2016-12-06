@@ -6,7 +6,7 @@
 //  Copyright © 2016 Florian Marcu. All rights reserved.
 //
 
-class HickerySong {
+class HickerySong: NSObject, NSCoding {
 
     var songID: String?
     var photoURL: String?
@@ -16,6 +16,7 @@ class HickerySong {
     var subcategoryID: String?
 
     init(jsonDictionary: [String:String]) {
+        super.init()
         songID = jsonDictionary["hkid"]!
         photoURL = jsonDictionary["photo"]
         title = jsonDictionary["title"]
@@ -25,10 +26,25 @@ class HickerySong {
     }
 
     init(facebookPost: FacebookPost) {
+        super.init()
         photoURL = facebookPost.picture
         content = facebookPost.link
         title = facebookPost.name
         songID = self.youtubeVideoID()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        songID = aDecoder.decodeObject(forKey: "songID") as? String
+        photoURL = aDecoder.decodeObject(forKey: "photoURL") as? String
+        title = aDecoder.decodeObject(forKey: "title") as? String
+        content = aDecoder.decodeObject(forKey: "content") as? String
+    }
+
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.songID, forKey:"songID")
+        aCoder.encode(self.photoURL, forKey:"photoURL")
+        aCoder.encode(self.title, forKey:"title")
+        aCoder.encode(self.content, forKey:"content")
     }
 
     func youtubeVideoID() -> String {

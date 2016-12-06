@@ -17,6 +17,7 @@
 		1700E3551DC689A70085A5D0 /* HickeryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3541DC689A70085A5D0 /* HickeryUITests.swift */; };
 		1700E3641DC68AE70085A5D0 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3631DC68AE70085A5D0 /* LandingViewController.swift */; };
 		1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1702436A1DC7008A00369C72 /* HickerySongStream.swift */; };
+		170FE9AB1DF65BA300678999 /* HickeryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FE9AA1DF65BA300678999 /* HickeryDataStorage.swift */; };
 		1737E8001DED3612000B23D2 /* HickeryUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1737E7FF1DED3612000B23D2 /* HickeryUserTest.swift */; };
 		1737E8031DEE8EB0000B23D2 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1737E8021DEE8EB0000B23D2 /* LocalStore.swift */; };
 		1756C4291DCFC26000505E03 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756C4281DCFC26000505E03 /* HomeViewController.swift */; };
@@ -77,6 +78,7 @@
 		1700E3561DC689A70085A5D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1700E3631DC68AE70085A5D0 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		1702436A1DC7008A00369C72 /* HickerySongStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickerySongStream.swift; sourceTree = "<group>"; };
+		170FE9AA1DF65BA300678999 /* HickeryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickeryDataStorage.swift; sourceTree = "<group>"; };
 		1737E7FF1DED3612000B23D2 /* HickeryUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HickeryUserTest.swift; sourceTree = "<group>"; };
 		1737E8021DEE8EB0000B23D2 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		1756C4281DCFC26000505E03 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				1737E8021DEE8EB0000B23D2 /* LocalStore.swift */,
+				170FE9AA1DF65BA300678999 /* HickeryDataStorage.swift */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				178D34C51DC6E2C60044175D /* HickeryUser.swift in Sources */,
+				170FE9AB1DF65BA300678999 /* HickeryDataStorage.swift in Sources */,
 				1786975F1DD579D900225681 /* FacebookPost.swift in Sources */,
 				178D34C11DC6DBC80044175D /* HKLoginButton.swift in Sources */,
 				178D34C91DC6E6550044175D /* HickeryTabBarViewController.swift in Sources */,

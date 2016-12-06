@@ -8,13 +8,13 @@
 
 class LocalStore: NSObject {
 
-    static var likes: [HickerySong]?
+    private let hkDataStorage = HickeryDataStorage(userDefaults: UserDefaults.standard)
 
     func save(likes: [HickerySong], forUser: HickeryUser) {
-        LocalStore.likes = likes
+        hkDataStorage.saveLikes(likes)
     }
 
     func likes(forUserId: String) -> [HickerySong]? {
-        return LocalStore.likes
+        return hkDataStorage.likes()
     }
 }

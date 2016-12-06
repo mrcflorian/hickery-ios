@@ -16,6 +16,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     let facebookAPIManager = FacebookAPIManager(accessToken: AccessToken.current!)
+    let localStore = LocalStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,20 +24,27 @@ class SignUpViewController: UIViewController {
 
     func startSignUpExperience(facebookUser: FacebookUser) {
         activityIndicator.startAnimating()
-        self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
-            self.didSignUp(fbUser: facebookUser, fbPosts: posts)
-        })
+        if (localStore.likes(forUserId: "TODO:") != nil) {
+            // We already fetched the wall posts, but the sign up was interrupted
+            self.didFinishSignUpProcess(facebookUser: facebookUser)
+        } else {
+            self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
+                self.savePostsToLocalStore(fbUser: facebookUser, fbPosts: posts)
+                self.didFinishSignUpProcess(facebookUser: facebookUser)
+            })
+        }
     }
 
-    private func didSignUp(fbUser: FacebookUser, fbPosts: [FacebookPost]) {
+    private func savePostsToLocalStore(fbUser: FacebookUser, fbPosts: [FacebookPost]) {
         let hickerySongs = fbPosts
             .map{HickerySong(facebookPost: $0)}
             .filter{$0.youtubeVideoID() != ""}
         if (hickerySongs.count > 0) {
             LocalStore().save(likes: hickerySongs, forUser: HickeryUser(facebookUser: fbUser))
         }
+    }
 
-        activityIndicator.stopAnimating()
-        HickeryTabBarViewController.startLoggedInExperience(facebookUser: fbUser, controller: self)
+    private func didFinishSignUpProcess(facebookUser: FacebookUser) {
+        HickeryTabBarViewController.startLoggedInExperience(facebookUser: facebookUser, controller: self)
     }
 }
