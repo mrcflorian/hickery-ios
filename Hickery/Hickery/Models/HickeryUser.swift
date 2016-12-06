@@ -54,10 +54,12 @@ class HickeryUser {
     }
 
     class func hickeryID(_ facebookID: String!) -> String {
-        var repeatNo = 15 - facebookID.characters.count
-        if repeatNo < 0 {
-            repeatNo = 0
+        let repeatNo = max(0, 15 - facebookID.characters.count)
+        let repeatedZeros = String(repeating: "0", count: repeatNo)
+        let id = "99" + repeatedZeros + facebookID;
+        if (id.characters.count > 20) {
+            return repeatedZeros + facebookID
         }
-        return "99" + facebookID;
+        return id
     }
 }

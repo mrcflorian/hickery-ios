@@ -52,7 +52,7 @@ class APIManager {
                 } else {
                     completion(nil)
                 }
-            case .error(let error):
+            case .error:
                 completion(nil)
             }
         }
