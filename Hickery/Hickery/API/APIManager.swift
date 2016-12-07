@@ -91,16 +91,12 @@ class APIManager {
                       "objects": jsonLikes] as [String : String]
         networkingManager.post(path: kHickeryAPIUserUploadLikesPath, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
-            case .success:
-                if let jsonResponse = jsonResponse as? [String: String] {
-                    if (jsonResponse["result"] == "success") {
-                        // succesful upload
-                        completion()
-                    }
-                }
-            case .error(let error):
-                print(error)
+            case .success: break
+                // TODO: Scribe success
+            case .error: break
+                // TODO: Scribe error
             }
+            completion()
         }
     }
 
