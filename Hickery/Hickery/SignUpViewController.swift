@@ -38,6 +38,8 @@ class SignUpViewController: UIViewController {
             self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: hickerySongs, completion: { () in
                 self.didFinishSignUpProcess(facebookUser: facebookUser)
             })
+        } else {
+            self.didFinishSignUpProcess(facebookUser: facebookUser)
         }
     }
 

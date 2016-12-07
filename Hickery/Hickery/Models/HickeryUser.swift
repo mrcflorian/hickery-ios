@@ -22,21 +22,21 @@ class HickeryUser {
         if (jsonDictionary["hkid"] != nil) {
             userID = jsonDictionary["hkid"] as! String
         }
-        if (jsonDictionary["large_profile_picture"] != nil) {
-            profileImageURL = jsonDictionary["large_profile_picture"] as! String
+        if let profilePicture = jsonDictionary["large_profile_picture"] as? String {
+            profileImageURL = profilePicture
         } else {
-            if (jsonDictionary["profile_picture"] != nil) {
-                profileImageURL = jsonDictionary["profile_picture"] as! String
+            if let profilePicture = jsonDictionary["profile_picture"] as? String {
+                profileImageURL = profilePicture
             }
         }
-        if (jsonDictionary["first_name"] != nil) {
-            firstName = jsonDictionary["first_name"] as! String
+        if let firstName = jsonDictionary["first_name"] as? String {
+            self.firstName = firstName
         }
-        if (jsonDictionary["last_name"] != nil) {
-            lastName = jsonDictionary["last_name"] as! String
+        if let lastName = jsonDictionary["last_name"] as? String {
+            self.lastName = lastName
         }
-        if (jsonDictionary["email"] != nil) {
-            email = jsonDictionary["email"] as! String
+        if let email = jsonDictionary["email"] as? String {
+            self.email = email
         }
     }
 
