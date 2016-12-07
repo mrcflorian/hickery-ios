@@ -28,7 +28,9 @@ class SignUpViewController: UIViewController {
         apiManager.signUpUser(facebookUser: facebookUser) { (hickeryUser) in
             if let likes = self.localStore.likes(forUserId: "TODO:") {
                 // We already fetched the wall posts, but the sign up was interrupted
-                self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: likes)
+                self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: likes, completion: { () in
+                    // TODO: removeLikes eventually??
+                })
                 self.didFinishSignUpProcess(facebookUser: facebookUser)
             } else {
                 self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in

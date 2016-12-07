@@ -17,4 +17,8 @@ class LocalStore: NSObject {
     func likes(forUserId: String) -> [HickerySong]? {
         return hkDataStorage.likes()
     }
+
+    func removeLikes(forUser: HickeryUser) {
+        hkDataStorage.removeLikes()
+    }
 }

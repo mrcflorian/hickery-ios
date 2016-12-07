@@ -84,24 +84,26 @@ class APIManager {
         }
     }
 
-    func uploadLikes(hickeryUser: HickeryUser, likes: [HickerySong]) {
+    func uploadLikes(hickeryUser: HickeryUser, likes: [HickerySong], completion: @escaping () -> Void) {
 
         let likesDictionaries = likes.flatMap{$0.dictionary()}
-
         guard let jsonData = try? JSONSerialization.data(withJSONObject: likesDictionaries, options: .prettyPrinted) else {
             return
         }
         guard let jsonLikes = String(data: jsonData, encoding: .utf8) else {
             return
         }
-
         let params = [kHickeryAPIParamUserIdKey: hickeryUser.userID,
                       "objects": jsonLikes] as [String : String]
-
         networkingManager.post(path: kHickeryAPIUserUploadLikesPath, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
             case .success:
-                print(jsonResponse)
+                if let jsonResponse = jsonResponse as? [String: String] {
+                    if (jsonResponse["result"] == "success") {
+                        // succesful upload
+                        completion()
+                    }
+                }
             case .error(let error):
                 print(error)
             }

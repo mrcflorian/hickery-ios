@@ -26,6 +26,10 @@ class HickeryDataStorage {
         return nil
     }
 
+    func removeLikes() {
+        userDefaults.removeObject(forKey: kHickeryDataStorageLikesKey)
+    }
+
     // MARK - Private
 
     private func archivedSongs(songs: [HickerySong]) -> Data {
