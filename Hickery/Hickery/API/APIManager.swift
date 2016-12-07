@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FacebookCore
 
 let kHickeryAPIUserLikesPath = "api/likes.php"
 let kHickeryAPIUserRecommendationsPath = "api/recommendations.php"
@@ -40,7 +41,12 @@ class APIManager {
     }
 
     func requestUser(email: String, completion: @escaping (_ user: HickeryUser?) -> Void) {
-        let params = [kHickeryAPIParamEmailKey: email]
+        var params = [kHickeryAPIParamEmailKey: email]
+
+        if let token = AccessToken.current {
+            params["access_token"] = token.authenticationToken
+        }
+
         networkingManager.get(path: kHickeryAPIUserPath, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
             case .success:
@@ -59,11 +65,15 @@ class APIManager {
     // MARK - Writes
 
     func signUpUser(facebookUser: FacebookUser, completion: @escaping (_ hickeryUser: HickeryUser) -> Void) {
-        let params = ["fbid": facebookUser.id,
+        var params = ["fbid": facebookUser.id,
                       "first_name": facebookUser.firstName,
                       "last_name": facebookUser.lastName,
                       kHickeryAPIParamEmailKey: facebookUser.email,
                       "profile_picture": facebookUser.profilePicture]
+
+        if let token = AccessToken.current {
+            params["access_token"] = token.authenticationToken
+        }
 
         if let params = params as? [String: String] {
             networkingManager.post(path: kHickeryAPIUserSignUpPath, params: params) { (jsonResponse, responseStatus) in
@@ -87,8 +97,13 @@ class APIManager {
         guard let jsonLikes = String(data: jsonData, encoding: .utf8) else {
             return
         }
-        let params = [kHickeryAPIParamUserIdKey: hickeryUser.userID,
+        var params = [kHickeryAPIParamUserIdKey: hickeryUser.userID,
                       "objects": jsonLikes] as [String : String]
+
+        if let token = AccessToken.current {
+            params["access_token"] = token.authenticationToken
+        }
+
         networkingManager.post(path: kHickeryAPIUserUploadLikesPath, params: params) { (jsonResponse, responseStatus) in
             switch responseStatus {
             case .success: break
