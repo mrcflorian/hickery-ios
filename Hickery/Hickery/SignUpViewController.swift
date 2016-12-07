@@ -26,8 +26,9 @@ class SignUpViewController: UIViewController {
     func startSignUpExperience(facebookUser: FacebookUser) {
         activityIndicator.startAnimating()
         apiManager.signUpUser(facebookUser: facebookUser) { (hickeryUser) in
-            if (self.localStore.likes(forUserId: "TODO:") != nil) {
+            if let likes = self.localStore.likes(forUserId: "TODO:") {
                 // We already fetched the wall posts, but the sign up was interrupted
+                self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: likes)
                 self.didFinishSignUpProcess(facebookUser: facebookUser)
             } else {
                 self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in

@@ -47,6 +47,15 @@ class HickerySong: NSObject, NSCoding {
         aCoder.encode(self.content, forKey:"content")
     }
 
+    func dictionary() -> [String: String]? {
+        guard let photoURL = photoURL, let title = title, let content = content else {
+            return nil
+        }
+        return ["photo": photoURL,
+                "title": title,
+                "content": content]
+    }
+
     func youtubeVideoID() -> String {
         if let components = self.content?.components(separatedBy: "?") {
             if (components.count <= 1) {

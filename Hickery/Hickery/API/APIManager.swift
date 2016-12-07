@@ -13,6 +13,7 @@ let kHickeryAPIUserRecommendationsPath = "api/recommendations.php"
 let kHickeryAPIUserSearchPath = "api/search.php"
 let kHickeryAPIUserPath = "api/user.php"
 let kHickeryAPIUserSignUpPath = "api/signup.php"
+let kHickeryAPIUserUploadLikesPath = "api/upload_likes.php"
 
 let kHickeryAPIParamUserIdKey = "user_id"
 let kHickeryAPIParamQueryKey = "query"
@@ -66,8 +67,9 @@ class APIManager {
         let params = ["fbid": facebookUser.id,
                       "first_name": facebookUser.firstName,
                       "last_name": facebookUser.lastName,
-                      "email": facebookUser.email,
+                      kHickeryAPIParamEmailKey: facebookUser.email,
                       "profile_picture": facebookUser.profilePicture]
+
         if let params = params as? [String: String] {
             networkingManager.post(path: kHickeryAPIUserSignUpPath, params: params) { (jsonResponse, responseStatus) in
                 switch responseStatus {
@@ -78,6 +80,30 @@ class APIManager {
                 case .error(let error):
                     print(error)
                 }
+            }
+        }
+    }
+
+    func uploadLikes(hickeryUser: HickeryUser, likes: [HickerySong]) {
+
+        let likesDictionaries = likes.flatMap{$0.dictionary()}
+
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: likesDictionaries, options: .prettyPrinted) else {
+            return
+        }
+        guard let jsonLikes = String(data: jsonData, encoding: .utf8) else {
+            return
+        }
+
+        let params = [kHickeryAPIParamUserIdKey: hickeryUser.userID,
+                      "objects": jsonLikes] as [String : String]
+
+        networkingManager.post(path: kHickeryAPIUserUploadLikesPath, params: params) { (jsonResponse, responseStatus) in
+            switch responseStatus {
+            case .success:
+                print(jsonResponse)
+            case .error(let error):
+                print(error)
             }
         }
     }
