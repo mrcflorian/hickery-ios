@@ -12,11 +12,9 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
-
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     let facebookAPIManager = FacebookAPIManager(accessToken: AccessToken.current!)
-    let localStore = LocalStore()
     let apiManager = APIManager()
 
     override func viewDidLoad() {
@@ -26,27 +24,20 @@ class SignUpViewController: UIViewController {
     func startSignUpExperience(facebookUser: FacebookUser) {
         activityIndicator.startAnimating()
         apiManager.signUpUser(facebookUser: facebookUser) { (hickeryUser) in
-            if let likes = self.localStore.likes(forUserId: "TODO:") {
-                // We already fetched the wall posts, but the sign up was interrupted
-                self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: likes, completion: { () in
-                    // TODO: removeLikes eventually??
-                })
-                self.didFinishSignUpProcess(facebookUser: facebookUser)
-            } else {
-                self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
-                    self.savePostsToLocalStore(fbUser: facebookUser, fbPosts: posts)
-                    self.didFinishSignUpProcess(facebookUser: facebookUser)
-                })
-            }
+            self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
+                self.sendPostsToHickery(hickeryUser: hickeryUser, facebookUser: facebookUser, fbPosts: posts)
+            })
         }
     }
 
-    private func savePostsToLocalStore(fbUser: FacebookUser, fbPosts: [FacebookPost]) {
+    private func sendPostsToHickery(hickeryUser: HickeryUser, facebookUser: FacebookUser, fbPosts: [FacebookPost]) {
         let hickerySongs = fbPosts
             .map{HickerySong(facebookPost: $0)}
             .filter{$0.youtubeVideoID() != ""}
         if (hickerySongs.count > 0) {
-            LocalStore().save(likes: hickerySongs, forUser: HickeryUser(facebookUser: fbUser))
+            self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: hickerySongs, completion: { () in
+                self.didFinishSignUpProcess(facebookUser: facebookUser)
+            })
         }
     }
 
