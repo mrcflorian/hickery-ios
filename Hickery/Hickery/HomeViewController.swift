@@ -13,8 +13,9 @@ class HomeViewController: UIViewController {
     let apiManager = APIManager()
     let playlistVC = StoryboardEntityProvider().playlistViewController()
 
-    var userId: String? {
+    var user: HickeryUser? {
         didSet {
+            playlistVC.user = user
             requestUserLikes()
         }
     }
@@ -25,10 +26,10 @@ class HomeViewController: UIViewController {
     }
 
     private func requestUserLikes() {
-        guard let userId = userId else {
+        guard let user = user else {
             return
         }
-        apiManager.requestLikes(userId: userId) { (songs) in
+        apiManager.requestLikes(user: user) { (songs) in
             self.didFetchUserSongs(songs: songs)
         }
     }

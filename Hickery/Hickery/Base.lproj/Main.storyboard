@@ -32,21 +32,47 @@
                                     <segue destination="IWh-aO-amX" kind="embed" id="GYA-uI-V54"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uD9-xS-oNY">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LL7-Pa-SZf">
+                                        <frame key="frameInset" minX="160" minY="3" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="SgI-vN-lhh"/>
+                                            <constraint firstAttribute="height" constant="25" id="tRU-gR-Ta7"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="didTapLikeButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fvG-W0-S17"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="LL7-Pa-SZf" firstAttribute="centerY" secondItem="uD9-xS-oNY" secondAttribute="centerY" id="Xz4-OW-HM4"/>
+                                    <constraint firstAttribute="height" constant="30" id="dEl-y9-z2t"/>
+                                    <constraint firstItem="LL7-Pa-SZf" firstAttribute="centerX" secondItem="uD9-xS-oNY" secondAttribute="centerX" id="jPu-ag-fSA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Bsc-LH-mvj" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="23m-Dz-0fz"/>
                             <constraint firstItem="Bsc-LH-mvj" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="354-YY-joy"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="50U-UC-CIf"/>
+                            <constraint firstItem="uD9-xS-oNY" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="BHk-iH-6Bb"/>
+                            <constraint firstItem="uD9-xS-oNY" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="EDH-m7-1VF"/>
+                            <constraint firstItem="uD9-xS-oNY" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" id="GQ3-Vs-l6C"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="I5F-dm-MqB"/>
-                            <constraint firstItem="Bsc-LH-mvj" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" constant="8" id="fNY-Xp-i8T"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="B5W-px-e8z" secondAttribute="bottom" multiplier="3" id="gyB-vg-5be"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="iMJ-uO-zZi"/>
+                            <constraint firstItem="Bsc-LH-mvj" firstAttribute="top" secondItem="uD9-xS-oNY" secondAttribute="bottom" id="rvF-Bq-U3O"/>
                             <constraint firstItem="B5W-px-e8z" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="height" multiplier="375:667" id="u74-Zj-DWo"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Bsc-LH-mvj" secondAttribute="bottom" id="uq3-TP-5Ok"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="likeButton" destination="LL7-Pa-SZf" id="p3e-by-6aF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -368,7 +394,7 @@
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="IWh-aO-amX" customClass="SongTableViewController" customModule="Hickery" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="35" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRB-e5-PUS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="436.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="414.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

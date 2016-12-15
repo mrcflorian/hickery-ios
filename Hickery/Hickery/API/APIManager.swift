@@ -28,9 +28,12 @@ class APIManager {
     let networkingManager = NetworkingManager()
 
     // MARK - Reads
-    func requestLikes(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
-        let params = [kHickeryAPIParamUserIdKey:userId]
-        requestSongs(endpoint: kHickeryAPIUserLikesPath, params: params, completion: completion)
+    func requestLikes(user: HickeryUser, completion: @escaping (_ songs: [HickerySong]) -> Void) {
+        let params = [kHickeryAPIParamUserIdKey: user.userID]
+        requestSongs(endpoint: kHickeryAPIUserLikesPath, params: params) { (songs) in
+            LikeStore(user: user).insert(songs: songs, liked: true)
+            completion(songs)
+        }
     }
 
     func requestRecommendations(userId: String, completion: @escaping (_ songs: [HickerySong]) -> Void) {
@@ -118,7 +121,7 @@ class APIManager {
         }
     }
 
-    func like(hickeryUser: HickeryUser, hickerySong: HickerySong, isDislike: Bool, completion: @escaping () -> Void) {
+    func like(hickeryUser: HickeryUser, hickerySong: HickerySong, isDislike: Bool) {
         let userId = hickeryUser.userID
         guard let songId = hickerySong.songID else {
             return
@@ -129,7 +132,6 @@ class APIManager {
             params[kHickeryAPIParamIsDislikeIdKey] = "true";
         }
         networkingManager.get(path: kHickeryAPIUserLikePath, params: params) { (jsonResponse, responseStatus) in
-            completion()
         }
     }
 

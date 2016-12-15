@@ -13,8 +13,9 @@ class DiscoverViewController: UIViewController {
     let apiManager = APIManager()
     let playlistVC = StoryboardEntityProvider().playlistViewController()
 
-    var userId: String? {
+    var user: HickeryUser? {
         didSet {
+            playlistVC.user = user
             requestUserRecommendations()
         }
     }
@@ -25,7 +26,7 @@ class DiscoverViewController: UIViewController {
     }
 
     private func requestUserRecommendations() {
-        guard let userId = userId else {
+        guard let userId = user?.userID else {
             return
         }
         apiManager.requestRecommendations(userId: userId) { (songs) in

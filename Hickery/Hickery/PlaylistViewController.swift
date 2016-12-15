@@ -13,6 +13,8 @@ let kNumberOfSongsToEnqueueForBackground = 10
 
 class PlaylistViewController: UIViewController {
 
+    @IBOutlet var likeButton: UIButton!
+
     static var playingPlaylistVC: PlaylistViewController?
 
     var playerVC: PlayerViewController?
@@ -22,9 +24,18 @@ class PlaylistViewController: UIViewController {
             updateIfNeeded()
         }
     }
+    var user: HickeryUser? {
+        didSet {
+            if let user = user {
+                likeStore = LikeStore(user: user)
+            }
+        }
+    }
+
     var currentPlayingIndex: Int = 0
 
     let commandCenter = MPRemoteCommandCenter.shared()
+    private var likeStore: LikeStore?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +46,8 @@ class PlaylistViewController: UIViewController {
     func playSongInForeground(hickerySong: HickerySong) {
         currentPlayingIndex = index(of: hickerySong)
         playerVC?.playSongInForeground(atIndex: currentPlayingIndex)
-        songTableVC?.scrollToSongIndex(index: Int(currentPlayingIndex))
+        songTableVC?.scrollToSongIndex(index: currentPlayingIndex)
+        updateActionBar()
     }
 
     func playNextSong(inBackground: Bool) {
@@ -109,6 +121,28 @@ class PlaylistViewController: UIViewController {
         if (self == PlaylistViewController.playingPlaylistVC) {
             self.playPreviousSong()
         }
+    }
+
+    @IBAction func didTapLikeButton(_ sender: UIButton) {
+        if let song = currentPlayingSong() {
+            likeStore?.toggle(song: song)
+            updateActionBar()
+        }
+    }
+
+    private func updateActionBar() {
+        guard let likeStore = likeStore, let song = currentPlayingSong() else {
+            return
+        }
+        let likeImageName = (likeStore.likes(song: song)) ? #imageLiteral(resourceName: "heart-filled") : #imageLiteral(resourceName: "heart-empty")
+        likeButton.setImage(likeImageName, for: .normal)
+    }
+
+    private func currentPlayingSong() -> HickerySong? {
+        if currentPlayingIndex < songs.count {
+            return songs[currentPlayingIndex];
+        }
+        return nil
     }
 }
 

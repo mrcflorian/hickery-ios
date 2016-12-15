@@ -46,13 +46,13 @@ class HickeryTabBarViewController: UITabBarController {
             return
         }
         homeVC = viewControllers?.first as? HomeViewController
-        homeVC?.userId = user.userID
+        homeVC?.user = user
 
         discoverVC = viewControllers?[1] as? DiscoverViewController
-        discoverVC?.userId = user.userID
+        discoverVC?.user = user
 
         searchVC = viewControllers?[2] as? SearchViewController
-        searchVC?.userId = user.userID
+        searchVC?.user = user
 
         profileVC = viewControllers?[3] as? ProfileViewController
         profileVC?.partialUser = user
