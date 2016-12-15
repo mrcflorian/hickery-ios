@@ -20,8 +20,7 @@ class HickeryTabBarViewController: UITabBarController {
     static var tabBarHeight: CGFloat = 49
 
     static func startLoggedInExperience(facebookUser: FacebookUser, controller: UIViewController) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as? HickeryTabBarViewController {
+        if let vc = StoryboardEntityProvider().hickeryTabBarViewController() {
             vc.user = HickeryUser(facebookUser: facebookUser)
             controller.present(vc, animated: true, completion: nil)
         }

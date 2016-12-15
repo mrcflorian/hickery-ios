@@ -19,4 +19,8 @@ class StoryboardEntityProvider {
     func signUpViewController() -> SignUpViewController {
         return mainStoryboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
     }
+
+    func hickeryTabBarViewController() -> HickeryTabBarViewController? {
+        return mainStoryboard.instantiateViewController(withIdentifier: "HickeryTabBarViewController") as? HickeryTabBarViewController
+    }
 }

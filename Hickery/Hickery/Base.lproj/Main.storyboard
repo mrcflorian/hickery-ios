@@ -197,12 +197,47 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thL-gv-fbe">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="242" id="pPt-HV-Q7b"/>
+                                    <constraint firstAttribute="height" constant="35" id="yl9-U8-ivr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Sync Facebook account"/>
+                                <connections>
+                                    <action selector="didTapSyncFacebookButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="eHU-Sf-deO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSn-sG-5sk">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="159" id="2Gp-pL-9oT"/>
+                                    <constraint firstAttribute="height" constant="35" id="b47-ch-kBl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="didTapLogoutButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="tSx-xZ-X2I"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Vme-4Y-dwu">
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="4DC-wP-Li6"/>
+                                    <constraint firstAttribute="height" constant="20" id="73f-8U-urQ"/>
+                                    <constraint firstAttribute="width" constant="20" id="7KE-rK-JO2"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="thL-gv-fbe" firstAttribute="top" secondItem="5na-Vb-cBE" secondAttribute="bottom" multiplier="1.1" id="Br2-G8-reg"/>
                             <constraint firstItem="5na-Vb-cBE" firstAttribute="width" secondItem="QS5-Rx-YEW" secondAttribute="width" id="ELR-nn-ZiS"/>
+                            <constraint firstItem="pSn-sG-5sk" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Ext-41-F9h"/>
+                            <constraint firstItem="Vme-4Y-dwu" firstAttribute="top" secondItem="5na-Vb-cBE" secondAttribute="bottom" multiplier="1.15" id="Vcb-Il-dP3"/>
                             <constraint firstItem="5na-Vb-cBE" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="-16" id="Yul-uQ-s6M"/>
                             <constraint firstItem="Kix-5R-l8t" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="50" id="anf-id-Ic1"/>
+                            <constraint firstItem="pSn-sG-5sk" firstAttribute="top" secondItem="thL-gv-fbe" secondAttribute="bottom" id="ccE-LM-kTF"/>
+                            <constraint firstItem="Vme-4Y-dwu" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="cqw-qq-DCN"/>
+                            <constraint firstItem="thL-gv-fbe" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="vnJ-Bf-q6B"/>
                             <constraint firstItem="5na-Vb-cBE" firstAttribute="top" secondItem="Kix-5R-l8t" secondAttribute="bottom" constant="31" id="vx9-s7-dTh"/>
                             <constraint firstItem="Kix-5R-l8t" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="xcb-Kb-0HR"/>
                         </constraints>
@@ -210,7 +245,10 @@
                     <tabBarItem key="tabBarItem" title="Me" image="me-tab-icon-white" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="avatarImageView" destination="Kix-5R-l8t" id="EC5-bW-zwK"/>
+                        <outlet property="logoutButton" destination="pSn-sG-5sk" id="i9Q-jf-4Q2"/>
                         <outlet property="nameLabel" destination="5na-Vb-cBE" id="SQS-3T-bQc"/>
+                        <outlet property="syncActivityIndicator" destination="Vme-4Y-dwu" id="2C2-2x-eZA"/>
+                        <outlet property="syncFacebookButton" destination="thL-gv-fbe" id="hCV-rg-lS5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

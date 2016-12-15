@@ -14,8 +14,8 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
-    let facebookAPIManager = FacebookAPIManager(accessToken: AccessToken.current!)
-    let apiManager = APIManager()
+    private let apiManager = APIManager()
+    private let facebookSyncManager = FacebookSyncManager(facebookAPIManager: FacebookAPIManager(accessToken: AccessToken.current!), apiManager: APIManager())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,22 +24,9 @@ class SignUpViewController: UIViewController {
     func startSignUpExperience(facebookUser: FacebookUser) {
         activityIndicator.startAnimating()
         apiManager.signUpUser(facebookUser: facebookUser) { (hickeryUser) in
-            self.facebookAPIManager.requestWallPosts(completion: { (posts: [FacebookPost]) in
-                self.sendPostsToHickery(hickeryUser: hickeryUser, facebookUser: facebookUser, fbPosts: posts)
-            })
-        }
-    }
-
-    private func sendPostsToHickery(hickeryUser: HickeryUser, facebookUser: FacebookUser, fbPosts: [FacebookPost]) {
-        let hickerySongs = fbPosts
-            .map{HickerySong(facebookPost: $0)}
-            .filter{$0.youtubeVideoID() != ""}
-        if (hickerySongs.count > 0) {
-            self.apiManager.uploadLikes(hickeryUser: hickeryUser, likes: hickerySongs, completion: { () in
+            self.facebookSyncManager.syncFacebookWallPosts(hickeryUser: hickeryUser, completionBlock: { (hickerySongs) in
                 self.didFinishSignUpProcess(facebookUser: facebookUser)
             })
-        } else {
-            self.didFinishSignUpProcess(facebookUser: facebookUser)
         }
     }
 
