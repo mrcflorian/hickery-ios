@@ -15,10 +15,13 @@ let kHickeryAPIUserSearchPath = "api/search.php"
 let kHickeryAPIUserPath = "api/user.php"
 let kHickeryAPIUserSignUpPath = "api/signup.php"
 let kHickeryAPIUserUploadLikesPath = "api/upload_likes.php"
+let kHickeryAPIUserLikePath = "api/like.php"
 
 let kHickeryAPIParamUserIdKey = "user_id"
+let kHickeryAPIParamObjectIdKey = "object_id"
 let kHickeryAPIParamQueryKey = "query"
 let kHickeryAPIParamEmailKey = "email"
+let kHickeryAPIParamIsDislikeIdKey = "is_dislike"
 
 class APIManager {
 
@@ -111,6 +114,21 @@ class APIManager {
             case .error: break
                 // TODO: Scribe error
             }
+            completion()
+        }
+    }
+
+    func like(hickeryUser: HickeryUser, hickerySong: HickerySong, isDislike: Bool, completion: @escaping () -> Void) {
+        let userId = hickeryUser.userID
+        guard let songId = hickerySong.songID else {
+            return
+        }
+        var params = [kHickeryAPIParamUserIdKey:userId,
+                      kHickeryAPIParamObjectIdKey: songId]
+        if isDislike {
+            params[kHickeryAPIParamIsDislikeIdKey] = "true";
+        }
+        networkingManager.get(path: kHickeryAPIUserLikePath, params: params) { (jsonResponse, responseStatus) in
             completion()
         }
     }
