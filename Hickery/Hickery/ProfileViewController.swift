@@ -81,7 +81,7 @@ class ProfileViewController: UIViewController {
         syncActivityIndicator.startAnimating()
         facebookSyncManager?.syncFacebookWallPosts(hickeryUser: user, completionBlock: { (songs) in
             self.syncActivityIndicator.stopAnimating()
-            sender.isHidden = true
+            sender.isHidden = false
         })
     }
 
