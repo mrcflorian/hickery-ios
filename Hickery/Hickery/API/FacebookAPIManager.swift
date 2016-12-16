@@ -44,7 +44,7 @@ class FacebookAPIManager {
     }
 
     func requestWallPosts(completion: @escaping (_ posts: [FacebookPost]) -> Void) {
-        let graphRequest = GraphRequest(graphPath: "me/posts", parameters: ["fields":"link,created_time,description,picture,name","limit":"25"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
+        let graphRequest = GraphRequest(graphPath: "me/posts", parameters: ["fields":"link,created_time,description,picture,name","limit":"500"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
 
         graphRequest.start { (response: HTTPURLResponse?, result: GraphRequestResult<GraphRequest>) in
             switch result {

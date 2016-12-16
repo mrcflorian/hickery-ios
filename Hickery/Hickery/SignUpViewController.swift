@@ -17,10 +17,6 @@ class SignUpViewController: UIViewController {
     private let apiManager = APIManager()
     private let facebookSyncManager = FacebookSyncManager(facebookAPIManager: FacebookAPIManager(accessToken: AccessToken.current!), apiManager: APIManager())
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     func startSignUpExperience(facebookUser: FacebookUser) {
         activityIndicator.startAnimating()
         apiManager.signUpUser(facebookUser: facebookUser) { (hickeryUser) in
