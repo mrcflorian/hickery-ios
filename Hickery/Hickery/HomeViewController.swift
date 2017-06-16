@@ -36,5 +36,13 @@ class HomeViewController: UIViewController {
 
     private func didFetchUserSongs(songs: [HickerySong]) {
         playlistVC.songs = songs
+        let currSong = songs[0]
+//        let videoId: String = currSong.youtubeVideoID()
+//        let apiManager = APIManager()
+//        apiManager.requestAudioURL(videoId: videoId) { (audioURL) in
+//            print("Audio: " + audioURL)
+//        }
+
+        
     }
 }

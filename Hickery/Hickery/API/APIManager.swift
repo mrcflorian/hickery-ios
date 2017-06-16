@@ -17,6 +17,8 @@ let kHickeryAPIUserSignUpPath = "api/signup.php"
 let kHickeryAPIUserUploadLikesPath = "api/upload_likes.php"
 let kHickeryAPIUserLikePath = "api/like.php"
 
+let kHickeryYoutubeAudioPath = "youtube/main.php"
+
 let kHickeryAPIParamUserIdKey = "user_id"
 let kHickeryAPIParamObjectIdKey = "object_id"
 let kHickeryAPIParamQueryKey = "query"
@@ -45,7 +47,7 @@ class APIManager {
         let params = [kHickeryAPIParamUserIdKey:userId, kHickeryAPIParamQueryKey:query]
         requestSongs(endpoint: kHickeryAPIUserSearchPath, params: params, completion: completion)
     }
-
+    
     func requestUser(email: String, completion: @escaping (_ user: HickeryUser?) -> Void) {
         var params = [kHickeryAPIParamEmailKey: email]
 
@@ -68,6 +70,26 @@ class APIManager {
         }
     }
 
+    func requestAudioURL(videoId: String, completion: @escaping (_ audioURL: String ) -> Void) {
+        print("video id: " + videoId)
+        let params:[String:String] = ["video": videoId]
+        networkingManager.get(path: kHickeryYoutubeAudioPath, params: params) { (jsonResponse, responseStatus) in
+            switch responseStatus {
+            case .success:
+                if let jsonResponse = jsonResponse as? [String : Any] {
+                    let audioURL: String = jsonResponse["url"] as! String
+                    completion(audioURL)
+                } else {
+                    completion("error")
+                }
+            case .error:
+                completion("this error")
+                print(responseStatus)
+            }
+        }
+
+    }
+    
     // MARK - Writes
 
     func signUpUser(facebookUser: FacebookUser, completion: @escaping (_ hickeryUser: HickeryUser) -> Void) {

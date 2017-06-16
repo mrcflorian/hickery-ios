@@ -11,7 +11,7 @@ import Crashlytics
 import Fabric
 import FacebookCore
 import FacebookLogin
-import FacebookShare
+//import FacebookShare
 import UIKit
 
 @UIApplicationMain

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0001C96D1724B7C5A0A2FA7B /* Pods_Hickery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CF4180F1803A0DA6BA5319 /* Pods_Hickery.framework */; };
+		080008301EF431A900BCD460 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0800082F1EF431A900BCD460 /* libstdc++.6.tbd */; };
+		080008321EF43C4C00BCD460 /* VLCPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080008311EF43C4C00BCD460 /* VLCPlayer.swift */; };
 		1700E3331DC689A60085A5D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3321DC689A60085A5D0 /* AppDelegate.swift */; };
 		1700E3371DC689A60085A5D0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1700E3361DC689A60085A5D0 /* ProfileViewController.swift */; };
 		1700E33A1DC689A60085A5D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1700E3381DC689A60085A5D0 /* Main.storyboard */; };
@@ -62,6 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0800082D1EF42E4900BCD460 /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileVLCKit.framework; path = "Pods/MobileVLCKit/MobileVLCKit-binary/MobileVLCKit.framework"; sourceTree = "<group>"; };
+		0800082F1EF431A900BCD460 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		080008311EF43C4C00BCD460 /* VLCPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLCPlayer.swift; sourceTree = "<group>"; };
 		0DA5F0FF1754AF4E4652B1E6 /* Pods_HickeryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HickeryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11CF4180F1803A0DA6BA5319 /* Pods_Hickery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hickery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16257AB68E3B77AC6AF6EFDA /* Pods-Hickery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hickery.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hickery/Pods-Hickery.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080008301EF431A900BCD460 /* libstdc++.6.tbd in Frameworks */,
 				0001C96D1724B7C5A0A2FA7B /* Pods_Hickery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +150,8 @@
 		04651A15901C623CE5291850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0800082F1EF431A900BCD460 /* libstdc++.6.tbd */,
+				0800082D1EF42E4900BCD460 /* MobileVLCKit.framework */,
 				11CF4180F1803A0DA6BA5319 /* Pods_Hickery.framework */,
 				0DA5F0FF1754AF4E4652B1E6 /* Pods_HickeryTests.framework */,
 				F5928909C0522813C5BB8153 /* Pods_HickeryUITests.framework */,
@@ -283,6 +291,7 @@
 				17A945001DC9972D0080EFA8 /* PlaylistViewController.swift */,
 				17A945021DC9973D0080EFA8 /* PlayerViewController.swift */,
 				17A945041DC997550080EFA8 /* SongTableViewController.swift */,
+				080008311EF43C4C00BCD460 /* VLCPlayer.swift */,
 			);
 			name = Playlists;
 			sourceTree = "<group>";
@@ -386,8 +395,8 @@
 				TargetAttributes = {
 					1700E32E1DC689A60085A5D0 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = JSQ6T9Y6J4;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = D8C6SJMXLA;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -471,7 +480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		17BAEDBC1DCC4C7A0053B182 /* ShellScript */ = {
@@ -499,7 +508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2DFBC18740F75A736AAADC70 /* [CP] Embed Pods Frameworks */ = {
@@ -589,7 +598,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CEC909C43D080F6EB2A90EC4 /* [CP] Embed Pods Frameworks */ = {
@@ -638,6 +647,7 @@
 				17BAEDB71DCBC6B40053B182 /* SongTableViewCell.swift in Sources */,
 				1702436B1DC7008A00369C72 /* HickerySongStream.swift in Sources */,
 				1700E3641DC68AE70085A5D0 /* LandingViewController.swift in Sources */,
+				080008321EF43C4C00BCD460 /* VLCPlayer.swift in Sources */,
 				178D34C71DC6E2E60044175D /* HickerySong.swift in Sources */,
 				172B6FB21E032B1600AB1E8B /* FacebookSyncManager.swift in Sources */,
 			);
@@ -793,13 +803,76 @@
 			baseConfigurationReference = F8C1B69B1D5D8E01162779F9 /* Pods-Hickery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = Hickery/Hickery.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JSQ6T9Y6J4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = D8C6SJMXLA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
+				);
 				INFOPLIST_FILE = Hickery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"bz2\"",
+					"-l\"c++\"",
+					"-l\"iconv\"",
+					"-l\"stdc++\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FacebookCore\"",
+					"-framework",
+					"\"FacebookLogin\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MobileVLCKit\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"youtube_ios_player_helper\"",
+					"-l\"bz2\"",
+					"-l\"iconv\"",
+					"-framework",
+					"\"MobileVLCKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.hickery.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5215f267-a3de-44cd-b8f3-730f31b27544";
+				PROVISIONING_PROFILE_SPECIFIER = "XC: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -810,13 +883,76 @@
 			baseConfigurationReference = 16257AB68E3B77AC6AF6EFDA /* Pods-Hickery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = Hickery/Hickery.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JSQ6T9Y6J4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = D8C6SJMXLA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
+				);
 				INFOPLIST_FILE = Hickery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"bz2\"",
+					"-l\"c++\"",
+					"-l\"iconv\"",
+					"-l\"stdc++\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FacebookCore\"",
+					"-framework",
+					"\"FacebookLogin\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MobileVLCKit\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"youtube_ios_player_helper\"",
+					"-l\"bz2\"",
+					"-l\"iconv\"",
+					"-framework",
+					"\"MobileVLCKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.hickery.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5215f267-a3de-44cd-b8f3-730f31b27544";
+				PROVISIONING_PROFILE_SPECIFIER = "XC: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
+
 import youtube_ios_player_helper
 
 protocol PlayerViewControllerDelegate {
@@ -15,8 +18,13 @@ protocol PlayerViewControllerDelegate {
     func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController)
 }
 
-class PlayerViewController: UIViewController {
-
+class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
+    @IBOutlet weak var volumeControl: UISlider!
+    var audioPlayer = AVQueuePlayer()
+    var mediaPlayer = VLCPlayer.instance
+    //var movieView: UIView!
+    let playerViewController = AVPlayerViewController()
+    
     @IBOutlet var youtubePlayerView: YTPlayerView!
     var delegate: PlayerViewControllerDelegate?
     var didForcePlayingAfterBackgrounding = false
@@ -38,14 +46,63 @@ class PlayerViewController: UIViewController {
         self.videoIds = videoIds
 
         if (videoIds.count >= 1) {
-            youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
+            //youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
+            do {
+                let videoId = videoIds[0]
+                let apiManager = APIManager()
+                apiManager.requestAudioURL(videoId: videoId) { (audioURL) in
+                    print("Audio: " + audioURL)
+                    do {
+                        self.mediaPlayer.mediaPlayer.delegate = self as! VLCMediaPlayerDelegate
+                        
+                        if (self.mediaPlayer.mediaPlayer.isPlaying) {
+                            self.mediaPlayer.mediaPlayer.stop()
+                        }
+                        let url = NSURL(string: audioURL)
+                        let media = VLCMedia(url: url as! URL)
+                        self.mediaPlayer.mediaPlayer.media = media
+                        
+                        self.mediaPlayer.mediaPlayer.play()
+                        
+                        
+                        
+                    } catch{
+                        print(error)
+                    }
+                }
+                
+            } catch {}
         }
     }
-
+    
+    func playAudio(videoId: String) {
+        let apiManager = APIManager()
+        apiManager.requestAudioURL(videoId: videoId) { (audioURL) in
+            print("Audio: " + audioURL)
+            do {
+                self.mediaPlayer.mediaPlayer.delegate = self as! VLCMediaPlayerDelegate
+                
+                if (self.mediaPlayer.mediaPlayer.isPlaying) {
+                    self.mediaPlayer.mediaPlayer.stop()
+                }
+                let url = NSURL(string: audioURL)
+                let media = VLCMedia(url: url as! URL)
+                self.mediaPlayer.mediaPlayer.media = media
+                
+                self.mediaPlayer.mediaPlayer.play()
+                
+            } catch{
+                print(error)
+            }
+        }
+    }
+    
     func playSongInForeground(atIndex index: Int) {
         if let videoIds = videoIds, index < videoIds.count {
             didStartPlaybackAfterQueing = false
-            youtubePlayerView.cuePlaylist(byVideos: videosToBeEnqueued(index: index), index: 0, startSeconds: 0, suggestedQuality: .small)
+            let video = videosToBeEnqueued(index: index)[0]
+            self.playAudio(videoId: video)
+            //youtubePlayerView.cuePlaylist(byVideos: videosToBeEnqueued(index: index), index: 0, startSeconds: 0, suggestedQuality: .small)
         }
     }
 
@@ -68,6 +125,7 @@ class PlayerViewController: UIViewController {
     private func configurePlayer() {
         youtubePlayerView.delegate = self
         youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
+        //mediaPlayer.drawable = self.movieView
     }
 }
 
