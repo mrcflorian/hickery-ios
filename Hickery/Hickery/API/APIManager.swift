@@ -90,6 +90,20 @@ class APIManager {
 
     }
     
+    func requestURL(url: String, completion: @escaping (_ data: String? ) -> Void) {
+        networkingManager.getText(url: url, params: [:]) { (data, responseStatus) in
+            switch responseStatus {
+            case .success:
+                    completion(data as? String)
+            case .error:
+                completion(nil)
+                print(responseStatus)
+            }
+        }
+        
+    }
+
+    
     // MARK - Writes
 
     func signUpUser(facebookUser: FacebookUser, completion: @escaping (_ hickeryUser: HickeryUser) -> Void) {

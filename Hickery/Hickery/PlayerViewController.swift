@@ -46,55 +46,32 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
         self.videoIds = videoIds
 
         if (videoIds.count >= 1) {
-            //youtubePlayerView.load(withVideoId: videoIds[0], playerVars: playerVars)
-            do {
                 let videoId = videoIds[0]
-                let apiManager = APIManager()
-                apiManager.requestAudioURL(videoId: videoId) { (audioURL) in
-                    print("Audio: " + audioURL)
-                    do {
-                        self.mediaPlayer.mediaPlayer.delegate = self as! VLCMediaPlayerDelegate
-                        
-                        if (self.mediaPlayer.mediaPlayer.isPlaying) {
-                            self.mediaPlayer.mediaPlayer.stop()
-                        }
-                        let url = NSURL(string: audioURL)
-                        let media = VLCMedia(url: url as! URL)
-                        self.mediaPlayer.mediaPlayer.media = media
-                        
-                        self.mediaPlayer.mediaPlayer.play()
-                        
-                        
-                        
-                    } catch{
-                        print(error)
-                    }
-                }
-                
-            } catch {}
+                self.playAudio(videoId: videoId)
         }
     }
     
     func playAudio(videoId: String) {
+        
+        self.mediaPlayer.playVideo(videoId: videoId)
+    
+        /*
         let apiManager = APIManager()
         apiManager.requestAudioURL(videoId: videoId) { (audioURL) in
             print("Audio: " + audioURL)
             do {
                 self.mediaPlayer.mediaPlayer.delegate = self as! VLCMediaPlayerDelegate
                 
-                if (self.mediaPlayer.mediaPlayer.isPlaying) {
-                    self.mediaPlayer.mediaPlayer.stop()
+                if (self.mediaPlayer.isPlaying()) {
+                    self.mediaPlayer.stop()
                 }
-                let url = NSURL(string: audioURL)
-                let media = VLCMedia(url: url as! URL)
-                self.mediaPlayer.mediaPlayer.media = media
-                
-                self.mediaPlayer.mediaPlayer.play()
+                self.mediaPlayer.playAudio(audioURL: audioURL)
                 
             } catch{
                 print(error)
             }
         }
+        */
     }
     
     func playSongInForeground(atIndex index: Int) {

@@ -34,6 +34,27 @@ class NetworkingManager {
             }
         }
     }
+    
+    func getText(url: String, params: [String: String]?, completion: ((_ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {
+        print("url: " + url)
+        let manager = AFHTTPSessionManager()//baseURL: NSURL(string: url) as URL?)
+        manager.requestSerializer = AFHTTPRequestSerializer()
+        manager.responseSerializer = AFHTTPResponseSerializer()
+        manager.responseSerializer.acceptableContentTypes = nil;
+        
+        manager.get(url, parameters: params, progress: nil, success: { (dataTask, response) in
+            let res: NSData = response as! NSData
+            var backToString = String(data: res as Data, encoding: String.Encoding.utf8) as String!
+            if completion != nil {
+                completion!(backToString, .success)
+            }
+        }) { (dataTask, error) in
+            print("eroare: " + (error as! String))
+            if completion != nil {
+                completion!("", .error(error: error.localizedDescription))
+            }
+        }
+    }
 
     // TODO: Refactor get and post  (DRY)
     func post(path: String, params: [String:String]?, completion: ((_ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {

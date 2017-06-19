@@ -807,6 +807,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hickery/Hickery.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = D8C6SJMXLA;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
@@ -887,6 +888,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hickery/Hickery.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = D8C6SJMXLA;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
