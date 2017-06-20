@@ -8,6 +8,8 @@
 
 import Foundation
 import PySwiftyRegex
+import JavaScriptCore
+
 
 class VLCPlayer {
     public static let instance = VLCPlayer()
@@ -44,12 +46,25 @@ class VLCPlayer {
                 let strResult = result?.replacingOccurrences(of: "\\", with: "")
                 //print(strResult)
                 let playerURL = self.getPlayerURL(strResult: strResult!)
-                let baseAudioURL = self.getBaseAudioURL(strResult: strResult!)
+                //let baseAudioURL = self.getBaseAudioURL(strResult: strResult!)
                 print("Player URL: " + playerURL)
                 
                 let infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&sts=17325&gl=US&eurl="
                 apiManager.requestURL(url: infoURL) { (result) in
                     //print(result)
+                    //let resString = result?.removingPercentEncoding
+                    let res = self.parseQuery(query: result!)
+                    let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
+                    let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
+                    var url = map["url"]!.removingPercentEncoding!
+                    print("URL: " + map["url"]!.removingPercentEncoding!)
+                    print("S: " + map["s"]!)
+                    
+                    apiManager.requestAudioSignature(player: playerURL, s: map["s"]!) { (signature) in
+                        let audioURL = url + "&signature=" + signature + "&ratebypass=yes"
+                        self.playAudio(audioURL: audioURL)
+                    }
+                    
                 }
             }catch {
                 print(error)
@@ -77,8 +92,9 @@ class VLCPlayer {
     }
     
     func getBaseAudioURL(strResult: String) -> String {
-        let regex: String = "\"adaptive_fmts\":\""
+        let regex: String = "url="
         var res = ""
+        //print(strResult)
         if let m = re.search(regex, strResult) {
             res = m.group(0)!
         }
@@ -86,15 +102,44 @@ class VLCPlayer {
         return ""
     }
     
-    func matches(for regex: String, in text: String) -> [String] {
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let nsString = text as NSString
-            let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
-            return results.map { nsString.substring(with: $0.range)}
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
+    func parseQuery(query: String) -> [String:String] {
+        var results = [String:String]()
+        var keyValues = query.components(separatedBy: "&")
+        if (keyValues.count) > 0 {
+            for pair in keyValues {
+                let kv = pair.components(separatedBy: "=")
+                if kv.count > 1 {
+                    results.updateValue(kv[1], forKey: kv[0])
+                }
+            }
+            
         }
+        return results
+    }
+    
+    func runJS(jsSource: String, funcName: String, param: String) -> String {
+        var context = JSContext()
+        let ress = context?.evaluateScript(jsSource)
+        let testFunction = context?.objectForKeyedSubscript(funcName)
+        let result = testFunction?.call(withArguments: [param])
+        return (result?.toString())!
+    }
+}
+
+
+extension NSURL {
+    func getKeyVals() -> Dictionary<String, String>? {
+        var results = [String:String]()
+        var keyValues = self.query?.components(separatedBy: "&")
+        if (keyValues?.count)! > 0 {
+            for pair in keyValues! {
+                let kv = pair.components(separatedBy: "=")
+                if kv.count > 1 {
+                    results.updateValue(kv[1], forKey: kv[0])
+                }
+            }
+            
+        }
+        return results
     }
 }

@@ -18,7 +18,7 @@ let kHickeryAPIUserUploadLikesPath = "api/upload_likes.php"
 let kHickeryAPIUserLikePath = "api/like.php"
 
 let kHickeryYoutubeAudioPath = "youtube/main.php"
-
+let kHickeryYoutubeSIGPath = "youtube/sig.php"
 let kHickeryAPIParamUserIdKey = "user_id"
 let kHickeryAPIParamObjectIdKey = "object_id"
 let kHickeryAPIParamQueryKey = "query"
@@ -87,7 +87,24 @@ class APIManager {
                 print(responseStatus)
             }
         }
-
+    }
+    
+    func requestAudioSignature(player: String, s: String, completion: @escaping (_ signature: String ) -> Void) {
+        let params:[String:String] = ["player": player, "s": s]
+        networkingManager.get(path: kHickeryYoutubeSIGPath, params: params) { (jsonResponse, responseStatus) in
+            switch responseStatus {
+            case .success:
+                if let jsonResponse = jsonResponse as? [String : Any] {
+                    let signature: String = jsonResponse["signature"] as! String
+                    completion(signature)
+                } else {
+                    completion("error")
+                }
+            case .error:
+                completion("this error")
+                print(responseStatus)
+            }
+        }
     }
     
     func requestURL(url: String, completion: @escaping (_ data: String? ) -> Void) {
