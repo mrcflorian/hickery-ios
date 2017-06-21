@@ -159,12 +159,13 @@ extension PlaylistViewController: PlayerViewControllerDelegate {
 
     func playerViewControllerDidStartPlaying(_ playerViewController: PlayerViewController) {
         if (self != PlaylistViewController.playingPlaylistVC) {
-            PlaylistViewController.playingPlaylistVC?.playerVC?.youtubePlayerView.stopVideo()
+            
+            //PlaylistViewController.playingPlaylistVC?.playerVC?.youtubePlayerView.stopVideo()
         }
         PlaylistViewController.playingPlaylistVC = self
     }
 
     func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController) {
-        playerViewController.youtubePlayerView.playVideo()
+        //playerViewController.youtubePlayerView.playVideo()
     }
 }

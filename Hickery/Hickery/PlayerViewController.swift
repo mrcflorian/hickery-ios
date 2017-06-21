@@ -85,11 +85,11 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
     }
 
     func playNextSongInBackground() {
-        youtubePlayerView.nextVideo()
+        //youtubePlayerView.nextVideo()
     }
 
     func playPreviousSongInBackground() {
-        youtubePlayerView.previousVideo()
+        //youtubePlayerView.previousVideo()
     }
 
     private func videosToBeEnqueued(index: Int) -> [String] {
@@ -101,8 +101,8 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
     }
 
     private func configurePlayer() {
-        youtubePlayerView.delegate = self
-        youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
+        //youtubePlayerView.delegate = self
+        //youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
         //mediaPlayer.drawable = self.movieView
     }
 }
