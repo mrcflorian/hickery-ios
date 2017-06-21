@@ -108,7 +108,7 @@ class APIManager {
     }
     
     func requestURL(url: String, completion: @escaping (_ data: String? ) -> Void) {
-        networkingManager.getText(url: url, params: [:]) { (data, responseStatus) in
+        networkingManager.getText2(url: url, params: [:]) { (data, responseStatus) in
             switch responseStatus {
             case .success:
                     completion(data as? String)

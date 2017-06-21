@@ -41,15 +41,24 @@ class VLCPlayer {
     public func playVideo(videoId: String) {
         let apiManager = APIManager()
         let url: String = "https://www.youtube.com/watch?gl=US&hl=en&has_verified=1&bpctr=9999999999&v=" + videoId
+        //let url: String = "https://www.youtube.com/watch?v=" + videoId
+        
+        print(url)
+        
         apiManager.requestURL(url: url) { (result) in
             do {
                 let strResult = result?.replacingOccurrences(of: "\\", with: "")
                 //print(strResult)
                 let playerURL = self.getPlayerURL(strResult: strResult!)
+                let sts = self.getSTS(strResult: strResult!)
                 //let baseAudioURL = self.getBaseAudioURL(strResult: strResult!)
+                
                 print("Player URL: " + playerURL)
                 
-                let infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&sts=17325&gl=US&eurl="
+                var infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&gl=US&eurl="
+                if sts != "" {
+                    infoURL += "&sts=" + sts
+                }
                 apiManager.requestURL(url: infoURL) { (result) in
                     //print(result)
                     //let resString = result?.removingPercentEncoding
@@ -57,12 +66,14 @@ class VLCPlayer {
                     let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
                     let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
                     var url = map["url"]!.removingPercentEncoding!
-                    print("URL: " + map["url"]!.removingPercentEncoding!)
-                    print("S: " + map["s"]!)
+                    if url.range(of: "&signature=") != nil {
+                        self.playAudio(audioURL: url + "&ratebypass=yes")
+                    } else {
                     
-                    apiManager.requestAudioSignature(player: playerURL, s: map["s"]!) { (signature) in
-                        let audioURL = url + "&signature=" + signature + "&ratebypass=yes"
-                        self.playAudio(audioURL: audioURL)
+                        apiManager.requestAudioSignature(player: playerURL, s: map["s"]!) { (signature) in
+                            let audioURL = url + "&signature=" + signature + "&ratebypass=yes"
+                            self.playAudio(audioURL: audioURL)
+                        }
                     }
                     
                 }
@@ -123,6 +134,24 @@ class VLCPlayer {
         let testFunction = context?.objectForKeyedSubscript(funcName)
         let result = testFunction?.call(withArguments: [param])
         return (result?.toString())!
+    }
+    
+    func getSTS(strResult: String) -> String {
+        var res = ""
+        if let m = re.search("\"sts\"\\s*:\\s*(\\d+)", strResult) {
+            res = m.group(0)!
+        }
+        res = "{" + res + "}"
+        do {
+            if let json = try JSONSerialization.jsonObject(with: res.data(using: String.Encoding.utf8)!) as? [String: Any] {
+                let sts = json["sts"] as? Int
+                res = String(sts!)
+            }
+        } catch {
+            print(error)
+        }
+
+        return res;
     }
 }
 

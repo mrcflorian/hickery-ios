@@ -78,7 +78,8 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
         if let videoIds = videoIds, index < videoIds.count {
             didStartPlaybackAfterQueing = false
             let video = videosToBeEnqueued(index: index)[0]
-            self.playAudio(videoId: video)
+            self.mediaPlayer.playVideo(videoId: video)
+            //self.playAudio(videoId: video)
             //youtubePlayerView.cuePlaylist(byVideos: videosToBeEnqueued(index: index), index: 0, startSeconds: 0, suggestedQuality: .small)
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import AFNetworking
+import Alamofire
 
 let kHickeryRootURLString = "http://www.hickery.net/"
 
@@ -35,9 +36,10 @@ class NetworkingManager {
         }
     }
     
-    func getText(url: String, params: [String: String]?, completion: ((_ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {
+    func getText2(url: String, params: [String: String]?, completion: ((_ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {
         print("url: " + url)
         let manager = AFHTTPSessionManager()//baseURL: NSURL(string: url) as URL?)
+        manager.forceCacheResponse(duration: 0)
         manager.requestSerializer = AFHTTPRequestSerializer()
         manager.responseSerializer = AFHTTPResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = nil;
@@ -56,6 +58,14 @@ class NetworkingManager {
         }
     }
 
+    func getText(url: String, params: [String:String]?, completion: (( _ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {
+        Alamofire.request(url).responseString { response in
+            if completion != nil {
+                completion!(response.result.value, .success)
+            }
+        }
+    }
+    
     // TODO: Refactor get and post  (DRY)
     func post(path: String, params: [String:String]?, completion: ((_ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {
         let manager = AFHTTPSessionManager(baseURL: url)
@@ -71,5 +81,27 @@ class NetworkingManager {
                 completion!("", .error(error: error.localizedDescription))
             }
         }
+    }
+}
+
+extension AFHTTPSessionManager {
+    //duration in seconds
+    func forceCacheResponse(duration:Int) {
+        self.setDataTaskWillCacheResponseBlock({
+            (session:URLSession, task:URLSessionDataTask, proposedResponse:CachedURLResponse) -> (CachedURLResponse) in
+            if let response = proposedResponse.response as? HTTPURLResponse {
+                var headers = response.allHeaderFields as! [String:String]
+                headers["Cache-Control"] = "max-age=" + String(duration)
+                //String(format: "max-age=%@", arguments: [duration])
+                
+                let modifiedResponse = HTTPURLResponse(url: response.url!, statusCode: response.statusCode, httpVersion: "1.1", headerFields: headers)
+                if (modifiedResponse != nil) {
+                    let cachedResponse = CachedURLResponse(response: modifiedResponse!, data: proposedResponse.data, userInfo: proposedResponse.userInfo, storagePolicy: URLCache.StoragePolicy.allowed)
+                    return cachedResponse
+                }
+            }
+            
+            return proposedResponse
+        })
     }
 }
