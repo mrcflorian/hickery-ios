@@ -22,7 +22,9 @@ class VLCPlayer {
     public func play() {
         self.mediaPlayer.play()
     }
-    
+    public func pause() {
+        self.mediaPlayer.pause()
+    }
     public func stop() {
         self.mediaPlayer.stop()
     }
@@ -69,7 +71,7 @@ class VLCPlayer {
                     let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
                     let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
                     var url = map["url"]!.removingPercentEncoding!
-                    if url.range(of: "&signature=") != nil {
+                    if url.range(of: "signature=") != nil {
                         self.playAudio(audioURL: url + "&ratebypass=yes")
                     } else {
                     

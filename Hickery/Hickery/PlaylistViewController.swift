@@ -44,6 +44,7 @@ class PlaylistViewController: UIViewController {
     }
 
     func playSongInForeground(hickerySong: HickerySong) {
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: hickerySong.title!]
         currentPlayingIndex = index(of: hickerySong)
         playerVC?.playSongInForeground(atIndex: currentPlayingIndex)
         songTableVC?.scrollToSongIndex(index: currentPlayingIndex)
@@ -54,7 +55,8 @@ class PlaylistViewController: UIViewController {
         if currentPlayingIndex + 1 < songs.count {
             currentPlayingIndex += 1
             if (inBackground) {
-                playerVC?.playNextSongInBackground()
+                //playerVC?.playNextSongInBackground()
+                self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
             } else {
                 self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
             }
@@ -105,22 +107,42 @@ class PlaylistViewController: UIViewController {
 
     private func configureMediaPlayerCommandCenter()
     {
+        //UIApplication.shared.beginReceivingRemoteControlEvents()
         commandCenter.nextTrackCommand.isEnabled = true
         commandCenter.nextTrackCommand.addTarget(self, action:#selector(nextTrackCommandSelector))
         commandCenter.previousTrackCommand.isEnabled = true
         commandCenter.previousTrackCommand.addTarget(self, action:#selector(previousTrackCommandSelector))
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.playCommand.addTarget(self, action:#selector(playTrackCommandSelector))
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.pauseCommand.addTarget(self, action:#selector(pauseTrackCommandSelector))
+        commandCenter.skipForwardCommand.isEnabled = false
+        commandCenter.skipBackwardCommand.isEnabled = false
+            
     }
-
+    
+    func playTrackCommandSelector() {
+        print("play track selector")
+        VLCPlayer.instance.play()
+    }
+    
+    
+    func pauseTrackCommandSelector() {
+        print("pause track selector")
+        VLCPlayer.instance.pause()
+    }
+    
     func nextTrackCommandSelector() {
-        if (self == PlaylistViewController.playingPlaylistVC) {
+        print("next track selector")
+        //if (self == PlaylistViewController.playingPlaylistVC) {
             self.playNextSong(inBackground: true)
-        }
+        //}
     }
 
     func previousTrackCommandSelector() {
-        if (self == PlaylistViewController.playingPlaylistVC) {
+        //if (self == PlaylistViewController.playingPlaylistVC) {
             self.playPreviousSong()
-        }
+        //}
     }
 
     @IBAction func didTapLikeButton(_ sender: UIButton) {

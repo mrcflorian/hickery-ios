@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
+            UIApplication.shared.beginReceivingRemoteControlEvents()
         } catch let error as NSError {
             print(error.localizedDescription)
         }
