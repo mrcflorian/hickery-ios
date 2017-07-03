@@ -69,25 +69,6 @@ class APIManager {
             }
         }
     }
-
-    func requestAudioURL(videoId: String, completion: @escaping (_ audioURL: String ) -> Void) {
-        print("video id: " + videoId)
-        let params:[String:String] = ["video": videoId]
-        networkingManager.get(path: kHickeryYoutubeAudioPath, params: params) { (jsonResponse, responseStatus) in
-            switch responseStatus {
-            case .success:
-                if let jsonResponse = jsonResponse as? [String : Any] {
-                    let audioURL: String = jsonResponse["url"] as! String
-                    completion(audioURL)
-                } else {
-                    completion("error")
-                }
-            case .error:
-                completion("this error")
-                print(responseStatus)
-            }
-        }
-    }
     
     func requestAudioSignature(player: String, s: String, completion: @escaping (_ signature: String ) -> Void) {
         let params:[String:String] = ["player": player, "s": s]

@@ -19,9 +19,7 @@ protocol PlayerViewControllerDelegate {
 }
 
 class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
-    @IBOutlet weak var volumeControl: UISlider!
     var mediaPlayer = VLCPlayer.instance
-    let playerViewController = AVPlayerViewController()
     
     @IBOutlet var youtubePlayerView: YTPlayerView!
     var delegate: PlayerViewControllerDelegate?
