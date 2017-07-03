@@ -20,9 +20,7 @@ protocol PlayerViewControllerDelegate {
 
 class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
     @IBOutlet weak var volumeControl: UISlider!
-    var audioPlayer = AVQueuePlayer()
     var mediaPlayer = VLCPlayer.instance
-    //var movieView: UIView!
     let playerViewController = AVPlayerViewController()
     
     @IBOutlet var youtubePlayerView: YTPlayerView!
@@ -48,32 +46,12 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
 
         if (videoIds.count >= 1) {
                 let videoId = videoIds[0]
-            
                 self.playAudio(videoId: videoId)
         }
     }
     
     func playAudio(videoId: String) {
-        
         self.mediaPlayer.playVideo(videoId: videoId)
-    
-        /*
-        let apiManager = APIManager()
-        apiManager.requestAudioURL(videoId: videoId) { (audioURL) in
-            print("Audio: " + audioURL)
-            do {
-                self.mediaPlayer.mediaPlayer.delegate = self as! VLCMediaPlayerDelegate
-                
-                if (self.mediaPlayer.isPlaying()) {
-                    self.mediaPlayer.stop()
-                }
-                self.mediaPlayer.playAudio(audioURL: audioURL)
-                
-            } catch{
-                print(error)
-            }
-        }
-        */
     }
     
     func playSongInForeground(atIndex index: Int) {

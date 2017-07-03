@@ -42,6 +42,7 @@ class VLCPlayer {
     
     public func playVideo(videoId: String) {
         let apiManager = APIManager()
+        // TODO: might be possible to fetch the audio files directly from this link and not use the second calls
         let url: String = "https://www.youtube.com/watch?gl=US&hl=en&has_verified=1&bpctr=9999999999&v=" + videoId
         print(url)
         
