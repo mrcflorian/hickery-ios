@@ -7,7 +7,6 @@
 //
 
 import AFNetworking
-import Alamofire
 
 let kHickeryRootURLString = "http://www.hickery.net/"
 
@@ -51,17 +50,8 @@ class NetworkingManager {
                 completion!(backToString, .success)
             }
         }) { (dataTask, error) in
-            print("eroare: " + (error as! String))
             if completion != nil {
                 completion!("", .error(error: error.localizedDescription))
-            }
-        }
-    }
-
-    func getText(url: String, params: [String:String]?, completion: (( _ jsonResponse: Any?, _ responseStatus: ResponseStatus) -> Void)?) {
-        Alamofire.request(url).responseString { response in
-            if completion != nil {
-                completion!(response.result.value, .success)
             }
         }
     }

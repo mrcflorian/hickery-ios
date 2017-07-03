@@ -14,7 +14,6 @@ target 'Hickery' do
   pod 'Crashlytics'
   pod 'MobileVLCKit'
   pod 'PySwiftyRegex', '~> 1.0.0'
-  pod 'Alamofire', '~> 4.4'
   # Pods for Hickery
 
   target 'HickeryTests' do

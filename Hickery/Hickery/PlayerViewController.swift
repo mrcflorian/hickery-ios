@@ -132,7 +132,7 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
         }
         if type == .began {
             // Interruption began, take appropriate actions (save state, update user interface)
-            mediaPlayer.stop()
+            mediaPlayer.pause()
         }
         else if type == .ended {
             guard let optionsValue =

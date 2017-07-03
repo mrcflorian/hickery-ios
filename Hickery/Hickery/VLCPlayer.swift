@@ -35,15 +35,15 @@ class VLCPlayer {
     
     public func playAudio(audioURL: String) {
         let url = NSURL(string: audioURL)
-        let media = VLCMedia(url: url as! URL)
+        let media = VLCMedia(url: url! as URL)
         self.mediaPlayer.media = media
         self.mediaPlayer.play()
     }
     
     public func playVideo(videoId: String) {
-        if self.isPlaying() {
-            self.mediaPlayer.stop()
-        }
+//        if self.isPlaying() {
+//            self.mediaPlayer.stop()
+//        }
         let apiManager = APIManager()
         let url: String = "https://www.youtube.com/watch?gl=US&hl=en&has_verified=1&bpctr=9999999999&v=" + videoId
         //let url: String = "https://www.youtube.com/watch?v=" + videoId
