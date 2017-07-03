@@ -82,8 +82,6 @@ extension AFHTTPSessionManager {
             if let response = proposedResponse.response as? HTTPURLResponse {
                 var headers = response.allHeaderFields as! [String:String]
                 headers["Cache-Control"] = "max-age=" + String(duration)
-                //String(format: "max-age=%@", arguments: [duration])
-                
                 let modifiedResponse = HTTPURLResponse(url: response.url!, statusCode: response.statusCode, httpVersion: "1.1", headerFields: headers)
                 if (modifiedResponse != nil) {
                     let cachedResponse = CachedURLResponse(response: modifiedResponse!, data: proposedResponse.data, userInfo: proposedResponse.userInfo, storagePolicy: URLCache.StoragePolicy.allowed)

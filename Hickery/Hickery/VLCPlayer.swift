@@ -41,40 +41,28 @@ class VLCPlayer {
     }
     
     public func playVideo(videoId: String) {
-//        if self.isPlaying() {
-//            self.mediaPlayer.stop()
-//        }
         let apiManager = APIManager()
         let url: String = "https://www.youtube.com/watch?gl=US&hl=en&has_verified=1&bpctr=9999999999&v=" + videoId
-        //let url: String = "https://www.youtube.com/watch?v=" + videoId
-        
         print(url)
         
         apiManager.requestURL(url: url) { (result) in
             do {
                 let strResult = result?.replacingOccurrences(of: "\\", with: "")
-                //print(strResult)
                 let playerURL = self.getPlayerURL(strResult: strResult!)
                 let sts = self.getSTS(strResult: strResult!)
-                //let baseAudioURL = self.getBaseAudioURL(strResult: strResult!)
-                
-                print("Player URL: " + playerURL)
-                
+                // TODO: need to also fetch el=default and el=vevo if audio file not found on el=info
                 var infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&gl=US&eurl="
                 if sts != "" {
                     infoURL += "&sts=" + sts
                 }
                 apiManager.requestURL(url: infoURL) { (result) in
-                    //print(result)
-                    //let resString = result?.removingPercentEncoding
                     let res = self.parseQuery(query: result!)
                     let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
                     let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
-                    var url = map["url"]!.removingPercentEncoding!
+                    let url = map["url"]!.removingPercentEncoding!
                     if url.range(of: "signature=") != nil {
                         self.playAudio(audioURL: url + "&ratebypass=yes")
                     } else {
-                    
                         apiManager.requestAudioSignature(player: playerURL, s: map["s"]!) { (signature) in
                             let audioURL = url + "&signature=" + signature + "&ratebypass=yes"
                             self.playAudio(audioURL: audioURL)
@@ -107,20 +95,9 @@ class VLCPlayer {
         return "https://www.youtube.com" + res
     }
     
-    func getBaseAudioURL(strResult: String) -> String {
-        let regex: String = "url="
-        var res = ""
-        //print(strResult)
-        if let m = re.search(regex, strResult) {
-            res = m.group(0)!
-        }
-        print("fmts: " + res)
-        return ""
-    }
-    
     func parseQuery(query: String) -> [String:String] {
         var results = [String:String]()
-        var keyValues = query.components(separatedBy: "&")
+        let keyValues = query.components(separatedBy: "&")
         if (keyValues.count) > 0 {
             for pair in keyValues {
                 let kv = pair.components(separatedBy: "=")
@@ -128,14 +105,17 @@ class VLCPlayer {
                     results.updateValue(kv[1], forKey: kv[0])
                 }
             }
-            
         }
         return results
     }
     
+    /**
+     * Ideally we would use this to run JS code of the youtube player to decrypt the signature.
+     * Right now we run this on the server, for some reason this function is not working as expected
+     */
     func runJS(jsSource: String, funcName: String, param: String) -> String {
-        var context = JSContext()
-        let ress = context?.evaluateScript(jsSource)
+        let context = JSContext()
+        _ = context?.evaluateScript(jsSource)
         let testFunction = context?.objectForKeyedSubscript(funcName)
         let result = testFunction?.call(withArguments: [param])
         return (result?.toString())!
@@ -164,7 +144,7 @@ class VLCPlayer {
 extension NSURL {
     func getKeyVals() -> Dictionary<String, String>? {
         var results = [String:String]()
-        var keyValues = self.query?.components(separatedBy: "&")
+        let keyValues = self.query?.components(separatedBy: "&")
         if (keyValues?.count)! > 0 {
             for pair in keyValues! {
                 let kv = pair.components(separatedBy: "=")
