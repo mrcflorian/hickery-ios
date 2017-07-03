@@ -47,32 +47,28 @@ class VLCPlayer {
         print(url)
         
         apiManager.requestURL(url: url) { (result) in
-            do {
-                let strResult = result?.replacingOccurrences(of: "\\", with: "")
-                let playerURL = self.getPlayerURL(strResult: strResult!)
-                let sts = self.getSTS(strResult: strResult!)
-                // TODO: need to also fetch el=default and el=vevo if audio file not found on el=info
-                var infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&gl=US&eurl="
-                if sts != "" {
-                    infoURL += "&sts=" + sts
-                }
-                apiManager.requestURL(url: infoURL) { (result) in
-                    let res = self.parseQuery(query: result!)
-                    let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
-                    let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
-                    let url = map["url"]!.removingPercentEncoding!
-                    if url.range(of: "signature=") != nil {
-                        self.playAudio(audioURL: url + "&ratebypass=yes")
-                    } else {
-                        apiManager.requestAudioSignature(player: playerURL, s: map["s"]!) { (signature) in
-                            let audioURL = url + "&signature=" + signature + "&ratebypass=yes"
-                            self.playAudio(audioURL: audioURL)
-                        }
+            let strResult = result?.replacingOccurrences(of: "\\", with: "")
+            let playerURL = self.getPlayerURL(strResult: strResult!)
+            let sts = self.getSTS(strResult: strResult!)
+            // TODO: need to also fetch el=default and el=vevo if audio file not found on el=info
+            var infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&gl=US&eurl="
+            if sts != "" {
+                infoURL += "&sts=" + sts
+            }
+            apiManager.requestURL(url: infoURL) { (result) in
+                let res = self.parseQuery(query: result!)
+                let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
+                let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
+                let url = map["url"]!.removingPercentEncoding!
+                if url.range(of: "signature=") != nil {
+                    self.playAudio(audioURL: url + "&ratebypass=yes")
+                } else {
+                    apiManager.requestAudioSignature(player: playerURL, s: map["s"]!) { (signature) in
+                        let audioURL = url + "&signature=" + signature + "&ratebypass=yes"
+                        self.playAudio(audioURL: audioURL)
                     }
-                    
                 }
-            }catch {
-                print(error)
+                
             }
         }
     }

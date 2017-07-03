@@ -45,7 +45,7 @@ class NetworkingManager {
         
         manager.get(url, parameters: params, progress: nil, success: { (dataTask, response) in
             let res: NSData = response as! NSData
-            var backToString = String(data: res as Data, encoding: String.Encoding.utf8) as String!
+            let backToString = String(data: res as Data, encoding: String.Encoding.utf8) as String!
             if completion != nil {
                 completion!(backToString, .success)
             }
