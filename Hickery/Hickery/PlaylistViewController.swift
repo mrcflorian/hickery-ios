@@ -40,6 +40,7 @@ class PlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateIfNeeded()
+        self.playerVC?.mediaPlayer.delegate = self;
         configureMediaPlayerCommandCenter()
     }
 
@@ -76,7 +77,7 @@ class PlaylistViewController: UIViewController {
         // always in background
         if currentPlayingIndex - 1 >= 0 {
             currentPlayingIndex -= 1
-            playerVC?.playPreviousSongInBackground()
+            self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
         }
     }
 
@@ -189,5 +190,11 @@ extension PlaylistViewController: PlayerViewControllerDelegate {
 
     func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController) {
         //playerViewController.youtubePlayerView.playVideo()
+    }
+}
+
+extension PlaylistViewController: PlaylistViewControllerDelegate {
+    func songFailedToPlay() {
+        self.playNextSong(inBackground: true)
     }
 }

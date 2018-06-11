@@ -14,6 +14,7 @@ import JavaScriptCore
 class VLCPlayer {
     public static let instance = VLCPlayer()
     public var mediaPlayer = VLCMediaPlayer()
+    public var delegate: PlaylistViewControllerDelegate?
     
     public static func getInstance() -> VLCPlayer {
         return self.instance
@@ -41,6 +42,7 @@ class VLCPlayer {
     }
     
     public func playVideo(videoId: String) {
+        
         let apiManager = APIManager()
         // TODO: might be possible to fetch the audio files directly from this link and not use the second calls
         let url: String = "https://www.youtube.com/watch?gl=US&hl=en&has_verified=1&bpctr=9999999999&v=" + videoId
@@ -50,14 +52,20 @@ class VLCPlayer {
             let strResult = result?.replacingOccurrences(of: "\\", with: "")
             let playerURL = self.getPlayerURL(strResult: strResult!)
             let sts = self.getSTS(strResult: strResult!)
-            // TODO: need to also fetch el=default and el=vevo if audio file not found on el=info
-            var infoURL = "https://www.youtube.com/get_video_info?el=info&ps=default&video_id=" + videoId + "&hl=en&gl=US&eurl="
+            // el=detailpage works!!!!
+            var infoURL = "https://www.youtube.com/get_video_info?el=detailpage&ps=default&video_id=" + videoId + "&hl=en&gl=US&eurl="
+
             if sts != "" {
                 infoURL += "&sts=" + sts
             }
             apiManager.requestURL(url: infoURL) { (result) in
                 let res = self.parseQuery(query: result!)
                 let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
+                if data == nil {
+                    print("Shit is nil")
+                    self.delegate?.songFailedToPlay()
+                    return;
+                }
                 let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
                 let url = map["url"]!.removingPercentEncoding!
                 if url.range(of: "signature=") != nil {
@@ -153,4 +161,8 @@ extension NSURL {
         }
         return results
     }
+}
+
+protocol PlaylistViewControllerDelegate {
+    func songFailedToPlay()
 }
