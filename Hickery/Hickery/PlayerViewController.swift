@@ -85,7 +85,25 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
     
     public func mediaPlayerStateChanged(_ aNotification: Notification!) {
         let state = self.mediaPlayer.mediaPlayer.state
-        if state == VLCMediaPlayerState.ended || state == VLCMediaPlayerState.stopped {
+        if state == VLCMediaPlayerState.ended {
+            print("ENDED")
+        }
+        if state == VLCMediaPlayerState.stopped {
+            print("STOPPED")
+        }
+        if state == VLCMediaPlayerState.buffering {
+            print("BUFFERING")
+        }
+        if state == VLCMediaPlayerState.playing {
+            print("PLAYING")
+        }
+        if state == VLCMediaPlayerState.error {
+            print("ERROR")
+        }
+        if state == VLCMediaPlayerState.paused {
+            print("PAUSED")
+        }
+        if state == VLCMediaPlayerState.stopped {
             self.delegate?.playerViewControllerDidFinishCurrentSong(self)
         }
     }

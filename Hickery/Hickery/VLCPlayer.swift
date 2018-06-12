@@ -35,10 +35,11 @@ class VLCPlayer {
     }
     
     public func playAudio(audioURL: String) {
-        let url = NSURL(string: audioURL)
-        let media = VLCMedia(url: url! as URL)
-        self.mediaPlayer.media = media
-        self.mediaPlayer.play()
+        if let url = NSURL(string: audioURL) {
+            let media = VLCMedia(url: url as URL)
+            self.mediaPlayer.media = media
+            self.mediaPlayer.play()
+        }
     }
     
     public func playVideo(videoId: String) {
@@ -50,8 +51,8 @@ class VLCPlayer {
         
         apiManager.requestURL(url: url) { (result) in
             if result == nil {
-                print("Shit is nil")
-                //self.stop()
+                print("first request url is nil")
+                self.pause()
                 return;
             }
             let strResult = result?.replacingOccurrences(of: "\\", with: "")
@@ -65,15 +66,16 @@ class VLCPlayer {
             }
             apiManager.requestURL(url: infoURL) { (result) in
                 if result == nil {
-                    print("Shit is nil")
-                    //self.stop()
+                    print("infoURL is nil")
+                    self.pause()
                     return;
                 }
                 let res = self.parseQuery(query: result!)
                 let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
                 if data == nil {
-                    print("Shit is nil")
-                    self.delegate?.songFailedToPlay()
+                    print("data is nil")
+                    self.stop()
+                    //self.delegate?.songFailedToPlay()
                     return;
                 }
                 let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
