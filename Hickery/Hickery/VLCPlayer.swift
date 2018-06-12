@@ -49,6 +49,11 @@ class VLCPlayer {
         print(url)
         
         apiManager.requestURL(url: url) { (result) in
+            if result == nil {
+                print("Shit is nil")
+                self.stop()
+                return;
+            }
             let strResult = result?.replacingOccurrences(of: "\\", with: "")
             let playerURL = self.getPlayerURL(strResult: strResult!)
             let sts = self.getSTS(strResult: strResult!)
@@ -59,6 +64,11 @@ class VLCPlayer {
                 infoURL += "&sts=" + sts
             }
             apiManager.requestURL(url: infoURL) { (result) in
+                if result == nil {
+                    print("Shit is nil")
+                    self.stop()
+                    return;
+                }
                 let res = self.parseQuery(query: result!)
                 let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
                 if data == nil {

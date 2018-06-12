@@ -84,13 +84,10 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
     }
     
     public func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        print("Player state changed: " + String(self.mediaPlayer.mediaPlayer.state.rawValue))
         let state = self.mediaPlayer.mediaPlayer.state
-        print("state: " + VLCMediaPlayerStateToString(state))
         if state == VLCMediaPlayerState.ended || state == VLCMediaPlayerState.stopped {
             self.delegate?.playerViewControllerDidFinishCurrentSong(self)
         }
-        
     }
     
     func registerForNotifications() {
@@ -107,6 +104,7 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
                 return
         }
         self.mediaPlayer.delegate?.songFailedToPlay()
+        return
         if type == .began {
             // Interruption began, take appropriate actions (save state, update user interface)
             mediaPlayer.pause()
