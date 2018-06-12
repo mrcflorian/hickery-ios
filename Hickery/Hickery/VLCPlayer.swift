@@ -51,7 +51,7 @@ class VLCPlayer {
         apiManager.requestURL(url: url) { (result) in
             if result == nil {
                 print("Shit is nil")
-                self.stop()
+                //self.stop()
                 return;
             }
             let strResult = result?.replacingOccurrences(of: "\\", with: "")
@@ -66,7 +66,7 @@ class VLCPlayer {
             apiManager.requestURL(url: infoURL) { (result) in
                 if result == nil {
                     print("Shit is nil")
-                    self.stop()
+                    //self.stop()
                     return;
                 }
                 let res = self.parseQuery(query: result!)
