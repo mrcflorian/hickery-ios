@@ -106,6 +106,7 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
             let type = AVAudioSessionInterruptionType(rawValue: typeValue) else {
                 return
         }
+        self.mediaPlayer.delegate?.songFailedToPlay()
         if type == .began {
             // Interruption began, take appropriate actions (save state, update user interface)
             mediaPlayer.pause()
