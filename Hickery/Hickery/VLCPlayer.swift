@@ -184,6 +184,14 @@ class VLCPlayer : VLCMediaPlayerDelegate {
             self.delegate?.playerViewControllerDidFinishCurrentSong()
         }
     }
+    
+    public func mediaPlayerTimeChanged(_ aNotification: Notification!) {
+        let time = self.mediaPlayer.time
+        let remainingTime = self.mediaPlayer.remainingTime
+        let total:Int32 = ((time?.intValue)! - (remainingTime?.intValue)!) / 1000
+        let current: Int32 = (time?.intValue)! / 1000
+        delegate?.updateTrackTime(total: total, current: current)
+    }
 }
 
 
@@ -207,4 +215,5 @@ extension NSURL {
 protocol PlaylistViewControllerDelegate {
     func songFailedToPlay()
     func playerViewControllerDidFinishCurrentSong()
+    func updateTrackTime(total: Int32, current: Int32)
 }

@@ -43,7 +43,9 @@ class PlaylistViewController: UIViewController {
     }
 
     func playSongInForeground(hickerySong: HickerySong, tappedSong: Bool = false) {
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: hickerySong.title!]
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: hickerySong.title!,
+        ]
         currentPlayingIndex = index(of: hickerySong)
         
         print("tapped: " + String(tappedSong))
@@ -56,8 +58,6 @@ class PlaylistViewController: UIViewController {
         playerVC?.playSongInForeground(atIndex: currentPlayingIndex)
         songTableVC?.scrollToSongIndex(index: currentPlayingIndex)
         updateActionBar()
-
-
     }
 
     func playNextSong(inBackground: Bool) {
@@ -119,6 +119,7 @@ class PlaylistViewController: UIViewController {
         commandCenter.previousTrackCommand.removeTarget(nil)
         commandCenter.playCommand.removeTarget(nil)
         commandCenter.pauseCommand.removeTarget(nil)
+        commandCenter.changePlaybackPositionCommand.removeTarget(nil)
     }
     public func configureMediaPlayerCommandCenter()
     {
@@ -135,6 +136,14 @@ class PlaylistViewController: UIViewController {
         commandCenter.pauseCommand.addTarget(self, action:#selector(pauseTrackCommandSelector))
         commandCenter.skipForwardCommand.isEnabled = false
         commandCenter.skipBackwardCommand.isEnabled = false
+        commandCenter.changePlaybackPositionCommand.isEnabled = true
+        commandCenter.changePlaybackPositionCommand.addTarget { event -> MPRemoteCommandHandlerStatus in
+            let event = event as! MPChangePlaybackPositionCommandEvent
+            let ms:Int32 = Int32(event.positionTime) * 1000
+            self.playerVC?.mediaPlayer.mediaPlayer.time = VLCTime(int: ms)
+            return .success
+        }
+        
             
     }
     
@@ -218,4 +227,14 @@ extension PlaylistViewController: PlaylistViewControllerDelegate {
         self.playNextSong(inBackground: false)
     }
     
+    func updateTrackTime(total: Int32, current: Int32) {
+        //MPNowPlayingInfoCenter.default().nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = total
+        //MPNowPlayingInfoCenter.default().nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = current
+    
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: MPNowPlayingInfoCenter.default().nowPlayingInfo![MPMediaItemPropertyTitle],
+            MPMediaItemPropertyPlaybackDuration: total,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: current
+        ]
+    }
 }
