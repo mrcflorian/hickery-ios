@@ -78,8 +78,7 @@ class VLCPlayer : VLCMediaPlayerDelegate {
                 let data = res["adaptive_fmts"]?.components(separatedBy: "%2C") // ','
                 if data == nil {
                     print("data is nil")
-                    self.stop()
-                    //self.delegate?.songFailedToPlay()
+                    self.delegate?.songFailedToPlay()
                     return;
                 }
                 let map = self.parseQuery(query: (data?.last)!.removingPercentEncoding!)
