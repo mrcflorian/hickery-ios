@@ -18,7 +18,7 @@ protocol PlayerViewControllerDelegate {
     func playerViewControllerDidSwitchToBackground(_ playerViewController: PlayerViewController)
 }
 
-class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
+class PlayerViewController: UIViewController {
     var mediaPlayer = VLCPlayer.instance
     
     @IBOutlet var youtubePlayerView: YTPlayerView!
@@ -32,7 +32,6 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configurePlayer()
         registerForNotifications()
     }
     
@@ -41,11 +40,6 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
             return
         }
         self.videoIds = videoIds
-
-        if (videoIds.count >= 1) {
-                let videoId = videoIds[0]
-                self.playAudio(videoId: videoId)
-        }
     }
     
     func playAudio(videoId: String) {
@@ -59,14 +53,6 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
             self.mediaPlayer.playVideo(videoId: video)
         }
     }
-    
-    func playNextSongInBackground() {
-        //youtubePlayerView.nextVideo()
-    }
-
-    func playPreviousSongInBackground() {
-        //youtubePlayerView.previousVideo()
-    }
 
     private func videosToBeEnqueued(index: Int) -> [String] {
         if let videoIds = videoIds, index < videoIds.count {
@@ -74,38 +60,6 @@ class PlayerViewController: UIViewController, VLCMediaPlayerDelegate {
             return Array(videoIds[index...stopIndex])
         }
         return []
-    }
-
-    private func configurePlayer() {
-        //youtubePlayerView.delegate = self
-        //youtubePlayerView.webView?.mediaPlaybackAllowsAirPlay = true
-        //mediaPlayer.drawable = self.movieView
-        self.mediaPlayer.mediaPlayer.delegate = self
-    }
-    
-    public func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        let state = self.mediaPlayer.mediaPlayer.state
-        if state == VLCMediaPlayerState.ended {
-            print("ENDED")
-        }
-        if state == VLCMediaPlayerState.stopped {
-            print("STOPPED")
-        }
-        if state == VLCMediaPlayerState.buffering {
-            print("BUFFERING")
-        }
-        if state == VLCMediaPlayerState.playing {
-            print("PLAYING")
-        }
-        if state == VLCMediaPlayerState.error {
-            print("ERROR")
-        }
-        if state == VLCMediaPlayerState.paused {
-            print("PAUSED")
-        }
-        if state == VLCMediaPlayerState.stopped {
-            self.delegate?.playerViewControllerDidFinishCurrentSong(self)
-        }
     }
     
     func registerForNotifications() {

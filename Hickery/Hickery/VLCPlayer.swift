@@ -11,10 +11,14 @@ import PySwiftyRegex
 import JavaScriptCore
 
 
-class VLCPlayer {
+class VLCPlayer : VLCMediaPlayerDelegate {
     public static let instance = VLCPlayer()
     public var mediaPlayer = VLCMediaPlayer()
     public var delegate: PlaylistViewControllerDelegate?
+    
+    init() {
+        self.mediaPlayer.delegate = self
+    }
     
     public static func getInstance() -> VLCPlayer {
         return self.instance
@@ -155,6 +159,32 @@ class VLCPlayer {
 
         return res;
     }
+    
+    
+    public func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        let state = self.mediaPlayer.state
+        if state == VLCMediaPlayerState.ended {
+            print("ENDED")
+        }
+        if state == VLCMediaPlayerState.stopped {
+            print("STOPPED")
+        }
+        if state == VLCMediaPlayerState.buffering {
+            print("BUFFERING")
+        }
+        if state == VLCMediaPlayerState.playing {
+            print("PLAYING")
+        }
+        if state == VLCMediaPlayerState.error {
+            print("ERROR")
+        }
+        if state == VLCMediaPlayerState.paused {
+            print("PAUSED")
+        }
+        if state == VLCMediaPlayerState.stopped {
+            self.delegate?.playerViewControllerDidFinishCurrentSong()
+        }
+    }
 }
 
 
@@ -177,4 +207,5 @@ extension NSURL {
 
 protocol PlaylistViewControllerDelegate {
     func songFailedToPlay()
+    func playerViewControllerDidFinishCurrentSong()
 }

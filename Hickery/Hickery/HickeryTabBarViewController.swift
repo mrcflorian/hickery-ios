@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HickeryTabBarViewController: UITabBarController {
+class HickeryTabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
     var homeVC: HomeViewController?
     var discoverVC: DiscoverViewController?
@@ -27,6 +27,7 @@ class HickeryTabBarViewController: UITabBarController {
     }
 
     override func viewDidLoad() {
+        self.delegate = self
         configureViewControllers()
         configureTabBar()
     }
@@ -56,5 +57,9 @@ class HickeryTabBarViewController: UITabBarController {
 
         profileVC = viewControllers?[3] as? ProfileViewController
         profileVC?.partialUser = user
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
     }
 }

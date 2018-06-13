@@ -40,35 +40,43 @@ class PlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateIfNeeded()
-        self.playerVC?.mediaPlayer.delegate = self;
-        configureMediaPlayerCommandCenter()
     }
 
-    func playSongInForeground(hickerySong: HickerySong) {
+    func playSongInForeground(hickerySong: HickerySong, tappedSong: Bool = false) {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: hickerySong.title!]
         currentPlayingIndex = index(of: hickerySong)
+        
+        print("tapped: " + String(tappedSong))
+        // lazy update delegates when tapping a song so that the playlist considered is up-to-date
+        // so it continues to play from that playlist instead of another
+        if tappedSong {
+            updateDelegates()
+        }
+        
         playerVC?.playSongInForeground(atIndex: currentPlayingIndex)
         songTableVC?.scrollToSongIndex(index: currentPlayingIndex)
         updateActionBar()
+
+
     }
 
     func playNextSong(inBackground: Bool) {
         if currentPlayingIndex + 1 < songs.count {
             currentPlayingIndex += 1
-            if (inBackground) {
-                //playerVC?.playNextSongInBackground()
-                self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
-            } else {
-                self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
-            }
+            self.playSongInForeground(hickerySong: songs[currentPlayingIndex])
         }
     }
 
+    func updateDelegates() {
+        playerVC?.delegate = self
+        self.playerVC?.mediaPlayer.delegate = self;
+        songTableVC?.songTableViewControllerDelegate = self
+        configureMediaPlayerCommandCenter()
+    }
+    
     func updateIfNeeded() {
         configureViewControllers()
-        playerVC?.delegate = self
         playerVC?.update(videoIds: self.videoIds())
-
         songTableVC?.songTableViewControllerDelegate = self
         songTableVC?.songs = songs
     }
@@ -106,8 +114,16 @@ class PlaylistViewController: UIViewController {
         return 0
     }
 
-    private func configureMediaPlayerCommandCenter()
+    private func removeMediaPLayerCommandCenter() {
+        commandCenter.nextTrackCommand.removeTarget(nil)
+        commandCenter.previousTrackCommand.removeTarget(nil)
+        commandCenter.playCommand.removeTarget(nil)
+        commandCenter.pauseCommand.removeTarget(nil)
+    }
+    public func configureMediaPlayerCommandCenter()
     {
+        // we remove it since addTarget adds multiple times, so when having both home and discover, it triggers twice on both playlistviews
+        removeMediaPLayerCommandCenter()
         //UIApplication.shared.beginReceivingRemoteControlEvents()
         commandCenter.nextTrackCommand.isEnabled = true
         commandCenter.nextTrackCommand.addTarget(self, action:#selector(nextTrackCommandSelector))
@@ -171,7 +187,7 @@ class PlaylistViewController: UIViewController {
 
 extension PlaylistViewController: SongTableViewControllerDelegate {
     func songTableViewController(_ songTableViewController: SongTableViewController, didSelectHickerySong hickerySong: HickerySong) {
-        self.playSongInForeground(hickerySong: hickerySong)
+        self.playSongInForeground(hickerySong: hickerySong, tappedSong: true)
     }
 }
 
@@ -197,4 +213,9 @@ extension PlaylistViewController: PlaylistViewControllerDelegate {
     func songFailedToPlay() {
         self.playNextSong(inBackground: true)
     }
+    
+    func playerViewControllerDidFinishCurrentSong() {
+        self.playNextSong(inBackground: false)
+    }
+    
 }
