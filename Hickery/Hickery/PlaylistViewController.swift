@@ -33,6 +33,7 @@ class PlaylistViewController: UIViewController {
     }
 
     var currentPlayingIndex: Int = 0
+    var currentSong: HickerySong?
 
     let commandCenter = MPRemoteCommandCenter.shared()
     private var likeStore: LikeStore?
@@ -43,9 +44,7 @@ class PlaylistViewController: UIViewController {
     }
 
     func playSongInForeground(hickerySong: HickerySong, tappedSong: Bool = false) {
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-            MPMediaItemPropertyTitle: hickerySong.title!,
-        ]
+        currentSong = hickerySong
         currentPlayingIndex = index(of: hickerySong)
         
         print("tapped: " + String(tappedSong))
@@ -228,13 +227,12 @@ extension PlaylistViewController: PlaylistViewControllerDelegate {
     }
     
     func updateTrackTime(total: Int32, current: Int32) {
-        //MPNowPlayingInfoCenter.default().nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = total
-        //MPNowPlayingInfoCenter.default().nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = current
-    
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-            MPMediaItemPropertyTitle: MPNowPlayingInfoCenter.default().nowPlayingInfo![MPMediaItemPropertyTitle],
-            MPMediaItemPropertyPlaybackDuration: total,
-            MPNowPlayingInfoPropertyElapsedPlaybackTime: current
-        ]
+        DispatchQueue.main.async {
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+                MPMediaItemPropertyTitle: self.currentSong?.title!,
+                MPMediaItemPropertyPlaybackDuration: total,
+                MPNowPlayingInfoPropertyElapsedPlaybackTime: current
+            ]
+        }
     }
 }
